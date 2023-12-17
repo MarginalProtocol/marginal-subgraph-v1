@@ -1,0 +1,29 @@
+type LeverageEnabled @entity(immutable: true) {
+  id: Bytes!
+  maintenance: Int! # uint24
+  leverage: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnerChanged @entity(immutable: true) {
+  id: Bytes!
+  oldOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PoolCreated @entity(immutable: true) {
+  id: Bytes!
+  token0: Bytes! # address
+  token1: Bytes! # address
+  maintenance: Int! # uint24
+  oracle: Bytes! # address
+  pool: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

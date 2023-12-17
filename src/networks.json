@@ -1,0 +1,8 @@
+{
+  "goerli": {
+    "MarginalV1Factory": {
+      "address": "0xb92eb4ffC52a0EC383efa6577b2c3c89B7b980f5",
+      "startBlock": 10072948
+    }
+  }
+}

@@ -1,0 +1,30 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: MarginalV1Factory
+    network: goerli
+    source:
+      address: "0xb92eb4ffC52a0EC383efa6577b2c3c89B7b980f5"
+      abi: MarginalV1Factory
+      startBlock: 10072948
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - LeverageEnabled
+        - OwnerChanged
+        - PoolCreated
+      abis:
+        - name: MarginalV1Factory
+          file: ./abis/MarginalV1Factory.json
+      eventHandlers:
+        - event: LeverageEnabled(uint24,uint256)
+          handler: handleLeverageEnabled
+        - event: OwnerChanged(indexed address,indexed address)
+          handler: handleOwnerChanged
+        - event: PoolCreated(address,address,uint24,address,address)
+          handler: handlePoolCreated
+      file: ./src/marginal-v-1-factory.ts
