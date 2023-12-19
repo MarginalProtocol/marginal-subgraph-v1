@@ -1,0 +1,8 @@
+{
+  "goerli": {
+    "MarginalV1Pool": {
+      "address": "0x5EcAcc364E993D8050dC666c542f73154d54d04B",
+      "startBlock": 10087710
+    }
+  }
+}
