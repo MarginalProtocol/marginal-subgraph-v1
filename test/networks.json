@@ -1,8 +1,0 @@
-{
-  "goerli": {
-    "MarginalV1NonfungiblePositionManager": {
-      "address": "0x95D95C41436C15b50217Bf1C0f810536AD181C13",
-      "startBlock": 10082558
-    }
-  }
-}

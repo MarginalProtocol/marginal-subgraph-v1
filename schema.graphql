@@ -1,3 +1,4 @@
+# MarginalV1Factory Entities
 type LeverageEnabled @entity(immutable: true) {
   id: Bytes!
   maintenance: Int! # uint24
@@ -28,6 +29,7 @@ type PoolCreated @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
+# MarginalV1Pool Entities
 type Adjust @entity(immutable: true) {
   id: Bytes!
   owner: Bytes! # address
@@ -162,6 +164,84 @@ type Transfer @entity(immutable: true) {
   from: Bytes! # address
   to: Bytes! # address
   value: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+# NonfungiblePositionManager Entities
+type Approval @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  approved: Bytes! # address
+  tokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ApprovalForAll @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  operator: Bytes! # address
+  approved: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Burn @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt! # uint256
+  amountIn: BigInt! # uint256
+  amountOut: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Free @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt! # uint256
+  marginAfter: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Grab @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt! # uint256
+  rewards: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Lock @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt! # uint256
+  marginAfter: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Mint @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt! # uint256
+  size: BigInt! # uint256
+  debt: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Transfer @entity(immutable: true) {
+  id: Bytes!
+  from: Bytes! # address
+  to: Bytes! # address
+  tokenId: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
