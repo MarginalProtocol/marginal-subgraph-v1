@@ -45,3 +45,23 @@ dataSources:
           file: ./abis/MarginalV1Quoter.json
       eventHandlers: null
       file: ./src/marginal-v-1-quoter.ts
+
+templates:
+  - kind: ethereum
+    name: MarginalV1Pool
+    network: goerli
+    source:
+      abi: MarginalV1Pool
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - PoolCreated
+        - LeverageEnabled
+        - OwnerChanged
+      abis:
+        - name: MarginalV1Quoter
+          file: ./abis/MarginalV1Quoter.json
+      eventHandlers: null
+      file: ./src/marginal-v-1-quoter.ts
