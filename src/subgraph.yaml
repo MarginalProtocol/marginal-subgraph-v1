@@ -28,3 +28,20 @@ dataSources:
         - event: PoolCreated(address,address,uint24,address,address)
           handler: handlePoolCreated
       file: ./src/marginal-v-1-factory.ts
+  - kind: ethereum
+    name: MarginalV1Quoter
+    network: goerli
+    source:
+      address: "0x7385197B160CA2ec114960BCb32bc5D7CfA2720c"
+      abi: MarginalV1Quoter
+      startBlock: 10112665
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities: null
+      abis:
+        - name: MarginalV1Quoter
+          file: ./abis/MarginalV1Quoter.json
+      eventHandlers: null
+      file: ./src/marginal-v-1-quoter.ts

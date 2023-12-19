@@ -3,6 +3,9 @@
     "MarginalV1Factory": {
       "address": "0xb92eb4ffC52a0EC383efa6577b2c3c89B7b980f5",
       "startBlock": 10072948
+    },
+    "MarginalV1Quoter": {
+      "address": "0x7385197B160CA2ec114960BCb32bc5D7CfA2720c"
     }
   }
 }
