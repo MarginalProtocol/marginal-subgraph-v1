@@ -7,7 +7,7 @@ import {
   Lock as LockEvent,
   Mint as MintEvent,
   Transfer as TransferEvent
-} from "../MarginalV1Pool/generated/MarginalV1NonfungiblePositionManager/MarginalV1NonfungiblePositionManager"
+} from "../generated/MarginalV1NonfungiblePositionManager/MarginalV1NonfungiblePositionManager"
 import {
   Approval,
   ApprovalForAll,
@@ -17,7 +17,7 @@ import {
   Lock,
   Mint,
   Transfer
-} from "../MarginalV1Pool/generated/schema"
+} from "../generated/schema"
 
 export function handleApproval(event: ApprovalEvent): void {
   let entity = new Approval(

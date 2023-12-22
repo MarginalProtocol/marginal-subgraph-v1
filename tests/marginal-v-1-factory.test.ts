@@ -9,7 +9,7 @@ import {
 import { BigInt, Address } from "@graphprotocol/graph-ts"
 import { LeverageEnabled } from "../generated/schema"
 import { LeverageEnabled as LeverageEnabledEvent } from "../generated/MarginalV1Factory/MarginalV1Factory"
-import { handleLeverageEnabled } from "../src/marginal-v-1-factory"
+import { handleLeverageEnabled } from "../src/factory"
 import { createLeverageEnabledEvent } from "./marginal-v-1-factory-utils"
 
 // Tests structure (matchstick-as >=0.5.0)

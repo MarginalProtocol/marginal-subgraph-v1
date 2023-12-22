@@ -11,7 +11,7 @@ import {
   Settle as SettleEvent,
   Swap as SwapEvent,
   Transfer as TransferEvent
-} from "../generated/MarginalV1Pool/MarginalV1Pool"
+} from "../generated/templates/MarginalV1Pool/MarginalV1Pool"
 import {
   Adjust,
   Approval,
@@ -35,38 +35,6 @@ export function handleAdjust(event: AdjustEvent): void {
   entity.MarginalV1Pool_id = event.params.id
   entity.recipient = event.params.recipient
   entity.marginAfter = event.params.marginAfter
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
-export function handleApproval(event: ApprovalEvent): void {
-  let entity = new Approval(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.owner = event.params.owner
-  entity.spender = event.params.spender
-  entity.value = event.params.value
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
-export function handleBurn(event: BurnEvent): void {
-  let entity = new Burn(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.owner = event.params.owner
-  entity.recipient = event.params.recipient
-  entity.liquidityDelta = event.params.liquidityDelta
-  entity.amount0 = event.params.amount0
-  entity.amount1 = event.params.amount1
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -116,23 +84,6 @@ export function handleLiquidate(event: LiquidateEvent): void {
   entity.sqrtPriceX96After = event.params.sqrtPriceX96After
   entity.rewards0 = event.params.rewards0
   entity.rewards1 = event.params.rewards1
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
-export function handleMint(event: MintEvent): void {
-  let entity = new Mint(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.sender = event.params.sender
-  entity.owner = event.params.owner
-  entity.liquidityDelta = event.params.liquidityDelta
-  entity.amount0 = event.params.amount0
-  entity.amount1 = event.params.amount1
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
@@ -211,17 +162,3 @@ export function handleSwap(event: SwapEvent): void {
   entity.save()
 }
 
-export function handleTransfer(event: TransferEvent): void {
-  let entity = new Transfer(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.from = event.params.from
-  entity.to = event.params.to
-  entity.value = event.params.value
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
