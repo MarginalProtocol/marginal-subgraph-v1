@@ -27,7 +27,7 @@ dataSources:
           handler: handleOwnerChanged
         - event: PoolCreated(address,address,uint24,address,address)
           handler: handlePoolCreated
-      file: ./src/marginal-v-1-factory.ts
+      file: ./src/factory.ts
 
   - kind: ethereum
     name: MarginalV1NonfungiblePositionManager
@@ -41,35 +41,20 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - ApprovalForAll
-        - Burn
         - Free
         - Grab
         - Lock
-        - Mint
-        - Transfer
       abis:
         - name: MarginalV1NonfungiblePositionManager
           file: ./abis/MarginalV1NonfungiblePositionManager.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,indexed uint256)
-          handler: handleApproval
-        - event: ApprovalForAll(indexed address,indexed address,bool)
-          handler: handleApprovalForAll
-        - event: Burn(indexed uint256,uint256,uint256)
-          handler: handleBurn
         - event: Free(indexed uint256,uint256)
           handler: handleFree
         - event: Grab(indexed uint256,uint256)
           handler: handleGrab
         - event: Lock(indexed uint256,uint256)
           handler: handleLock
-        - event: Mint(indexed uint256,uint256,uint256,uint256)
-          handler: handleMint
-        - event: Transfer(indexed address,indexed address,indexed uint256)
-          handler: handleTransfer
-      file: ./src/marginal-v-1-nonfungible-position-manager.ts
+      file: ./src/nonfungiblePositionManager.ts
 
 templates:
   - kind: ethereum
@@ -83,13 +68,17 @@ templates:
       language: wasm/assemblyscript
       entities:
         - Adjust
+        - Approval
+        - Burn
         - CollectProtocol
         - Initialize
         - Liquidate
+        - Mint
         - Open
         - SetFeeProtocol
         - Settle
         - Swap
+        - Transfer
       abis:
         - name: MarginalV1Pool
           file: ./abis/MarginalV1Pool.json
@@ -118,4 +107,4 @@ templates:
           handler: handleSwap
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-      file: ./src/marginal-v-1-pool.ts
+      file: ./src/pool.ts
