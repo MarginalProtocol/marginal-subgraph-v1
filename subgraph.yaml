@@ -65,7 +65,7 @@ dataSources:
           handler: handleGrab
         - event: Lock(indexed uint256,uint256)
           handler: handleLock
-        - event: Mint(indexed uint256,uint256,uint256)
+        - event: Mint(indexed uint256,uint256,uint256,uint256)
           handler: handleMint
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
