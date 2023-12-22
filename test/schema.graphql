@@ -1,0 +1,138 @@
+type Adjust @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  MarginalV1Pool_id: BigInt! # uint256
+  recipient: Bytes! # address
+  marginAfter: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Approval @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  spender: Bytes! # address
+  value: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Burn @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  recipient: Bytes! # address
+  liquidityDelta: BigInt! # uint128
+  amount0: BigInt! # uint256
+  amount1: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CollectProtocol @entity(immutable: true) {
+  id: Bytes!
+  sender: Bytes! # address
+  recipient: Bytes! # address
+  amount0: BigInt! # uint128
+  amount1: BigInt! # uint128
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Initialize @entity(immutable: true) {
+  id: Bytes!
+  sqrtPriceX96: BigInt! # uint160
+  tick: Int! # int24
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Liquidate @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  MarginalV1Pool_id: BigInt! # uint256
+  recipient: Bytes! # address
+  liquidityAfter: BigInt! # uint128
+  sqrtPriceX96After: BigInt! # uint160
+  rewards0: BigInt! # uint256
+  rewards1: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Mint @entity(immutable: true) {
+  id: Bytes!
+  sender: Bytes! # address
+  owner: Bytes! # address
+  liquidityDelta: BigInt! # uint128
+  amount0: BigInt! # uint256
+  amount1: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Open @entity(immutable: true) {
+  id: Bytes!
+  sender: Bytes! # address
+  owner: Bytes! # address
+  MarginalV1Pool_id: BigInt! # uint256
+  liquidityAfter: BigInt! # uint128
+  sqrtPriceX96After: BigInt! # uint160
+  margin: BigInt! # uint128
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SetFeeProtocol @entity(immutable: true) {
+  id: Bytes!
+  oldFeeProtocol: Int! # uint8
+  newFeeProtocol: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Settle @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  MarginalV1Pool_id: BigInt! # uint256
+  recipient: Bytes! # address
+  liquidityAfter: BigInt! # uint128
+  sqrtPriceX96After: BigInt! # uint160
+  amount0: BigInt! # int256
+  amount1: BigInt! # int256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Swap @entity(immutable: true) {
+  id: Bytes!
+  sender: Bytes! # address
+  recipient: Bytes! # address
+  amount0: BigInt! # int256
+  amount1: BigInt! # int256
+  sqrtPriceX96: BigInt! # uint160
+  liquidity: BigInt! # uint128
+  tick: Int! # int24
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Transfer @entity(immutable: true) {
+  id: Bytes!
+  from: Bytes! # address
+  to: Bytes! # address
+  value: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
