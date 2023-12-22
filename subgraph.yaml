@@ -83,17 +83,13 @@ templates:
       language: wasm/assemblyscript
       entities:
         - Adjust
-        - Approval
-        - Burn
         - CollectProtocol
         - Initialize
         - Liquidate
-        - Mint
         - Open
         - SetFeeProtocol
         - Settle
         - Swap
-        - Transfer
       abis:
         - name: MarginalV1Pool
           file: ./abis/MarginalV1Pool.json

@@ -5,7 +5,7 @@ import {
   clearStore,
   beforeAll,
   afterAll
-} from "matchstick-as/assembly/index"
+} from "matchstick-as"
 import { Address, BigInt } from "@graphprotocol/graph-ts"
 import { Adjust } from "../generated/schema"
 import { Adjust as AdjustEvent } from "../generated/MarginalV1Pool/MarginalV1Pool"

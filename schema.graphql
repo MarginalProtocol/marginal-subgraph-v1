@@ -41,28 +41,6 @@ type Adjust @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type Approval @entity(immutable: true) {
-  id: Bytes!
-  owner: Bytes! # address
-  spender: Bytes! # address
-  value: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Burn @entity(immutable: true) {
-  id: Bytes!
-  owner: Bytes! # address
-  recipient: Bytes! # address
-  liquidityDelta: BigInt! # uint128
-  amount0: BigInt! # uint256
-  amount1: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
 type CollectProtocol @entity(immutable: true) {
   id: Bytes!
   sender: Bytes! # address
@@ -92,18 +70,6 @@ type Liquidate @entity(immutable: true) {
   sqrtPriceX96After: BigInt! # uint160
   rewards0: BigInt! # uint256
   rewards1: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Mint @entity(immutable: true) {
-  id: Bytes!
-  sender: Bytes! # address
-  owner: Bytes! # address
-  liquidityDelta: BigInt! # uint128
-  amount0: BigInt! # uint256
-  amount1: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
