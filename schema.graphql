@@ -7,6 +7,8 @@ type Factory @entity {
   uniV3Factory: ID!
   # observation cardinality min
   minCardinality: BigInt!
+  # margin maintenance
+  maintenance: Int!
   # leverage
   leverage: BigInt!
   # amount of pools created
@@ -18,6 +20,35 @@ type Factory @entity {
   # pools deployed by factory
   pools: [Pool!]! @derivedFrom(field: "factory")
 }
+
+type Pool @entity {
+  # pool address
+  id: ID!
+  # factory address
+  factory: Factory!
+  # oracle address:
+  oracle: ID!
+  # created timestamp
+  createdAtTimestamp: BigInt!
+  # created block number
+  createdAtBlockNumber: BigInt!
+  # token0
+  token0: Token!
+  # token1
+  token1: Token!
+  # all time number of transactions
+  txCount: BigInt!
+  # fee
+  fee: BigInt!
+  # reward
+  reward: BigInt!
+  # liquidity locked
+  liquidityLocked: BigInt!
+  # positions held on pool
+  positions: [Position!]! @derivedFrom(field: "pool")
+}
+
+### AUTO GENERATED ENTITIES ###
 
 # MarginalV1Factory Entities
 type LeverageEnabled @entity(immutable: true) {
