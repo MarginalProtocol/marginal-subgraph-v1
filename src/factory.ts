@@ -82,5 +82,10 @@ export function handlePoolCreated(event: PoolCreated): void {
 // }
 
 export function handleOwnerChanged(event: OwnerChanged): void {
+  let factory = loadFactory(FACTORY_ADDRESS)
 
+  // assign new owner
+  factory.owner = event.params.newOwner.toHexString()
+
+  factory.save()
 }
