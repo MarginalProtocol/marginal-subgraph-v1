@@ -54,7 +54,7 @@ dataSources:
           handler: handleGrab
         - event: Lock(indexed uint256,uint256)
           handler: handleLock
-      file: ./src/nonfungiblePositionManager.ts
+      file: ./src/position-manager.ts
 
 templates:
   - kind: ethereum
