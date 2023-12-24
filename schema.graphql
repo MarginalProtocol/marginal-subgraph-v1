@@ -48,6 +48,23 @@ type Pool @entity {
   positions: [Position!]! @derivedFrom(field: "pool")
 }
 
+type Position @entity {
+  # position nft id
+  id: ID!
+  # owner of position
+  owner: ID!
+  # pool address of position
+  pool: Pool!
+  # margin
+  margin: BigInt!
+  # created at block number
+  blockNumber: BigInt!
+  # created at timestamp
+  timestamp: BigInt!
+  # created at tx hash
+  transactionHash: ID!
+}
+
 ### AUTO GENERATED ENTITIES ###
 
 # MarginalV1Factory Entities
