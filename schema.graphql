@@ -1,3 +1,24 @@
+type Factory @entity {
+  # factory address
+  id: ID!
+  # deployer address
+  deployer: ID!
+  # uni v3 factory address
+  uniV3Factory: ID!
+  # observation cardinality min
+  minCardinality: BigInt!
+  # leverage
+  leverage: BigInt!
+  # amount of pools created
+  poolCount: BigInt!
+  # amount of all time transactions
+  txCount: BigInt!
+  # factory owner
+  owner: ID!
+  # pools deployed by factory
+  pools: [Pool!]! @derivedFrom(field: "factory")
+}
+
 # MarginalV1Factory Entities
 type LeverageEnabled @entity(immutable: true) {
   id: Bytes!
