@@ -18,22 +18,11 @@ import {
   fetchTokenSymbol,
 } from "./utils/token";
 import { BigInt, BigDecimal } from "@graphprotocol/graph-ts";
+import { loadFactory } from "./utils/loaders";
 
 export function handlePoolCreated(event: PoolCreated): void {
   // load factory
-  let factory = Factory.load(FACTORY_ADDRESS);
-
-  // create new factory if null
-  if (factory === null) {
-    factory = new Factory(FACTORY_ADDRESS);
-    factory.poolCount = ZERO_BI;
-    factory.deployer = factoryContract.marginalV1Deployer().toHexString();
-    factory.uniV3Factory = factoryContract.uniswapV3Factory().toHexString();
-    factory.minCardinality = factoryContract.observationCardinalityMinimum();
-    factory.poolCount = ZERO_BI;
-    factory.txCount = ZERO_BI;
-    factory.owner = factoryContract.owner().toHexString();
-  }
+  let factory = loadFactory(FACTORY_ADDRESS)
 
   factory.poolCount = factory.poolCount.plus(ONE_BI);
 
@@ -93,5 +82,5 @@ export function handlePoolCreated(event: PoolCreated): void {
 // }
 
 export function handleOwnerChanged(event: OwnerChanged): void {
-  
+
 }
