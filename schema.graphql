@@ -62,7 +62,24 @@ type Position @entity {
   # created at timestamp
   timestamp: BigInt!
   # created at tx hash
-  transactionHash: ID!
+  transaction: Transaction!
+}
+
+type Transaction @entity {
+  # tx hash
+  id: ID!
+  # block txn was included in
+  blockNumber: BigInt!
+  # timestamp txn was confirmed
+  timestamp: BigInt!
+  # gas settings during tx execution
+  gasLimit: BigInt!
+  gasPrice: BigInt!
+  # derived values
+  open: [Open!]! @derivedFrom(field: "transaction")
+  adjust: [Adjust!]! @derivedFrom(field: "transaction")
+  settle: [Settle!]! @derivedFrom(field: "transaction")
+  ## TODO: Add Liquidate, Swap, Mint, Burn
 }
 
 ### AUTO GENERATED ENTITIES ###
