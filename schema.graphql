@@ -7,10 +7,6 @@ type Factory @entity {
   uniV3Factory: ID!
   # observation cardinality min
   minCardinality: BigInt!
-  # margin maintenance
-  maintenance: Int!
-  # leverage
-  leverage: BigInt!
   # amount of pools created
   poolCount: BigInt!
   # amount of all time transactions
