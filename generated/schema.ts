@@ -250,6 +250,19 @@ export class Pool extends Entity {
     this.set("token1", Value.fromString(value));
   }
 
+  get maintenance(): BigInt {
+    let value = this.get("maintenance");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set maintenance(value: BigInt) {
+    this.set("maintenance", Value.fromBigInt(value));
+  }
+
   get txCount(): BigInt {
     let value = this.get("txCount");
     if (!value || value.kind == ValueKind.NULL) {

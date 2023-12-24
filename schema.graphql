@@ -32,6 +32,8 @@ type Pool @entity {
   token0: Token!
   # token1
   token1: Token!
+  # maintenance margin
+  maintenance: BigInt!
   # all time number of transactions
   txCount: BigInt!
   # fee

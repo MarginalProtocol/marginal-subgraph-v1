@@ -90,6 +90,10 @@ templates:
       abis:
         - name: MarginalV1Pool
           file: ./abis/MarginalV1Pool.json
+        - name: MarginalV1Factory
+          file: ./abis/MarginalV1Factory.json
+        - name: ERC20
+          file: ./abis/ERC20.json
       eventHandlers:
         - event: Adjust(indexed address,indexed uint256,address,uint256)
           handler: handleAdjust

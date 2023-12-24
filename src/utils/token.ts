@@ -5,6 +5,7 @@ import { StaticTokenDefinition } from "./staticTokenDefinition";
 import { BigInt, Address } from "@graphprotocol/graph-ts";
 import { isNullEthValue } from "./helpers";
 
+/** Imported from Uniswap V3 Subgraph */
 export function fetchTokenSymbol(tokenAddress: Address): string {
   let contract = ERC20.bind(tokenAddress);
   let contractSymbolBytes = ERC20SymbolBytes.bind(tokenAddress);
