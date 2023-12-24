@@ -48,6 +48,17 @@ type Pool @entity {
   positions: [Position!]! @derivedFrom(field: "pool")
 }
 
+type Token @entity {
+  # token address
+  id: ID!
+  # token symbol
+  symbol: String!
+  # token name
+  name: String!
+  # token decimals
+  decimals: BigInt!
+}
+
 type Position @entity {
   # position nft id
   id: ID!
@@ -76,209 +87,8 @@ type Transaction @entity {
   gasLimit: BigInt!
   gasPrice: BigInt!
   # derived values
-  open: [Open!]! @derivedFrom(field: "transaction")
-  adjust: [Adjust!]! @derivedFrom(field: "transaction")
-  settle: [Settle!]! @derivedFrom(field: "transaction")
+  # open: [Open!]! @derivedFrom(field: "transaction")
+  # adjust: [Adjust!]! @derivedFrom(field: "transaction")
+  # settle: [Settle!]! @derivedFrom(field: "transaction")
   ## TODO: Add Liquidate, Swap, Mint, Burn
-}
-
-### AUTO GENERATED ENTITIES ###
-
-# MarginalV1Factory Entities
-type LeverageEnabled @entity(immutable: true) {
-  id: Bytes!
-  maintenance: Int! # uint24
-  leverage: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type OwnerChanged @entity(immutable: true) {
-  id: Bytes!
-  oldOwner: Bytes! # address
-  newOwner: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type PoolCreated @entity(immutable: true) {
-  id: Bytes!
-  token0: Bytes! # address
-  token1: Bytes! # address
-  maintenance: Int! # uint24
-  oracle: Bytes! # address
-  pool: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-# MarginalV1Pool Entities
-type Adjust @entity(immutable: true) {
-  id: Bytes!
-  owner: Bytes! # address
-  MarginalV1Pool_id: BigInt! # uint256
-  recipient: Bytes! # address
-  marginAfter: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Approval @entity(immutable: true) {
-  id: Bytes!
-  owner: Bytes! # address
-  spender: Bytes! # address
-  value: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Burn @entity(immutable: true) {
-  id: Bytes!
-  owner: Bytes! # address
-  recipient: Bytes! # address
-  liquidityDelta: BigInt! # uint128
-  amount0: BigInt! # uint256
-  amount1: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type CollectProtocol @entity(immutable: true) {
-  id: Bytes!
-  sender: Bytes! # address
-  recipient: Bytes! # address
-  amount0: BigInt! # uint128
-  amount1: BigInt! # uint128
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Initialize @entity(immutable: true) {
-  id: Bytes!
-  sqrtPriceX96: BigInt! # uint160
-  tick: Int! # int24
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Liquidate @entity(immutable: true) {
-  id: Bytes!
-  owner: Bytes! # address
-  MarginalV1Pool_id: BigInt! # uint256
-  recipient: Bytes! # address
-  liquidityAfter: BigInt! # uint128
-  sqrtPriceX96After: BigInt! # uint160
-  rewards0: BigInt! # uint256
-  rewards1: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Mint @entity(immutable: true) {
-  id: Bytes!
-  sender: Bytes! # address
-  owner: Bytes! # address
-  liquidityDelta: BigInt! # uint128
-  amount0: BigInt! # uint256
-  amount1: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Open @entity(immutable: true) {
-  id: Bytes!
-  sender: Bytes! # address
-  owner: Bytes! # address
-  MarginalV1Pool_id: BigInt! # uint256
-  liquidityAfter: BigInt! # uint128
-  sqrtPriceX96After: BigInt! # uint160
-  margin: BigInt! # uint128
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type SetFeeProtocol @entity(immutable: true) {
-  id: Bytes!
-  oldFeeProtocol: Int! # uint8
-  newFeeProtocol: Int! # uint8
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Settle @entity(immutable: true) {
-  id: Bytes!
-  owner: Bytes! # address
-  MarginalV1Pool_id: BigInt! # uint256
-  recipient: Bytes! # address
-  liquidityAfter: BigInt! # uint128
-  sqrtPriceX96After: BigInt! # uint160
-  amount0: BigInt! # int256
-  amount1: BigInt! # int256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Swap @entity(immutable: true) {
-  id: Bytes!
-  sender: Bytes! # address
-  recipient: Bytes! # address
-  amount0: BigInt! # int256
-  amount1: BigInt! # int256
-  sqrtPriceX96: BigInt! # uint160
-  liquidity: BigInt! # uint128
-  tick: Int! # int24
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Transfer @entity(immutable: true) {
-  id: Bytes!
-  from: Bytes! # address
-  to: Bytes! # address
-  value: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-# NonfungiblePositionManager Entities
-type Free @entity(immutable: true) {
-  id: Bytes!
-  tokenId: BigInt! # uint256
-  marginAfter: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Grab @entity(immutable: true) {
-  id: Bytes!
-  tokenId: BigInt! # uint256
-  rewards: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Lock @entity(immutable: true) {
-  id: Bytes!
-  tokenId: BigInt! # uint256
-  marginAfter: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
 }
