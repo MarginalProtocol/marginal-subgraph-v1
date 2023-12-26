@@ -1,11 +1,14 @@
-import { Factory } from "../../generated/schema";
+import { MarginalV1Pool } from './../../generated/templates/MarginalV1Pool/MarginalV1Pool';
+import { MarginalV1Pool as PoolTemplate } from '../../generated/templates'
+import { Factory, Pool } from "../../generated/schema";
 import {
     FACTORY_ADDRESS,
     ZERO_BI,
     ONE_BI,
     factoryContract,
   } from "../utils/constants";
-import { BigInt } from "@graphprotocol/graph-ts";
+import { BigInt, ethereum, Address } from "@graphprotocol/graph-ts";
+
 
 export function loadFactory(factoryAddress: string): Factory {
   // load factory
@@ -24,4 +27,31 @@ export function loadFactory(factoryAddress: string): Factory {
   }
 
   return factory
+}
+
+export function loadPool(event: ethereum.Event, poolAddress: Address): Pool {
+  // load pool
+  let pool = Pool.load(poolAddress.toHexString())
+
+  // create new pool if null
+  if (pool === null) {
+    pool = new Pool(poolAddress.toHexString())
+    let poolContract = MarginalV1Pool.bind(poolAddress)
+
+    pool.factory = poolContract.factory().toHexString()
+    pool.oracle = poolContract.oracle().toHexString()
+    pool.createdAtTimestamp = event.block.timestamp
+    pool.createdAtBlockNumber = event.block.number
+    pool.token0 = poolContract.token0().toHexString()
+    pool.token1 = poolContract.token1().toHexString()
+    pool.maintenance = BigInt.fromI32(poolContract.maintenance() as i32);
+    pool.txCount = ZERO_BI // TODO: check how to retrieve tx count if loading
+    pool.fee = BigInt.fromI32(poolContract.fee() as i32)
+    pool.reward = BigInt.fromI32(poolContract.reward() as i32)
+    pool.liquidityLocked = poolContract.liquidityLocked()
+
+    PoolTemplate.create(poolAddress)
+  }
+
+  return pool
 }
