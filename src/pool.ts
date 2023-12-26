@@ -6,6 +6,7 @@ import {
   Settle,
 } from "../generated/templates/MarginalV1Pool/MarginalV1Pool"
 import { loadPool, loadTransaction } from "./utils/loaders"
+import { ONE_BI } from "./utils/constants"
 
 export function handleOpen(event: Open): void {
   let pool = loadPool(event, event.address)
@@ -23,6 +24,8 @@ export function handleOpen(event: Open): void {
   position.timestamp = event.block.timestamp
   position.transaction = transaction.id
 
+  pool.txCount = pool.txCount.plus(ONE_BI)
+  
   pool.save()
   transaction.save()
   position.save()
