@@ -90,3 +90,24 @@ type Transaction @entity {
   # settle: [Settle!]! @derivedFrom(field: "transaction")
   ## TODO: Add Liquidate, Swap, Mint, Burn
 }
+
+type Open @entity {
+  # position id
+  id: ID!
+  # txn that position was opened in
+  transaction: Transaction!
+  # time of txn
+  timestamp: BigInt!
+  # pool position created in
+  pool: Pool!
+  # pool token0
+  token0: Token!
+  # pool token1
+  token1: Token!
+  # owner of position
+  owner: Bytes!
+  # address that minted position
+  sender: Bytes!
+  # position margin
+  margin: BigInt!
+}
