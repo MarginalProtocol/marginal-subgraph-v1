@@ -90,5 +90,5 @@ export function fetchTokenDecimals(tokenAddress: Address): BigInt {
   //     }
   //   }
 
-  return BigInt.fromI32(decimalValue);
+  return BigInt.fromI32(decimalValue as i32);
 }

@@ -50,13 +50,13 @@ export function handlePoolCreated(event: PoolCreated): void {
 
   pool.token0 = token0.id;
   pool.token1 = token1.id;
-  pool.maintenance = event.params.maintenance;
+  pool.maintenance = BigInt.fromI32(event.params.maintenance as i32);
   pool.oracle = event.params.oracle.toHexString();
   pool.createdAtTimestamp = event.block.timestamp;
   pool.createdAtBlockNumber = event.block.number;
   pool.txCount = ZERO_BI;
-  pool.fee = BigInt.fromI32(poolContract.fee)
-  pool.reward = BigInt.fromI32(poolContract.reward)
+  pool.fee = BigInt.fromI32(poolContract.fee() as i32)
+  pool.reward = BigInt.fromI32(poolContract.reward() as i32)
   pool.liquidityLocked = poolContract.liquidityLocked()
   
   factory.save()

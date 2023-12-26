@@ -609,6 +609,10 @@ export class Transaction extends Entity {
   set gasPrice(value: BigInt) {
     this.set("gasPrice", Value.fromBigInt(value));
   }
+
+  get open(): OpenLoader {
+    return new OpenLoader("Transaction", this.get("id")!.toString(), "open");
+  }
 }
 
 export class Open extends Entity {
@@ -788,5 +792,23 @@ export class PositionLoader extends Entity {
   load(): Position[] {
     let value = store.loadRelated(this._entity, this._id, this._field);
     return changetype<Position[]>(value);
+  }
+}
+
+export class OpenLoader extends Entity {
+  _entity: string;
+  _field: string;
+  _id: string;
+
+  constructor(entity: string, id: string, field: string) {
+    super();
+    this._entity = entity;
+    this._id = id;
+    this._field = field;
+  }
+
+  load(): Open[] {
+    let value = store.loadRelated(this._entity, this._id, this._field);
+    return changetype<Open[]>(value);
   }
 }
