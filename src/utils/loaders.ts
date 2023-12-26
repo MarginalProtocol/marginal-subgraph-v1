@@ -1,6 +1,6 @@
 import { MarginalV1Pool } from './../../generated/templates/MarginalV1Pool/MarginalV1Pool';
 import { MarginalV1Pool as PoolTemplate } from '../../generated/templates'
-import { Factory, Pool } from "../../generated/schema";
+import { Factory, Pool, Transaction } from "../../generated/schema";
 import {
     FACTORY_ADDRESS,
     ZERO_BI,
@@ -54,4 +54,18 @@ export function loadPool(event: ethereum.Event, poolAddress: Address): Pool {
   }
 
   return pool
+}
+
+export function loadTransaction(event: ethereum.Event): Transaction {
+  let transaction = Transaction.load(event.transaction.hash.toHexString())
+
+  if (transaction === null) {
+    transaction = new Transaction(event.transaction.hash.toHexString())
+    transaction.blockNumber = event.block.number
+    transaction.timestamp = event.block.timestamp
+    transaction.gasLimit = event.transaction.gasLimit
+    transaction.gasPrice = event.transaction.gasPrice
+  }
+
+  return transaction as Transaction
 }
