@@ -161,3 +161,26 @@ type Settle @entity {
   # amount received of token1
   amount1: BigInt!
 }
+
+type Liquidate @entity {
+  # position id
+  id: ID!
+  # txn that position was liquidated
+  transaction: Transaction!
+  # time of txn
+  timestamp: BigInt!
+  # pool position liquidated in
+  pool: Pool!
+  # pool token0
+  token0: Token!
+  # pool token1
+  token1: Token!
+  # owner of position
+  owner: Bytes!
+  # receipient of rewards for liquidating
+  recipient: Bytes!
+  # reward received in token0
+  rewards0: BigInt!
+  # reward received in token1
+  rewards1: BigInt!
+}
