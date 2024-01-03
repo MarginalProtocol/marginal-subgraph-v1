@@ -45,3 +45,6 @@ export function handleOpen(event: OpenEvent): void {
   open.save()
 }
 
+export function handleSettle(event: SettleEvent): void {
+  
+}

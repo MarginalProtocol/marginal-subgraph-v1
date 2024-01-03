@@ -117,3 +117,26 @@ type Open @entity {
   # position margin
   margin: BigInt!
 }
+
+type Settle @entity {
+  # position id
+  id: ID!
+  # txn that position was settled in
+  transaction: Transaction!
+  # time of txn
+  timestamp: BigInt!
+  # pool position settled in
+  pool: Pool!
+  # pool token0
+  token0: Token!
+  # pool token1
+  token1: Token!
+  # owner of position
+  owner: Bytes!
+  # receipient of closed position
+  recipient: Bytes!
+  # amount received of token0
+  amount0: BigInt!
+  # amount received of token1
+  amount1: BigInt!
+}
