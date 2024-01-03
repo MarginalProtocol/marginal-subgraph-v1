@@ -1,4 +1,4 @@
-import { Position, Open } from "../generated/schema"
+import { Position, Open, Settle } from "../generated/schema"
 import {
   Adjust as AdjustEvent,
   Liquidate as LiquidateEvent,
@@ -28,6 +28,7 @@ export function handleOpen(event: OpenEvent): void {
   position.isClosed = false
 
   let open = new Open(positionId) as Open
+
   open.transaction = transaction.id
   open.timestamp = transaction.timestamp
   open.pool = pool.id
@@ -46,5 +47,27 @@ export function handleOpen(event: OpenEvent): void {
 }
 
 export function handleSettle(event: SettleEvent): void {
+  let positionId = event.params.id.toHexString()
+  let position = Position.load(positionId)
+
+  let transaction = loadTransaction(event)
+  let pool = loadPool(event, event.address)
+
+  let settle = new Settle(positionId) as Settle
+
+  settle.transaction = transaction.id
+  settle.timestamp = transaction.timestamp
+  settle.pool = pool.id
+  settle.token0 = pool.token0
+  settle.token1 = pool.token1
+  settle.owner = event.params.owner
+  settle.recipient = event.params.recipient
+  settle.amount0 = event.params.amount0
+  settle.amount1 = event.params.amount1
+
+  position.isSettled = true
+  position.isClosed = true
   
+  position.save()
+  settle.save()
 }
