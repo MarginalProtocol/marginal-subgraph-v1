@@ -47,6 +47,7 @@ export function handleOpen(event: OpenEvent): void {
   open.save()
 }
 
+// TODO: Need to rethink through how to index multiple Adjust events to a Position
 export function handleAdjust(event: AdjustEvent): void {
   let transaction = loadTransaction(event)
   let pool = loadPool(event, event.address)
