@@ -19,7 +19,6 @@ export function handleOpen(event: OpenEvent): void {
   let _positionId = pool.id.concat('-').concat(positionId)
   
   let position = new Position(_positionId) as Position
-
   position.owner = sender
   position.pool = pool.id
   position.margin = event.params.margin
@@ -31,7 +30,6 @@ export function handleOpen(event: OpenEvent): void {
   position.isClosed = false
 
   let open = new Open(positionId) as Open
-
   open.transaction = transaction.id
   open.timestamp = transaction.timestamp
   open.pool = pool.id
@@ -50,13 +48,16 @@ export function handleOpen(event: OpenEvent): void {
 }
 
 export function handleAdjust(event: AdjustEvent): void {
-  let positionId = event.params.id.toHexString()
-
   let transaction = loadTransaction(event)
   let pool = loadPool(event, event.address)
 
-  let adjust = new Adjust(positionId) as Adjust
+  let positionId = event.params.id.toHexString()
+  let _positionId = pool.id.concat('-').concat(positionId)
 
+  let position = loadPosition(event, event.params.owner, pool, _positionId)
+  position.margin = event.params.marginAfter
+
+  let adjust = new Adjust(positionId) as Adjust
   adjust.transaction = transaction.id
   adjust.timestamp = transaction.timestamp
   adjust.pool = pool.id
@@ -66,6 +67,7 @@ export function handleAdjust(event: AdjustEvent): void {
   adjust.recipient = event.params.recipient
   adjust.margin = event.params.marginAfter
 
+  position.save()
   adjust.save()
 } 
 
@@ -77,9 +79,10 @@ export function handleSettle(event: SettleEvent): void {
   let _positionId = pool.id.concat('-').concat(positionId)
 
   let position = loadPosition(event, event.params.owner, pool, _positionId)
+  position.isSettled = true
+  position.isClosed = true
 
   let settle = new Settle(positionId) as Settle
-
   settle.transaction = transaction.id
   settle.timestamp = transaction.timestamp
   settle.pool = pool.id
@@ -89,9 +92,6 @@ export function handleSettle(event: SettleEvent): void {
   settle.recipient = event.params.recipient
   settle.amount0 = event.params.amount0
   settle.amount1 = event.params.amount1
-
-  position.isSettled = true
-  position.isClosed = true
   
   position.save()
   settle.save()
@@ -105,9 +105,10 @@ export function handleLiquidate(event: LiquidateEvent): void {
   let _positionId = pool.id.concat('-').concat(positionId)
 
   let position = loadPosition(event, event.params.owner, pool, _positionId)
+  position.isLiquidated = true
+  position.isClosed = true
 
   let liquidate = new Liquidate(positionId) as Liquidate
-
   liquidate.transaction = transaction.id
   liquidate.timestamp = transaction.timestamp
   liquidate.pool = pool.id
@@ -117,9 +118,6 @@ export function handleLiquidate(event: LiquidateEvent): void {
   liquidate.recipient = event.params.recipient
   liquidate.rewards0 = event.params.rewards0
   liquidate.rewards1 = event.params.rewards1
-
-  position.isLiquidated = true
-  position.isClosed = true
   
   position.save()
   liquidate.save()
