@@ -94,7 +94,8 @@ type Transaction @entity {
   open: [Open!]! @derivedFrom(field: "transaction")
   adjust: [Adjust!]! @derivedFrom(field: "transaction")
   settle: [Settle!]! @derivedFrom(field: "transaction")
-  ## TODO: Add Liquidate, Swap, Mint, Burn
+  liquidate: [Liquidate!]! @derivedFrom(field: "liquidate")
+  ## TODO: Add Swap, Mint, Burn
 }
 
 type Open @entity {
