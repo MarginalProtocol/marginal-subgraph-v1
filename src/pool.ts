@@ -5,7 +5,7 @@ import {
   Open as OpenEvent,
   Settle as SettleEvent,
 } from "../generated/templates/MarginalV1Pool/MarginalV1Pool"
-import { loadPool, loadTransaction } from "./utils/loaders"
+import { loadPool, loadTransaction, loadPosition } from "./utils/loaders"
 import { ONE_BI } from "./utils/constants"
 
 export function handleOpen(event: OpenEvent): void {
@@ -15,7 +15,10 @@ export function handleOpen(event: OpenEvent): void {
   let sender = event.params.sender.toHexString()
   let positionId = event.params.id.toHexString()
 
-  let position = new Position(positionId) as Position
+  // Create unique id using pool and positionId
+  let _positionId = pool.id.concat('-').concat(positionId)
+  
+  let position = new Position(_positionId) as Position
 
   position.owner = sender
   position.pool = pool.id
@@ -67,11 +70,13 @@ export function handleAdjust(event: AdjustEvent): void {
 } 
 
 export function handleSettle(event: SettleEvent): void {
-  let positionId = event.params.id.toHexString()
-  let position = Position.load(positionId)
-
   let transaction = loadTransaction(event)
   let pool = loadPool(event, event.address)
+
+  let positionId = event.params.id.toHexString()
+  let _positionId = pool.id.concat('-').concat(positionId)
+
+  let position = loadPosition(event, event.params.owner, pool, _positionId)
 
   let settle = new Settle(positionId) as Settle
 
@@ -93,11 +98,13 @@ export function handleSettle(event: SettleEvent): void {
 }
 
 export function handleLiquidate(event: LiquidateEvent): void {
-  let positionId = event.params.id.toHexString()
-  let position = Position.load(positionId)
-
   let transaction = loadTransaction(event)
   let pool = loadPool(event, event.address)
+
+  let positionId = event.params.id.toHexString()
+  let _positionId = pool.id.concat('-').concat(positionId)
+
+  let position = loadPosition(event, event.params.owner, pool, _positionId)
 
   let liquidate = new Liquidate(positionId) as Liquidate
 

@@ -71,8 +71,8 @@ export function loadTransaction(event: ethereum.Event): Transaction {
   return transaction as Transaction
 }
 
-export function loadPosition(event: ethereum.Event, sender: Address, owner: Address, pool: Pool, positionId: BigInt): Position {
-  let _positionId = pool.id.concat('-').concat(positionId.toHexString())
+export function loadPosition(event: ethereum.Event, owner: Address, pool: Pool, positionId: string): Position {
+  let _positionId = pool.id.concat('-').concat(positionId)
   let poolContract = MarginalV1Pool.bind(pool.address)
 
   // load Position if exists
