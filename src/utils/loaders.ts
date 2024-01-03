@@ -1,6 +1,6 @@
 import { MarginalV1Pool } from './../../generated/templates/MarginalV1Pool/MarginalV1Pool';
 import { MarginalV1Pool as PoolTemplate } from '../../generated/templates'
-import { Factory, Pool, Transaction } from "../../generated/schema";
+import { Factory, Pool, Transaction, Position } from "../../generated/schema";
 import {
     FACTORY_ADDRESS,
     ZERO_BI,
@@ -38,6 +38,7 @@ export function loadPool(event: ethereum.Event, poolAddress: Address): Pool {
     pool = new Pool(poolAddress.toHexString())
     let poolContract = MarginalV1Pool.bind(poolAddress)
 
+    pool.address = poolAddress
     pool.factory = poolContract.factory().toHexString()
     pool.oracle = poolContract.oracle().toHexString()
     pool.createdAtTimestamp = event.block.timestamp
@@ -68,4 +69,19 @@ export function loadTransaction(event: ethereum.Event): Transaction {
   }
 
   return transaction as Transaction
+}
+
+export function loadPosition(event: ethereum.Event, pool: Pool, positionId: BigInt): Position {
+  let _positionId = pool.id.concat('-').concat(positionId.toHexString())
+  let poolContract = MarginalV1Pool.bind(pool.id as)
+
+  // load Position if exists
+  let position = Position.load(_positionId)
+
+  // create new Position if null
+  if (position === null) {
+    position = new Position(_positionId)
+
+    position.owner =
+  }
 }

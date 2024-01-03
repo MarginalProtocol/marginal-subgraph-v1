@@ -20,6 +20,8 @@ type Factory @entity {
 type Pool @entity {
   # pool address
   id: ID!
+  # pool address in Bytes
+  address: Bytes!
   # factory address
   factory: Factory!
   # oracle address:

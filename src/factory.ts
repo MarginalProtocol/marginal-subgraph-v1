@@ -48,6 +48,7 @@ export function handlePoolCreated(event: PoolCreated): void {
     token1.decimals = fetchTokenDecimals(event.params.token1);
   }
 
+  pool.address = event.params.pool
   pool.factory = factory.id
   pool.token0 = token0.id;
   pool.token1 = token1.id;

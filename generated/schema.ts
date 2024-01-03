@@ -172,6 +172,19 @@ export class Pool extends Entity {
     this.set("id", Value.fromString(value));
   }
 
+  get address(): Bytes {
+    let value = this.get("address");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set address(value: Bytes) {
+    this.set("address", Value.fromBytes(value));
+  }
+
   get factory(): string {
     let value = this.get("factory");
     if (!value || value.kind == ValueKind.NULL) {
@@ -666,6 +679,14 @@ export class Transaction extends Entity {
       "Transaction",
       this.get("id")!.toString(),
       "settle"
+    );
+  }
+
+  get liquidate(): LiquidateLoader {
+    return new LiquidateLoader(
+      "Transaction",
+      this.get("id")!.toString(),
+      "liquidate"
     );
   }
 }
@@ -1359,5 +1380,23 @@ export class SettleLoader extends Entity {
   load(): Settle[] {
     let value = store.loadRelated(this._entity, this._id, this._field);
     return changetype<Settle[]>(value);
+  }
+}
+
+export class LiquidateLoader extends Entity {
+  _entity: string;
+  _field: string;
+  _id: string;
+
+  constructor(entity: string, id: string, field: string) {
+    super();
+    this._entity = entity;
+    this._id = id;
+    this._field = field;
+  }
+
+  load(): Liquidate[] {
+    let value = store.loadRelated(this._entity, this._id, this._field);
+    return changetype<Liquidate[]>(value);
   }
 }
