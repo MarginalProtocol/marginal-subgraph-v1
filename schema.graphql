@@ -118,6 +118,27 @@ type Open @entity {
   margin: BigInt!
 }
 
+type Adjust @entity {
+  # position id
+  id: ID!
+  # txn that position was adjusted in
+  transaction: Transaction!
+  # time of txn
+  timestamp: BigInt!
+  # pool position adjusted in
+  pool: Pool!
+  # pool token0
+  token0: Token!
+  # pool token1
+  token1: Token!
+  # owner of position
+  owner: Bytes!
+  # receipient of adjusted position
+  recipient: Bytes!
+  # position margin
+  margin: BigInt!
+}
+
 type Settle @entity {
   # position id
   id: ID!
