@@ -72,6 +72,12 @@ type Position @entity {
   timestamp: BigInt!
   # created at tx hash
   transaction: Transaction!
+  # is position liquidated
+  isLiquidated: Boolean!
+  # is position settled
+  isSettled: Boolean!
+  # either settled/liquidated is true
+  isClosed: Boolean!
 }
 
 type Transaction @entity {

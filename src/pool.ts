@@ -23,6 +23,9 @@ export function handleOpen(event: OpenEvent): void {
   position.blockNumber = event.block.number
   position.timestamp = event.block.timestamp
   position.transaction = transaction.id
+  position.isLiquidated = false
+  position.isSettled = false
+  position.isClosed = false
 
   let open = new Open(positionId) as Open
   open.transaction = transaction.id
@@ -41,3 +44,4 @@ export function handleOpen(event: OpenEvent): void {
   position.save()
   open.save()
 }
+

@@ -515,6 +515,45 @@ export class Position extends Entity {
   set transaction(value: string) {
     this.set("transaction", Value.fromString(value));
   }
+
+  get isLiquidated(): boolean {
+    let value = this.get("isLiquidated");
+    if (!value || value.kind == ValueKind.NULL) {
+      return false;
+    } else {
+      return value.toBoolean();
+    }
+  }
+
+  set isLiquidated(value: boolean) {
+    this.set("isLiquidated", Value.fromBoolean(value));
+  }
+
+  get isSettled(): boolean {
+    let value = this.get("isSettled");
+    if (!value || value.kind == ValueKind.NULL) {
+      return false;
+    } else {
+      return value.toBoolean();
+    }
+  }
+
+  set isSettled(value: boolean) {
+    this.set("isSettled", Value.fromBoolean(value));
+  }
+
+  get isClosed(): boolean {
+    let value = this.get("isClosed");
+    if (!value || value.kind == ValueKind.NULL) {
+      return false;
+    } else {
+      return value.toBoolean();
+    }
+  }
+
+  set isClosed(value: boolean) {
+    this.set("isClosed", Value.fromBoolean(value));
+  }
 }
 
 export class Transaction extends Entity {
