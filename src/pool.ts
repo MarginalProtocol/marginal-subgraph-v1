@@ -111,7 +111,7 @@ export function handleLiquidate(event: LiquidateEvent): void {
   liquidate.rewards0 = event.params.rewards0
   liquidate.rewards1 = event.params.rewards1
 
-  position.isSettled = true
+  position.isLiquidated = true
   position.isClosed = true
   
   position.save()
