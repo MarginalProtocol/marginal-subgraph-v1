@@ -41,7 +41,7 @@ type Pool @entity {
   # fee
   fee: BigInt!
   # reward
-  reward: BigInt!
+  rewardPremium: BigInt!
   # liquidity locked
   liquidityLocked: BigInt!
   # positions held on pool
@@ -51,6 +51,8 @@ type Pool @entity {
 type Token @entity {
   # token address
   id: ID!
+  # token address
+  address: ID!
   # token symbol
   symbol: String!
   # token name
@@ -67,11 +69,11 @@ type Position @entity {
   # pool address of position
   pool: Pool!
   # margin
-  margin: BigInt!
+  margin: BigInt
   # created at block number
-  blockNumber: BigInt!
+  blockNumber: BigInt
   # created at timestamp
-  timestamp: BigInt!
+  timestamp: BigInt
   # created at tx hash
   transaction: Transaction!
   # is position liquidated
@@ -159,10 +161,8 @@ type Settle @entity {
   owner: Bytes!
   # receipient of closed position
   recipient: Bytes!
-  # amount received of token0
-  amount0: BigInt!
-  # amount received of token1
-  amount1: BigInt!
+  # amount received
+  rewards: BigInt!
 }
 
 type Liquidate @entity {
@@ -182,8 +182,6 @@ type Liquidate @entity {
   owner: Bytes!
   # receipient of rewards for liquidating
   recipient: Bytes!
-  # reward received in token0
-  rewards0: BigInt!
-  # reward received in token1
-  rewards1: BigInt!
+  # amount received
+  rewards: BigInt!
 }

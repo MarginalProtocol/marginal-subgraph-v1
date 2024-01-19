@@ -33,7 +33,6 @@
     "type": "error"
   },
   { "inputs": [], "name": "InvalidOracle", "type": "error" },
-  { "inputs": [], "name": "InvalidTokens", "type": "error" },
   { "inputs": [], "name": "LeverageActive", "type": "error" },
   { "inputs": [], "name": "PoolActive", "type": "error" },
   { "inputs": [], "name": "Unauthorized", "type": "error" },
@@ -79,13 +78,13 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "address",
         "name": "token0",
         "type": "address"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "address",
         "name": "token1",
         "type": "address"
@@ -97,7 +96,7 @@
         "type": "uint24"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "address",
         "name": "oracle",
         "type": "address"
@@ -151,6 +150,13 @@
     ],
     "name": "getPool",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "isPool",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
   },

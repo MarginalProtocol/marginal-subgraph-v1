@@ -91,8 +91,7 @@ export function handleSettle(event: SettleEvent): void {
   settle.token1 = pool.token1
   settle.owner = event.params.owner
   settle.recipient = event.params.recipient
-  settle.amount0 = event.params.amount0
-  settle.amount1 = event.params.amount1
+  settle.rewards = event.params.rewards
   
   position.save()
   settle.save()
@@ -117,8 +116,7 @@ export function handleLiquidate(event: LiquidateEvent): void {
   liquidate.token1 = pool.token1
   liquidate.owner = event.params.owner
   liquidate.recipient = event.params.recipient
-  liquidate.rewards0 = event.params.rewards0
-  liquidate.rewards1 = event.params.rewards1
+  liquidate.rewards = event.params.rewards
   
   position.save()
   liquidate.save()

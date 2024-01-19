@@ -198,6 +198,25 @@ export class MarginalV1Factory extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
+  isPool(param0: Address): boolean {
+    let result = super.call("isPool", "isPool(address):(bool)", [
+      ethereum.Value.fromAddress(param0)
+    ]);
+
+    return result[0].toBoolean();
+  }
+
+  try_isPool(param0: Address): ethereum.CallResult<boolean> {
+    let result = super.tryCall("isPool", "isPool(address):(bool)", [
+      ethereum.Value.fromAddress(param0)
+    ]);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBoolean());
+  }
+
   marginalV1Deployer(): Address {
     let result = super.call(
       "marginalV1Deployer",

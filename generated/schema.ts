@@ -302,8 +302,8 @@ export class Pool extends Entity {
     this.set("fee", Value.fromBigInt(value));
   }
 
-  get reward(): BigInt {
-    let value = this.get("reward");
+  get rewardPremium(): BigInt {
+    let value = this.get("rewardPremium");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -311,8 +311,8 @@ export class Pool extends Entity {
     }
   }
 
-  set reward(value: BigInt) {
-    this.set("reward", Value.fromBigInt(value));
+  set rewardPremium(value: BigInt) {
+    this.set("rewardPremium", Value.fromBigInt(value));
   }
 
   get liquidityLocked(): BigInt {
@@ -370,6 +370,19 @@ export class Token extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
+  }
+
+  get address(): string {
+    let value = this.get("address");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set address(value: string) {
+    this.set("address", Value.fromString(value));
   }
 
   get symbol(): string {
@@ -477,43 +490,55 @@ export class Position extends Entity {
     this.set("pool", Value.fromString(value));
   }
 
-  get margin(): BigInt {
+  get margin(): BigInt | null {
     let value = this.get("margin");
     if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
+      return null;
     } else {
       return value.toBigInt();
     }
   }
 
-  set margin(value: BigInt) {
-    this.set("margin", Value.fromBigInt(value));
+  set margin(value: BigInt | null) {
+    if (!value) {
+      this.unset("margin");
+    } else {
+      this.set("margin", Value.fromBigInt(<BigInt>value));
+    }
   }
 
-  get blockNumber(): BigInt {
+  get blockNumber(): BigInt | null {
     let value = this.get("blockNumber");
     if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
+      return null;
     } else {
       return value.toBigInt();
     }
   }
 
-  set blockNumber(value: BigInt) {
-    this.set("blockNumber", Value.fromBigInt(value));
+  set blockNumber(value: BigInt | null) {
+    if (!value) {
+      this.unset("blockNumber");
+    } else {
+      this.set("blockNumber", Value.fromBigInt(<BigInt>value));
+    }
   }
 
-  get timestamp(): BigInt {
+  get timestamp(): BigInt | null {
     let value = this.get("timestamp");
     if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
+      return null;
     } else {
       return value.toBigInt();
     }
   }
 
-  set timestamp(value: BigInt) {
-    this.set("timestamp", Value.fromBigInt(value));
+  set timestamp(value: BigInt | null) {
+    if (!value) {
+      this.unset("timestamp");
+    } else {
+      this.set("timestamp", Value.fromBigInt(<BigInt>value));
+    }
   }
 
   get transaction(): string {
@@ -1109,8 +1134,8 @@ export class Settle extends Entity {
     this.set("recipient", Value.fromBytes(value));
   }
 
-  get amount0(): BigInt {
-    let value = this.get("amount0");
+  get rewards(): BigInt {
+    let value = this.get("rewards");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -1118,21 +1143,8 @@ export class Settle extends Entity {
     }
   }
 
-  set amount0(value: BigInt) {
-    this.set("amount0", Value.fromBigInt(value));
-  }
-
-  get amount1(): BigInt {
-    let value = this.get("amount1");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set amount1(value: BigInt) {
-    this.set("amount1", Value.fromBigInt(value));
+  set rewards(value: BigInt) {
+    this.set("rewards", Value.fromBigInt(value));
   }
 }
 
@@ -1266,8 +1278,8 @@ export class Liquidate extends Entity {
     this.set("recipient", Value.fromBytes(value));
   }
 
-  get rewards0(): BigInt {
-    let value = this.get("rewards0");
+  get rewards(): BigInt {
+    let value = this.get("rewards");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
@@ -1275,21 +1287,8 @@ export class Liquidate extends Entity {
     }
   }
 
-  set rewards0(value: BigInt) {
-    this.set("rewards0", Value.fromBigInt(value));
-  }
-
-  get rewards1(): BigInt {
-    let value = this.get("rewards1");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set rewards1(value: BigInt) {
-    this.set("rewards1", Value.fromBigInt(value));
+  set rewards(value: BigInt) {
+    this.set("rewards", Value.fromBigInt(value));
   }
 }
 

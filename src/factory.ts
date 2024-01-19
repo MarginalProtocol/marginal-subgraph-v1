@@ -17,7 +17,7 @@ import {
   fetchTokenName,
   fetchTokenSymbol,
 } from "./utils/token";
-import { BigInt, BigDecimal } from "@graphprotocol/graph-ts";
+import { BigInt, BigDecimal, log } from "@graphprotocol/graph-ts";
 import { loadFactory } from "./utils/loaders";
 
 export function handlePoolCreated(event: PoolCreated): void {
@@ -29,13 +29,22 @@ export function handlePoolCreated(event: PoolCreated): void {
   // bind Pool contract to query 
   let poolContract = MarginalV1Pool.bind(event.params.pool)
 
+  log.info(`poolContract: {}`, [event.params.pool.toHexString()])
+
   let pool = new Pool(event.params.pool.toHexString()) as Pool;
   let token0 = Token.load(event.params.token0.toHexString());
   let token1 = Token.load(event.params.token1.toHexString());
 
+  log.info(`token0 loaded: {}`, [event.params.token0.toHexString()])
+  log.info(`token1 loaded: {}`, [event.params.token1.toHexString()])
+
+
   // fetch token info if null
   if (token0 === null) {
     token0 = new Token(event.params.token0.toHexString());
+    log.info(`token0 indexed: {}`, [event.params.token0.toHexString()])
+
+    token0.address = event.params.token0.toHexString()
     token0.symbol = fetchTokenSymbol(event.params.token0);
     token0.name = fetchTokenName(event.params.token0);
     token0.decimals = fetchTokenDecimals(event.params.token0);
@@ -43,6 +52,9 @@ export function handlePoolCreated(event: PoolCreated): void {
 
   if (token1 === null) {
     token1 = new Token(event.params.token1.toHexString());
+    log.info(`token1 indexed: {}`, [event.params.token1.toHexString()])
+
+    token1.address = "food"
     token1.symbol = fetchTokenSymbol(event.params.token1);
     token1.name = fetchTokenName(event.params.token1);
     token1.decimals = fetchTokenDecimals(event.params.token1);
@@ -58,7 +70,7 @@ export function handlePoolCreated(event: PoolCreated): void {
   pool.createdAtBlockNumber = event.block.number;
   pool.txCount = ZERO_BI;
   pool.fee = BigInt.fromI32(poolContract.fee() as i32)
-  pool.reward = BigInt.fromI32(poolContract.reward() as i32)
+  pool.rewardPremium = BigInt.fromI32(poolContract.rewardPremium() as i32)
   pool.liquidityLocked = poolContract.liquidityLocked()
   
   factory.save()

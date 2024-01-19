@@ -185,12 +185,8 @@ export class Liquidate__Params {
     return this._event.parameters[4].value.toBigInt();
   }
 
-  get rewards0(): BigInt {
+  get rewards(): BigInt {
     return this._event.parameters[5].value.toBigInt();
-  }
-
-  get rewards1(): BigInt {
-    return this._event.parameters[6].value.toBigInt();
   }
 }
 
@@ -327,6 +323,10 @@ export class Settle__Params {
 
   get amount1(): BigInt {
     return this._event.parameters[6].value.toBigInt();
+  }
+
+  get rewards(): BigInt {
+    return this._event.parameters[7].value.toBigInt();
   }
 }
 
@@ -480,31 +480,6 @@ export class MarginalV1Pool__collectProtocolResult {
   }
 }
 
-export class MarginalV1Pool__liquidateResult {
-  value0: BigInt;
-  value1: BigInt;
-
-  constructor(value0: BigInt, value1: BigInt) {
-    this.value0 = value0;
-    this.value1 = value1;
-  }
-
-  toMap(): TypedMap<string, ethereum.Value> {
-    let map = new TypedMap<string, ethereum.Value>();
-    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
-    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
-    return map;
-  }
-
-  getRewards0(): BigInt {
-    return this.value0;
-  }
-
-  getRewards1(): BigInt {
-    return this.value1;
-  }
-}
-
 export class MarginalV1Pool__mintResult {
   value0: BigInt;
   value1: BigInt;
@@ -537,58 +512,6 @@ export class MarginalV1Pool__mintResult {
   }
 }
 
-export class MarginalV1Pool__openResult {
-  value0: BigInt;
-  value1: BigInt;
-  value2: BigInt;
-  value3: BigInt;
-  value4: BigInt;
-
-  constructor(
-    value0: BigInt,
-    value1: BigInt,
-    value2: BigInt,
-    value3: BigInt,
-    value4: BigInt
-  ) {
-    this.value0 = value0;
-    this.value1 = value1;
-    this.value2 = value2;
-    this.value3 = value3;
-    this.value4 = value4;
-  }
-
-  toMap(): TypedMap<string, ethereum.Value> {
-    let map = new TypedMap<string, ethereum.Value>();
-    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
-    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
-    map.set("value2", ethereum.Value.fromUnsignedBigInt(this.value2));
-    map.set("value3", ethereum.Value.fromUnsignedBigInt(this.value3));
-    map.set("value4", ethereum.Value.fromUnsignedBigInt(this.value4));
-    return map;
-  }
-
-  getId(): BigInt {
-    return this.value0;
-  }
-
-  getSize(): BigInt {
-    return this.value1;
-  }
-
-  getDebt(): BigInt {
-    return this.value2;
-  }
-
-  getAmount0(): BigInt {
-    return this.value3;
-  }
-
-  getAmount1(): BigInt {
-    return this.value4;
-  }
-}
-
 export class MarginalV1Pool__positionsResult {
   value0: BigInt;
   value1: BigInt;
@@ -602,6 +525,7 @@ export class MarginalV1Pool__positionsResult {
   value9: BigInt;
   value10: BigInt;
   value11: BigInt;
+  value12: BigInt;
 
   constructor(
     value0: BigInt,
@@ -615,7 +539,8 @@ export class MarginalV1Pool__positionsResult {
     value8: BigInt,
     value9: BigInt,
     value10: BigInt,
-    value11: BigInt
+    value11: BigInt,
+    value12: BigInt
   ) {
     this.value0 = value0;
     this.value1 = value1;
@@ -629,6 +554,7 @@ export class MarginalV1Pool__positionsResult {
     this.value9 = value9;
     this.value10 = value10;
     this.value11 = value11;
+    this.value12 = value12;
   }
 
   toMap(): TypedMap<string, ethereum.Value> {
@@ -645,6 +571,7 @@ export class MarginalV1Pool__positionsResult {
     map.set("value9", ethereum.Value.fromSignedBigInt(this.value9));
     map.set("value10", ethereum.Value.fromUnsignedBigInt(this.value10));
     map.set("value11", ethereum.Value.fromUnsignedBigInt(this.value11));
+    map.set("value12", ethereum.Value.fromUnsignedBigInt(this.value12));
     return map;
   }
 
@@ -695,6 +622,10 @@ export class MarginalV1Pool__positionsResult {
   getLiquidityLocked(): BigInt {
     return this.value11;
   }
+
+  getRewards(): BigInt {
+    return this.value12;
+  }
 }
 
 export class MarginalV1Pool__protocolFeesResult {
@@ -725,16 +656,19 @@ export class MarginalV1Pool__protocolFeesResult {
 export class MarginalV1Pool__settleResult {
   value0: BigInt;
   value1: BigInt;
+  value2: BigInt;
 
-  constructor(value0: BigInt, value1: BigInt) {
+  constructor(value0: BigInt, value1: BigInt, value2: BigInt) {
     this.value0 = value0;
     this.value1 = value1;
+    this.value2 = value2;
   }
 
   toMap(): TypedMap<string, ethereum.Value> {
     let map = new TypedMap<string, ethereum.Value>();
     map.set("value0", ethereum.Value.fromSignedBigInt(this.value0));
     map.set("value1", ethereum.Value.fromSignedBigInt(this.value1));
+    map.set("value2", ethereum.Value.fromUnsignedBigInt(this.value2));
     return map;
   }
 
@@ -745,13 +679,17 @@ export class MarginalV1Pool__settleResult {
   getAmount1(): BigInt {
     return this.value1;
   }
+
+  getRewards(): BigInt {
+    return this.value2;
+  }
 }
 
 export class MarginalV1Pool__stateResult {
   value0: BigInt;
   value1: BigInt;
-  value2: i32;
-  value3: BigInt;
+  value2: BigInt;
+  value3: i32;
   value4: BigInt;
   value5: BigInt;
   value6: i32;
@@ -760,8 +698,8 @@ export class MarginalV1Pool__stateResult {
   constructor(
     value0: BigInt,
     value1: BigInt,
-    value2: i32,
-    value3: BigInt,
+    value2: BigInt,
+    value3: i32,
     value4: BigInt,
     value5: BigInt,
     value6: i32,
@@ -781,10 +719,10 @@ export class MarginalV1Pool__stateResult {
     let map = new TypedMap<string, ethereum.Value>();
     map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
     map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
-    map.set("value2", ethereum.Value.fromI32(this.value2));
-    map.set("value3", ethereum.Value.fromUnsignedBigInt(this.value3));
-    map.set("value4", ethereum.Value.fromSignedBigInt(this.value4));
-    map.set("value5", ethereum.Value.fromUnsignedBigInt(this.value5));
+    map.set("value2", ethereum.Value.fromUnsignedBigInt(this.value2));
+    map.set("value3", ethereum.Value.fromI32(this.value3));
+    map.set("value4", ethereum.Value.fromUnsignedBigInt(this.value4));
+    map.set("value5", ethereum.Value.fromSignedBigInt(this.value5));
     map.set(
       "value6",
       ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(this.value6))
@@ -793,27 +731,27 @@ export class MarginalV1Pool__stateResult {
     return map;
   }
 
-  getLiquidity(): BigInt {
+  getSqrtPriceX96(): BigInt {
     return this.value0;
   }
 
-  getSqrtPriceX96(): BigInt {
+  getTotalPositions(): BigInt {
     return this.value1;
   }
 
-  getTick(): i32 {
+  getLiquidity(): BigInt {
     return this.value2;
   }
 
-  getBlockTimestamp(): BigInt {
+  getTick(): i32 {
     return this.value3;
   }
 
-  getTickCumulative(): BigInt {
+  getBlockTimestamp(): BigInt {
     return this.value4;
   }
 
-  getTotalPositions(): BigInt {
+  getTickCumulative(): BigInt {
     return this.value5;
   }
 
@@ -1166,14 +1104,10 @@ export class MarginalV1Pool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBoolean());
   }
 
-  liquidate(
-    recipient: Address,
-    owner: Address,
-    id: BigInt
-  ): MarginalV1Pool__liquidateResult {
+  liquidate(recipient: Address, owner: Address, id: BigInt): BigInt {
     let result = super.call(
       "liquidate",
-      "liquidate(address,address,uint96):(uint256,uint256)",
+      "liquidate(address,address,uint96):(uint256)",
       [
         ethereum.Value.fromAddress(recipient),
         ethereum.Value.fromAddress(owner),
@@ -1181,20 +1115,17 @@ export class MarginalV1Pool extends ethereum.SmartContract {
       ]
     );
 
-    return new MarginalV1Pool__liquidateResult(
-      result[0].toBigInt(),
-      result[1].toBigInt()
-    );
+    return result[0].toBigInt();
   }
 
   try_liquidate(
     recipient: Address,
     owner: Address,
     id: BigInt
-  ): ethereum.CallResult<MarginalV1Pool__liquidateResult> {
+  ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "liquidate",
-      "liquidate(address,address,uint96):(uint256,uint256)",
+      "liquidate(address,address,uint96):(uint256)",
       [
         ethereum.Value.fromAddress(recipient),
         ethereum.Value.fromAddress(owner),
@@ -1205,12 +1136,7 @@ export class MarginalV1Pool extends ethereum.SmartContract {
       return new ethereum.CallResult();
     }
     let value = result.value;
-    return ethereum.CallResult.fromValue(
-      new MarginalV1Pool__liquidateResult(
-        value[0].toBigInt(),
-        value[1].toBigInt()
-      )
-    );
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
   liquidityLocked(): BigInt {
@@ -1315,71 +1241,6 @@ export class MarginalV1Pool extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toString());
   }
 
-  open(
-    recipient: Address,
-    zeroForOne: boolean,
-    liquidityDelta: BigInt,
-    sqrtPriceLimitX96: BigInt,
-    margin: BigInt,
-    data: Bytes
-  ): MarginalV1Pool__openResult {
-    let result = super.call(
-      "open",
-      "open(address,bool,uint128,uint160,uint128,bytes):(uint256,uint256,uint256,uint256,uint256)",
-      [
-        ethereum.Value.fromAddress(recipient),
-        ethereum.Value.fromBoolean(zeroForOne),
-        ethereum.Value.fromUnsignedBigInt(liquidityDelta),
-        ethereum.Value.fromUnsignedBigInt(sqrtPriceLimitX96),
-        ethereum.Value.fromUnsignedBigInt(margin),
-        ethereum.Value.fromBytes(data)
-      ]
-    );
-
-    return new MarginalV1Pool__openResult(
-      result[0].toBigInt(),
-      result[1].toBigInt(),
-      result[2].toBigInt(),
-      result[3].toBigInt(),
-      result[4].toBigInt()
-    );
-  }
-
-  try_open(
-    recipient: Address,
-    zeroForOne: boolean,
-    liquidityDelta: BigInt,
-    sqrtPriceLimitX96: BigInt,
-    margin: BigInt,
-    data: Bytes
-  ): ethereum.CallResult<MarginalV1Pool__openResult> {
-    let result = super.tryCall(
-      "open",
-      "open(address,bool,uint128,uint160,uint128,bytes):(uint256,uint256,uint256,uint256,uint256)",
-      [
-        ethereum.Value.fromAddress(recipient),
-        ethereum.Value.fromBoolean(zeroForOne),
-        ethereum.Value.fromUnsignedBigInt(liquidityDelta),
-        ethereum.Value.fromUnsignedBigInt(sqrtPriceLimitX96),
-        ethereum.Value.fromUnsignedBigInt(margin),
-        ethereum.Value.fromBytes(data)
-      ]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(
-      new MarginalV1Pool__openResult(
-        value[0].toBigInt(),
-        value[1].toBigInt(),
-        value[2].toBigInt(),
-        value[3].toBigInt(),
-        value[4].toBigInt()
-      )
-    );
-  }
-
   oracle(): Address {
     let result = super.call("oracle", "oracle():(address)", []);
 
@@ -1398,7 +1259,7 @@ export class MarginalV1Pool extends ethereum.SmartContract {
   positions(param0: Bytes): MarginalV1Pool__positionsResult {
     let result = super.call(
       "positions",
-      "positions(bytes32):(uint128,uint128,uint128,uint128,uint128,bool,bool,int24,uint32,int56,uint128,uint128)",
+      "positions(bytes32):(uint128,uint128,uint128,uint128,uint128,bool,bool,int24,uint32,int56,uint128,uint128,uint256)",
       [ethereum.Value.fromFixedBytes(param0)]
     );
 
@@ -1414,7 +1275,8 @@ export class MarginalV1Pool extends ethereum.SmartContract {
       result[8].toBigInt(),
       result[9].toBigInt(),
       result[10].toBigInt(),
-      result[11].toBigInt()
+      result[11].toBigInt(),
+      result[12].toBigInt()
     );
   }
 
@@ -1423,7 +1285,7 @@ export class MarginalV1Pool extends ethereum.SmartContract {
   ): ethereum.CallResult<MarginalV1Pool__positionsResult> {
     let result = super.tryCall(
       "positions",
-      "positions(bytes32):(uint128,uint128,uint128,uint128,uint128,bool,bool,int24,uint32,int56,uint128,uint128)",
+      "positions(bytes32):(uint128,uint128,uint128,uint128,uint128,bool,bool,int24,uint32,int56,uint128,uint128,uint256)",
       [ethereum.Value.fromFixedBytes(param0)]
     );
     if (result.reverted) {
@@ -1443,7 +1305,8 @@ export class MarginalV1Pool extends ethereum.SmartContract {
         value[8].toBigInt(),
         value[9].toBigInt(),
         value[10].toBigInt(),
-        value[11].toBigInt()
+        value[11].toBigInt(),
+        value[12].toBigInt()
       )
     );
   }
@@ -1479,14 +1342,14 @@ export class MarginalV1Pool extends ethereum.SmartContract {
     );
   }
 
-  reward(): i32 {
-    let result = super.call("reward", "reward():(uint24)", []);
+  rewardPremium(): i32 {
+    let result = super.call("rewardPremium", "rewardPremium():(uint24)", []);
 
     return result[0].toI32();
   }
 
-  try_reward(): ethereum.CallResult<i32> {
-    let result = super.tryCall("reward", "reward():(uint24)", []);
+  try_rewardPremium(): ethereum.CallResult<i32> {
+    let result = super.tryCall("rewardPremium", "rewardPremium():(uint24)", []);
     if (result.reverted) {
       return new ethereum.CallResult();
     }
@@ -1516,7 +1379,7 @@ export class MarginalV1Pool extends ethereum.SmartContract {
   ): MarginalV1Pool__settleResult {
     let result = super.call(
       "settle",
-      "settle(address,uint96,bytes):(int256,int256)",
+      "settle(address,uint96,bytes):(int256,int256,uint256)",
       [
         ethereum.Value.fromAddress(recipient),
         ethereum.Value.fromUnsignedBigInt(id),
@@ -1526,7 +1389,8 @@ export class MarginalV1Pool extends ethereum.SmartContract {
 
     return new MarginalV1Pool__settleResult(
       result[0].toBigInt(),
-      result[1].toBigInt()
+      result[1].toBigInt(),
+      result[2].toBigInt()
     );
   }
 
@@ -1537,7 +1401,7 @@ export class MarginalV1Pool extends ethereum.SmartContract {
   ): ethereum.CallResult<MarginalV1Pool__settleResult> {
     let result = super.tryCall(
       "settle",
-      "settle(address,uint96,bytes):(int256,int256)",
+      "settle(address,uint96,bytes):(int256,int256,uint256)",
       [
         ethereum.Value.fromAddress(recipient),
         ethereum.Value.fromUnsignedBigInt(id),
@@ -1549,22 +1413,26 @@ export class MarginalV1Pool extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new MarginalV1Pool__settleResult(value[0].toBigInt(), value[1].toBigInt())
+      new MarginalV1Pool__settleResult(
+        value[0].toBigInt(),
+        value[1].toBigInt(),
+        value[2].toBigInt()
+      )
     );
   }
 
   state(): MarginalV1Pool__stateResult {
     let result = super.call(
       "state",
-      "state():(uint128,uint160,int24,uint32,int56,uint96,uint8,bool)",
+      "state():(uint160,uint96,uint128,int24,uint32,int56,uint8,bool)",
       []
     );
 
     return new MarginalV1Pool__stateResult(
       result[0].toBigInt(),
       result[1].toBigInt(),
-      result[2].toI32(),
-      result[3].toBigInt(),
+      result[2].toBigInt(),
+      result[3].toI32(),
       result[4].toBigInt(),
       result[5].toBigInt(),
       result[6].toI32(),
@@ -1575,7 +1443,7 @@ export class MarginalV1Pool extends ethereum.SmartContract {
   try_state(): ethereum.CallResult<MarginalV1Pool__stateResult> {
     let result = super.tryCall(
       "state",
-      "state():(uint128,uint160,int24,uint32,int56,uint96,uint8,bool)",
+      "state():(uint160,uint96,uint128,int24,uint32,int56,uint8,bool)",
       []
     );
     if (result.reverted) {
@@ -1586,8 +1454,8 @@ export class MarginalV1Pool extends ethereum.SmartContract {
       new MarginalV1Pool__stateResult(
         value[0].toBigInt(),
         value[1].toBigInt(),
-        value[2].toI32(),
-        value[3].toBigInt(),
+        value[2].toBigInt(),
+        value[3].toI32(),
         value[4].toBigInt(),
         value[5].toBigInt(),
         value[6].toI32(),
@@ -2082,36 +1950,6 @@ export class IncreaseAllowanceCall__Outputs {
   }
 }
 
-export class InitializeCall extends ethereum.Call {
-  get inputs(): InitializeCall__Inputs {
-    return new InitializeCall__Inputs(this);
-  }
-
-  get outputs(): InitializeCall__Outputs {
-    return new InitializeCall__Outputs(this);
-  }
-}
-
-export class InitializeCall__Inputs {
-  _call: InitializeCall;
-
-  constructor(call: InitializeCall) {
-    this._call = call;
-  }
-
-  get _sqrtPriceX96(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-}
-
-export class InitializeCall__Outputs {
-  _call: InitializeCall;
-
-  constructor(call: InitializeCall) {
-    this._call = call;
-  }
-}
-
 export class LiquidateCall extends ethereum.Call {
   get inputs(): LiquidateCall__Inputs {
     return new LiquidateCall__Inputs(this);
@@ -2149,12 +1987,8 @@ export class LiquidateCall__Outputs {
     this._call = call;
   }
 
-  get rewards0(): BigInt {
+  get rewards(): BigInt {
     return this._call.outputValues[0].value.toBigInt();
-  }
-
-  get rewards1(): BigInt {
-    return this._call.outputValues[1].value.toBigInt();
   }
 }
 
@@ -2351,6 +2185,10 @@ export class SettleCall__Outputs {
 
   get amount1(): BigInt {
     return this._call.outputValues[1].value.toBigInt();
+  }
+
+  get rewards(): BigInt {
+    return this._call.outputValues[2].value.toBigInt();
   }
 }
 

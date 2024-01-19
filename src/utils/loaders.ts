@@ -48,7 +48,7 @@ export function loadPool(event: ethereum.Event, poolAddress: Address): Pool {
     pool.maintenance = BigInt.fromI32(poolContract.maintenance() as i32);
     pool.txCount = ZERO_BI // TODO: check how to retrieve tx count if loading
     pool.fee = BigInt.fromI32(poolContract.fee() as i32)
-    pool.reward = BigInt.fromI32(poolContract.reward() as i32)
+    pool.rewardPremium = BigInt.fromI32(poolContract.rewardPremium() as i32)
     pool.liquidityLocked = poolContract.liquidityLocked()
 
     PoolTemplate.create(poolAddress)
@@ -73,7 +73,7 @@ export function loadTransaction(event: ethereum.Event): Transaction {
 
 export function loadPosition(event: ethereum.Event, owner: Address, pool: Pool, positionId: string): Position {
   let _positionId = pool.id.concat('-').concat(positionId)
-  let poolContract = MarginalV1Pool.bind(pool.address)
+  let poolContract = MarginalV1Pool.bind(pool.address as Address)
 
   // load Position if exists
   let position = Position.load(_positionId)
