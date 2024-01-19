@@ -36,6 +36,8 @@ type Pool @entity {
   token1: Token!
   # maintenance margin
   maintenance: BigInt!
+  # uniswap pool fee
+  uniV3Fee: BigInt!
   # all time number of transactions
   txCount: BigInt!
   # fee
@@ -51,8 +53,6 @@ type Pool @entity {
 type Token @entity {
   # token address
   id: ID!
-  # token address
-  address: String!
   # token symbol
   symbol: String!
   # token name

@@ -276,6 +276,19 @@ export class Pool extends Entity {
     this.set("maintenance", Value.fromBigInt(value));
   }
 
+  get uniV3Fee(): BigInt {
+    let value = this.get("uniV3Fee");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set uniV3Fee(value: BigInt) {
+    this.set("uniV3Fee", Value.fromBigInt(value));
+  }
+
   get txCount(): BigInt {
     let value = this.get("txCount");
     if (!value || value.kind == ValueKind.NULL) {
@@ -370,19 +383,6 @@ export class Token extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
-  }
-
-  get address(): string {
-    let value = this.get("address");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toString();
-    }
-  }
-
-  set address(value: string) {
-    this.set("address", Value.fromString(value));
   }
 
   get symbol(): string {
