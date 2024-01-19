@@ -52,7 +52,7 @@ type Token @entity {
   # token address
   id: ID!
   # token address
-  address: ID!
+  address: String!
   # token symbol
   symbol: String!
   # token name

@@ -29,21 +29,14 @@ export function handlePoolCreated(event: PoolCreated): void {
   // bind Pool contract to query 
   let poolContract = MarginalV1Pool.bind(event.params.pool)
 
-  log.info(`poolContract: {}`, [event.params.pool.toHexString()])
-
   let pool = new Pool(event.params.pool.toHexString()) as Pool;
   let token0 = Token.load(event.params.token0.toHexString());
   let token1 = Token.load(event.params.token1.toHexString());
-
-  log.info(`token0 loaded: {}`, [event.params.token0.toHexString()])
-  log.info(`token1 loaded: {}`, [event.params.token1.toHexString()])
 
 
   // fetch token info if null
   if (token0 === null) {
     token0 = new Token(event.params.token0.toHexString());
-    log.info(`token0 indexed: {}`, [event.params.token0.toHexString()])
-
     token0.address = event.params.token0.toHexString()
     token0.symbol = fetchTokenSymbol(event.params.token0);
     token0.name = fetchTokenName(event.params.token0);
@@ -52,9 +45,7 @@ export function handlePoolCreated(event: PoolCreated): void {
 
   if (token1 === null) {
     token1 = new Token(event.params.token1.toHexString());
-    log.info(`token1 indexed: {}`, [event.params.token1.toHexString()])
-
-    token1.address = "food"
+    token1.address = event.params.token1.toHexString()
     token1.symbol = fetchTokenSymbol(event.params.token1);
     token1.name = fetchTokenName(event.params.token1);
     token1.decimals = fetchTokenDecimals(event.params.token1);

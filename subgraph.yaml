@@ -6,9 +6,9 @@ dataSources:
     name: MarginalV1Factory
     network: goerli
     source:
-      address: "0xb92eb4ffC52a0EC383efa6577b2c3c89B7b980f5"
+      address: "0xA8d9566F6aECE20986e6dfff427DFDB3e0D9750E"
       abi: MarginalV1Factory
-      startBlock: 10072948
+      startBlock: 10374922
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
