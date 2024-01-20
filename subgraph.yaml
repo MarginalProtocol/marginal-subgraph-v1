@@ -95,8 +95,8 @@ templates:
         - name: ERC20
           file: ./abis/ERC20.json
       eventHandlers:
-        - event: Adjust(indexed address,indexed uint256,address,uint256)
-          handler: handleAdjust
+        # - event: Adjust(indexed address,indexed uint256,address,uint256)
+        #   handler: handleAdjust
         # - event: Approval(indexed address,indexed address,uint256)
         #   handler: handleApproval
         # - event: Burn(indexed address,address,uint128,uint256,uint256)
@@ -105,8 +105,8 @@ templates:
         #   handler: handleCollectProtocol
         # - event: Initialize(uint160,int24)
         #   handler: handleInitialize
-        - event: Liquidate(indexed address,indexed uint256,address,uint128,uint160,uint256)
-          handler: handleLiquidate
+        # - event: Liquidate(indexed address,indexed uint256,address,uint128,uint160,uint256)
+        #   handler: handleLiquidate
         # - event: Mint(address,indexed address,uint128,uint256,uint256)
         #   handler: handleMint
         - event: Open(address,indexed address,indexed uint256,uint128,uint160,uint128)

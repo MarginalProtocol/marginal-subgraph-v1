@@ -20,7 +20,7 @@ export const FACTORY_ADDRESS = '0xA8d9566F6aECE20986e6dfff427DFDB3e0D9750E'
 export const NFT_POSITION_MANAGER_ADDRESS = '0x4F20f97E3C030584Fb39E86AA6547C785289d415'
 
 // Periphery View Functions
-export const QUOTER_ADDRESS = '0x7385197B160CA2ec114960BCb32bc5D7CfA2720c'
+export const QUOTER_ADDRESS = '0x0CdCb8A938B641eDCF025afa6c8F3BD5C292a1A2'
 
 export let factoryContract = MarginalV1Factory.bind(Address.fromString(FACTORY_ADDRESS))
 export let nftPositionManagerContract = MarginalV1NonfungiblePositionManager.bind(Address.fromString(NFT_POSITION_MANAGER_ADDRESS))

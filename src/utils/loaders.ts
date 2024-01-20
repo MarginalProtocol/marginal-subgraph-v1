@@ -8,7 +8,7 @@ import {
     factoryContract,
   } from "../utils/constants";
 import { BigInt, ethereum, Address } from "@graphprotocol/graph-ts";
-
+import { fetchTokenSymbol } from './token';
 
 export function loadFactory(factoryAddress: string): Factory {
   // load factory
@@ -38,6 +38,10 @@ export function loadPool(event: ethereum.Event, poolAddress: Address): Pool {
     pool = new Pool(poolAddress.toHexString())
     let poolContract = MarginalV1Pool.bind(poolAddress)
 
+    let token0Symbol = fetchTokenSymbol(poolContract.token0())
+    let token1Symbol = fetchTokenSymbol(poolContract.token1())
+
+    pool.tokenPair = token0Symbol.concat('-').concat(token1Symbol)
     pool.address = poolAddress
     pool.factory = poolContract.factory().toHexString()
     pool.oracle = poolContract.oracle().toHexString()
@@ -73,7 +77,7 @@ export function loadTransaction(event: ethereum.Event): Transaction {
 
 export function loadPosition(event: ethereum.Event, owner: Address, pool: Pool, positionId: string): Position {
   let _positionId = pool.id.concat('-').concat(positionId)
-  let poolContract = MarginalV1Pool.bind(pool.address as Address)
+  // let poolContract = MarginalV1Pool.bind(pool.address as Address)
 
   // load Position if exists
   let position = Position.load(_positionId)

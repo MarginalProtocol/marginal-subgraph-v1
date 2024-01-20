@@ -48,29 +48,29 @@ export function handleOpen(event: OpenEvent): void {
 }
 
 // TODO: Need to rethink through how to index multiple Adjust events to a Position
-export function handleAdjust(event: AdjustEvent): void {
-  let transaction = loadTransaction(event)
-  let pool = loadPool(event, event.address)
+// export function handleAdjust(event: AdjustEvent): void {
+//   let transaction = loadTransaction(event)
+//   let pool = loadPool(event, event.address)
 
-  let positionId = event.params.id.toHexString()
-  let _positionId = pool.id.concat('-').concat(positionId)
+//   let positionId = event.params.id.toHexString()
+//   let _positionId = pool.id.concat('-').concat(positionId)
 
-  let position = loadPosition(event, event.params.owner, pool, _positionId)
-  position.margin = event.params.marginAfter
+//   let position = loadPosition(event, event.params.owner, pool, _positionId)
+//   position.margin = event.params.marginAfter
 
-  let adjust = new Adjust(positionId) as Adjust
-  adjust.transaction = transaction.id
-  adjust.timestamp = transaction.timestamp
-  adjust.pool = pool.id
-  adjust.token0 = pool.token0
-  adjust.token1 = pool.token1
-  adjust.owner = event.params.owner
-  adjust.recipient = event.params.recipient
-  adjust.margin = event.params.marginAfter
+//   let adjust = new Adjust(positionId) as Adjust
+//   adjust.transaction = transaction.id
+//   adjust.timestamp = transaction.timestamp
+//   adjust.pool = pool.id
+//   adjust.token0 = pool.token0
+//   adjust.token1 = pool.token1
+//   adjust.owner = event.params.owner
+//   adjust.recipient = event.params.recipient
+//   adjust.margin = event.params.marginAfter
 
-  position.save()
-  adjust.save()
-} 
+//   position.save()
+//   adjust.save()
+// } 
 
 export function handleSettle(event: SettleEvent): void {
   let transaction = loadTransaction(event)
@@ -97,27 +97,27 @@ export function handleSettle(event: SettleEvent): void {
   settle.save()
 }
 
-export function handleLiquidate(event: LiquidateEvent): void {
-  let transaction = loadTransaction(event)
-  let pool = loadPool(event, event.address)
+// export function handleLiquidate(event: LiquidateEvent): void {
+//   let transaction = loadTransaction(event)
+//   let pool = loadPool(event, event.address)
 
-  let positionId = event.params.id.toHexString()
-  let _positionId = pool.id.concat('-').concat(positionId)
+//   let positionId = event.params.id.toHexString()
+//   let _positionId = pool.id.concat('-').concat(positionId)
 
-  let position = loadPosition(event, event.params.owner, pool, _positionId)
-  position.isLiquidated = true
-  position.isClosed = true
+//   let position = loadPosition(event, event.params.owner, pool, _positionId)
+//   position.isLiquidated = true
+//   position.isClosed = true
 
-  let liquidate = new Liquidate(positionId) as Liquidate
-  liquidate.transaction = transaction.id
-  liquidate.timestamp = transaction.timestamp
-  liquidate.pool = pool.id
-  liquidate.token0 = pool.token0
-  liquidate.token1 = pool.token1
-  liquidate.owner = event.params.owner
-  liquidate.recipient = event.params.recipient
-  liquidate.rewards = event.params.rewards
+//   let liquidate = new Liquidate(positionId) as Liquidate
+//   liquidate.transaction = transaction.id
+//   liquidate.timestamp = transaction.timestamp
+//   liquidate.pool = pool.id
+//   liquidate.token0 = pool.token0
+//   liquidate.token1 = pool.token1
+//   liquidate.owner = event.params.owner
+//   liquidate.recipient = event.params.recipient
+//   liquidate.rewards = event.params.rewards
   
-  position.save()
-  liquidate.save()
-}
+//   position.save()
+//   liquidate.save()
+// }

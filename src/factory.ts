@@ -37,18 +37,21 @@ export function handlePoolCreated(event: PoolCreated): void {
   // fetch token info if null
   if (token0 === null) {
     token0 = new Token(event.params.token0.toHexString());
+    token0.address = event.params.token0.toHexString()
     token0.symbol = fetchTokenSymbol(event.params.token0);
     token0.name = fetchTokenName(event.params.token0);
     token0.decimals = fetchTokenDecimals(event.params.token0);
   }
 
   if (token1 === null) {
-    token1 = new Token(event.params.token1.toHexString());
+    token1 = new Token(event.params.token1.toHexString())
+    token1.address = event.params.token1.toHexString()
     token1.symbol = fetchTokenSymbol(event.params.token1);
     token1.name = fetchTokenName(event.params.token1);
     token1.decimals = fetchTokenDecimals(event.params.token1);
   }
 
+  pool.tokenPair = token0.symbol.concat('-').concat(token1.symbol)
   pool.address = event.params.pool
   pool.factory = factory.id
   pool.token0 = token0.id;
