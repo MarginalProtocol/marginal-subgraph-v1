@@ -14,12 +14,13 @@ export function handleOpen(event: OpenEvent): void {
 
   let sender = event.params.sender.toHexString()
   let positionId = event.params.id.toHexString()
-
+  let owner = event.params.owner.toHexString()
+  
   // Create unique id using pool and positionId
   let _positionId = pool.id.concat('-').concat(positionId)
   
   let position = new Position(_positionId) as Position
-  position.owner = sender
+  position.owner = owner
   position.pool = pool.id
   position.margin = event.params.margin
   position.blockNumber = event.block.number
