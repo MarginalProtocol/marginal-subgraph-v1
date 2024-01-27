@@ -19,7 +19,7 @@ export function handleMint(event: MintEvent): void {
   let poolAddress: Address = positionInfo.value0
 
   position.pool = poolAddress.toHexString()
-  position.owner = event.params.recipient.toHexString()
+  position.owner = Address.fromString(event.params.recipient.toHexString()).toString()
   position.margin = event.params.margin
   position.blockNumber = event.block.number
   position.timestamp = event.block.timestamp
