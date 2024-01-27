@@ -15,10 +15,10 @@ export function handleMint(event: MintEvent): void {
   let tokenId = event.params.tokenId
   let position = new Position(tokenId.toHexString())
 
-  const positionInfo = positionManagerContract.positions(tokenId)
-  let poolAddress: Address = positionInfo[0]
+  let positionInfo = positionManagerContract.positions(tokenId)
+  let poolAddress: Address = positionInfo.value0
 
-  position.pool = positionInfo[0]
+  position.pool = poolAddress.toHexString()
   position.owner = event.params.recipient.toHexString()
   position.margin = event.params.margin
   position.blockNumber = event.block.number
