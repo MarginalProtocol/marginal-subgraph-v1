@@ -58,59 +58,59 @@ dataSources:
           handler: handleMint
       file: ./src/positionManager.ts
 
-templates:
-  - kind: ethereum
-    name: MarginalV1Pool
-    network: goerli
-    source:
-      abi: MarginalV1Pool
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - Adjust
-        - Approval
-        - Burn
-        - CollectProtocol
-        - Initialize
-        - Liquidate
-        - Mint
-        - Open
-        - SetFeeProtocol
-        - Settle
-        - Swap
-        - Transfer
-      abis:
-        - name: MarginalV1Pool
-          file: ./abis/MarginalV1Pool.json
-        - name: MarginalV1Factory
-          file: ./abis/MarginalV1Factory.json
-        - name: ERC20
-          file: ./abis/ERC20.json
-      eventHandlers:
-        # - event: Adjust(indexed address,indexed uint256,address,uint256)
-        #   handler: handleAdjust
-        # - event: Approval(indexed address,indexed address,uint256)
-        #   handler: handleApproval
-        # - event: Burn(indexed address,address,uint128,uint256,uint256)
-        #   handler: handleBurn
-        # - event: CollectProtocol(address,indexed address,uint128,uint128)
-        #   handler: handleCollectProtocol
-        # - event: Initialize(uint160,int24)
-        #   handler: handleInitialize
-        # - event: Liquidate(indexed address,indexed uint256,address,uint128,uint160,uint256)
-        #   handler: handleLiquidate
-        # - event: Mint(address,indexed address,uint128,uint256,uint256)
-        #   handler: handleMint
-        - event: Open(address,indexed address,indexed uint256,uint128,uint160,uint128)
-          handler: handleOpen
-        # - event: SetFeeProtocol(uint8,uint8)
-        #   handler: handleSetFeeProtocol
-        - event: Settle(indexed address,indexed uint256,address,uint128,uint160,int256,int256,uint256)
-          handler: handleSettle
-        # - event: Swap(indexed address,indexed address,int256,int256,uint160,uint128,int24)
-        #   handler: handleSwap
-        # - event: Transfer(indexed address,indexed address,uint256)
-        #   handler: handleTransfer
-      file: ./src/pool.ts
+# templates:
+#   - kind: ethereum
+#     name: MarginalV1Pool
+#     network: goerli
+#     source:
+#       abi: MarginalV1Pool
+#     mapping:
+#       kind: ethereum/events
+#       apiVersion: 0.0.7
+#       language: wasm/assemblyscript
+#       entities:
+#         - Adjust
+#         - Approval
+#         - Burn
+#         - CollectProtocol
+#         - Initialize
+#         - Liquidate
+#         - Mint
+#         - Open
+#         - SetFeeProtocol
+#         - Settle
+#         - Swap
+#         - Transfer
+#       abis:
+#         - name: MarginalV1Pool
+#           file: ./abis/MarginalV1Pool.json
+#         - name: MarginalV1Factory
+#           file: ./abis/MarginalV1Factory.json
+#         - name: ERC20
+#           file: ./abis/ERC20.json
+#       eventHandlers:
+#         # - event: Adjust(indexed address,indexed uint256,address,uint256)
+#         #   handler: handleAdjust
+#         # - event: Approval(indexed address,indexed address,uint256)
+#         #   handler: handleApproval
+#         # - event: Burn(indexed address,address,uint128,uint256,uint256)
+#         #   handler: handleBurn
+#         # - event: CollectProtocol(address,indexed address,uint128,uint128)
+#         #   handler: handleCollectProtocol
+#         # - event: Initialize(uint160,int24)
+#         #   handler: handleInitialize
+#         # - event: Liquidate(indexed address,indexed uint256,address,uint128,uint160,uint256)
+#         #   handler: handleLiquidate
+#         # - event: Mint(address,indexed address,uint128,uint256,uint256)
+#         #   handler: handleMint
+#         - event: Open(address,indexed address,indexed uint256,uint128,uint160,uint128)
+#           handler: handleOpen
+#         # - event: SetFeeProtocol(uint8,uint8)
+#         #   handler: handleSetFeeProtocol
+#         - event: Settle(indexed address,indexed uint256,address,uint128,uint160,int256,int256,uint256)
+#           handler: handleSettle
+#         # - event: Swap(indexed address,indexed address,int256,int256,uint160,uint128,int24)
+#         #   handler: handleSwap
+#         # - event: Transfer(indexed address,indexed address,uint256)
+#         #   handler: handleTransfer
+#       file: ./src/pool.ts
