@@ -34,11 +34,7 @@
   { "inputs": [], "name": "PoolNotSender", "type": "error" },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "rewardsMinimum",
-        "type": "uint256"
-      }
+      { "internalType": "uint256", "name": "rewardsMinimum", "type": "uint256" }
     ],
     "name": "RewardsLessThanMin",
     "type": "error"
@@ -270,6 +266,12 @@
       {
         "indexed": false,
         "internalType": "uint256",
+        "name": "positionId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
         "name": "size",
         "type": "uint256"
       },
@@ -358,18 +360,10 @@
         "components": [
           { "internalType": "address", "name": "token0", "type": "address" },
           { "internalType": "address", "name": "token1", "type": "address" },
-          {
-            "internalType": "uint24",
-            "name": "maintenance",
-            "type": "uint24"
-          },
+          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
           { "internalType": "address", "name": "oracle", "type": "address" },
           { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-          {
-            "internalType": "address",
-            "name": "recipient",
-            "type": "address"
-          },
+          { "internalType": "address", "name": "recipient", "type": "address" },
           { "internalType": "uint256", "name": "deadline", "type": "uint256" }
         ],
         "internalType": "struct INonfungiblePositionManager.BurnParams",
@@ -406,23 +400,11 @@
         "components": [
           { "internalType": "address", "name": "token0", "type": "address" },
           { "internalType": "address", "name": "token1", "type": "address" },
-          {
-            "internalType": "uint24",
-            "name": "maintenance",
-            "type": "uint24"
-          },
+          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
           { "internalType": "address", "name": "oracle", "type": "address" },
           { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-          {
-            "internalType": "uint128",
-            "name": "marginOut",
-            "type": "uint128"
-          },
-          {
-            "internalType": "address",
-            "name": "recipient",
-            "type": "address"
-          },
+          { "internalType": "uint128", "name": "marginOut", "type": "uint128" },
+          { "internalType": "address", "name": "recipient", "type": "address" },
           { "internalType": "uint256", "name": "deadline", "type": "uint256" }
         ],
         "internalType": "struct INonfungiblePositionManager.FreeParams",
@@ -452,18 +434,10 @@
         "components": [
           { "internalType": "address", "name": "token0", "type": "address" },
           { "internalType": "address", "name": "token1", "type": "address" },
-          {
-            "internalType": "uint24",
-            "name": "maintenance",
-            "type": "uint24"
-          },
+          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
           { "internalType": "address", "name": "oracle", "type": "address" },
           { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-          {
-            "internalType": "address",
-            "name": "recipient",
-            "type": "address"
-          },
+          { "internalType": "address", "name": "recipient", "type": "address" },
           { "internalType": "uint256", "name": "deadline", "type": "uint256" }
         ],
         "internalType": "struct INonfungiblePositionManager.GrabParams",
@@ -484,11 +458,7 @@
         "components": [
           { "internalType": "address", "name": "token0", "type": "address" },
           { "internalType": "address", "name": "token1", "type": "address" },
-          {
-            "internalType": "uint24",
-            "name": "maintenance",
-            "type": "uint24"
-          },
+          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
           { "internalType": "address", "name": "oracle", "type": "address" },
           { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
           {
@@ -496,11 +466,7 @@
             "name": "amountOutMinimum",
             "type": "uint256"
           },
-          {
-            "internalType": "address",
-            "name": "recipient",
-            "type": "address"
-          },
+          { "internalType": "address", "name": "recipient", "type": "address" },
           { "internalType": "uint256", "name": "deadline", "type": "uint256" }
         ],
         "internalType": "struct INonfungiblePositionManager.IgniteParams",
@@ -532,23 +498,11 @@
         "components": [
           { "internalType": "address", "name": "token0", "type": "address" },
           { "internalType": "address", "name": "token1", "type": "address" },
-          {
-            "internalType": "uint24",
-            "name": "maintenance",
-            "type": "uint24"
-          },
+          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
           { "internalType": "address", "name": "oracle", "type": "address" },
           { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-          {
-            "internalType": "uint128",
-            "name": "marginIn",
-            "type": "uint128"
-          },
-          {
-            "internalType": "address",
-            "name": "recipient",
-            "type": "address"
-          },
+          { "internalType": "uint128", "name": "marginIn", "type": "uint128" },
+          { "internalType": "address", "name": "recipient", "type": "address" },
           { "internalType": "uint256", "name": "deadline", "type": "uint256" }
         ],
         "internalType": "struct INonfungiblePositionManager.LockParams",
@@ -602,11 +556,7 @@
         "components": [
           { "internalType": "address", "name": "token0", "type": "address" },
           { "internalType": "address", "name": "token1", "type": "address" },
-          {
-            "internalType": "uint24",
-            "name": "maintenance",
-            "type": "uint24"
-          },
+          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
           { "internalType": "address", "name": "oracle", "type": "address" },
           { "internalType": "bool", "name": "zeroForOne", "type": "bool" },
           {
@@ -635,11 +585,7 @@
             "type": "uint160"
           },
           { "internalType": "uint128", "name": "margin", "type": "uint128" },
-          {
-            "internalType": "address",
-            "name": "recipient",
-            "type": "address"
-          },
+          { "internalType": "address", "name": "recipient", "type": "address" },
           { "internalType": "uint256", "name": "deadline", "type": "uint256" }
         ],
         "internalType": "struct INonfungiblePositionManager.MintParams",
@@ -761,11 +707,7 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "amountMinimum",
-        "type": "uint256"
-      },
+      { "internalType": "uint256", "name": "amountMinimum", "type": "uint256" },
       { "internalType": "address", "name": "recipient", "type": "address" }
     ],
     "name": "sweepETH",
@@ -776,11 +718,7 @@
   {
     "inputs": [
       { "internalType": "address", "name": "token", "type": "address" },
-      {
-        "internalType": "uint256",
-        "name": "amountMinimum",
-        "type": "uint256"
-      },
+      { "internalType": "uint256", "name": "amountMinimum", "type": "uint256" },
       { "internalType": "address", "name": "recipient", "type": "address" }
     ],
     "name": "sweepToken",
@@ -835,11 +773,7 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "amountMinimum",
-        "type": "uint256"
-      },
+      { "internalType": "uint256", "name": "amountMinimum", "type": "uint256" },
       { "internalType": "address", "name": "recipient", "type": "address" }
     ],
     "name": "unwrapWETH9",

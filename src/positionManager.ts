@@ -1,11 +1,7 @@
 import {
-  Approval,
-  ApprovalForAll,
-  Burn,
-  Free,
-  Grab,
-  Lock,
-  Mint,
-  Transfer
+  Mint as MintEvent,
 } from "../generated/MarginalV1NonfungiblePositionManager/MarginalV1NonfungiblePositionManager"
 
+export function handleMint(event: MintEvent): void {
+  
+}

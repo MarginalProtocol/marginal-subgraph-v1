@@ -37,32 +37,26 @@ dataSources:
           handler: handlePoolCreated
       file: ./src/factory.ts
 
-  # - kind: ethereum
-  #   name: MarginalV1NonfungiblePositionManager
-  #   network: goerli
-  #   source:
-  #     address: "0x95D95C41436C15b50217Bf1C0f810536AD181C13"
-  #     abi: MarginalV1NonfungiblePositionManager
-  #     startBlock: 10082558
-  #   mapping:
-  #     kind: ethereum/events
-  #     apiVersion: 0.0.7
-  #     language: wasm/assemblyscript
-  #     entities:
-  #       - Free
-  #       - Grab
-  #       - Lock
-  #     abis:
-  #       - name: MarginalV1NonfungiblePositionManager
-  #         file: ./abis/MarginalV1NonfungiblePositionManager.json
-  #     eventHandlers:
-  #       - event: Free(indexed uint256,uint256)
-  #         handler: handleFree
-  #       - event: Grab(indexed uint256,uint256)
-  #         handler: handleGrab
-  #       - event: Lock(indexed uint256,uint256)
-  #         handler: handleLock
-  #     file: ./src/position-manager.ts
+  - kind: ethereum
+    name: MarginalV1NonfungiblePositionManager
+    network: goerli
+    source:
+      address: "0x19D3dC151170eb94BB4CaBF3aD2931bDC14d566e"
+      abi: MarginalV1NonfungiblePositionManager
+      startBlock: 10082558
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Mint
+      abis:
+        - name: MarginalV1NonfungiblePositionManager
+          file: ./abis/MarginalV1NonfungiblePositionManager.json
+      eventHandlers:
+        - event: Mint(indexed uint256,indexed address,uint256,uint256,uint256,uint256,uint256,uint256)
+          handler: handleMint
+      file: ./src/positionManager.ts
 
 templates:
   - kind: ethereum

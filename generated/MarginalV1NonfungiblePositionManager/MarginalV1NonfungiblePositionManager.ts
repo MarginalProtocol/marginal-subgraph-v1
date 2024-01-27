@@ -79,12 +79,20 @@ export class Burn__Params {
     return this._event.parameters[0].value.toBigInt();
   }
 
+  get recipient(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
   get amountIn(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
+    return this._event.parameters[2].value.toBigInt();
   }
 
   get amountOut(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
+    return this._event.parameters[3].value.toBigInt();
+  }
+
+  get rewards(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
   }
 }
 
@@ -105,8 +113,12 @@ export class Free__Params {
     return this._event.parameters[0].value.toBigInt();
   }
 
+  get recipient(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
   get marginAfter(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
+    return this._event.parameters[2].value.toBigInt();
   }
 }
 
@@ -127,8 +139,42 @@ export class Grab__Params {
     return this._event.parameters[0].value.toBigInt();
   }
 
+  get recipient(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
   get rewards(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class Ignite extends ethereum.Event {
+  get params(): Ignite__Params {
+    return new Ignite__Params(this);
+  }
+}
+
+export class Ignite__Params {
+  _event: Ignite;
+
+  constructor(event: Ignite) {
+    this._event = event;
+  }
+
+  get tokenId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get recipient(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get amountOut(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get rewards(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
   }
 }
 
@@ -149,8 +195,12 @@ export class Lock__Params {
     return this._event.parameters[0].value.toBigInt();
   }
 
+  get recipient(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
   get marginAfter(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
+    return this._event.parameters[2].value.toBigInt();
   }
 }
 
@@ -171,16 +221,32 @@ export class Mint__Params {
     return this._event.parameters[0].value.toBigInt();
   }
 
-  get size(): BigInt {
-    return this._event.parameters[1].value.toBigInt();
+  get recipient(): Address {
+    return this._event.parameters[1].value.toAddress();
   }
 
-  get debt(): BigInt {
+  get positionId(): BigInt {
     return this._event.parameters[2].value.toBigInt();
   }
 
-  get amountIn(): BigInt {
+  get size(): BigInt {
     return this._event.parameters[3].value.toBigInt();
+  }
+
+  get debt(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+
+  get margin(): BigInt {
+    return this._event.parameters[5].value.toBigInt();
+  }
+
+  get fees(): BigInt {
+    return this._event.parameters[6].value.toBigInt();
+  }
+
+  get rewards(): BigInt {
+    return this._event.parameters[7].value.toBigInt();
   }
 }
 
@@ -217,7 +283,10 @@ export class MarginalV1NonfungiblePositionManager__positionsResult {
   value3: BigInt;
   value4: BigInt;
   value5: BigInt;
-  value6: boolean;
+  value6: BigInt;
+  value7: boolean;
+  value8: boolean;
+  value9: BigInt;
 
   constructor(
     value0: Address,
@@ -226,7 +295,10 @@ export class MarginalV1NonfungiblePositionManager__positionsResult {
     value3: BigInt,
     value4: BigInt,
     value5: BigInt,
-    value6: boolean
+    value6: BigInt,
+    value7: boolean,
+    value8: boolean,
+    value9: BigInt
   ) {
     this.value0 = value0;
     this.value1 = value1;
@@ -235,6 +307,9 @@ export class MarginalV1NonfungiblePositionManager__positionsResult {
     this.value4 = value4;
     this.value5 = value5;
     this.value6 = value6;
+    this.value7 = value7;
+    this.value8 = value8;
+    this.value9 = value9;
   }
 
   toMap(): TypedMap<string, ethereum.Value> {
@@ -245,7 +320,10 @@ export class MarginalV1NonfungiblePositionManager__positionsResult {
     map.set("value3", ethereum.Value.fromUnsignedBigInt(this.value3));
     map.set("value4", ethereum.Value.fromUnsignedBigInt(this.value4));
     map.set("value5", ethereum.Value.fromUnsignedBigInt(this.value5));
-    map.set("value6", ethereum.Value.fromBoolean(this.value6));
+    map.set("value6", ethereum.Value.fromUnsignedBigInt(this.value6));
+    map.set("value7", ethereum.Value.fromBoolean(this.value7));
+    map.set("value8", ethereum.Value.fromBoolean(this.value8));
+    map.set("value9", ethereum.Value.fromUnsignedBigInt(this.value9));
     return map;
   }
 
@@ -273,8 +351,20 @@ export class MarginalV1NonfungiblePositionManager__positionsResult {
     return this.value5;
   }
 
-  getLiquidated(): boolean {
+  getSafeMarginMinimum(): BigInt {
     return this.value6;
+  }
+
+  getLiquidated(): boolean {
+    return this.value7;
+  }
+
+  getSafe(): boolean {
+    return this.value8;
+  }
+
+  getRewards(): BigInt {
+    return this.value9;
   }
 }
 
@@ -436,7 +526,7 @@ export class MarginalV1NonfungiblePositionManager extends ethereum.SmartContract
   ): MarginalV1NonfungiblePositionManager__positionsResult {
     let result = super.call(
       "positions",
-      "positions(uint256):(address,uint96,bool,uint128,uint128,uint128,bool)",
+      "positions(uint256):(address,uint96,bool,uint128,uint128,uint128,uint128,bool,bool,uint256)",
       [ethereum.Value.fromUnsignedBigInt(tokenId)]
     );
 
@@ -447,7 +537,10 @@ export class MarginalV1NonfungiblePositionManager extends ethereum.SmartContract
       result[3].toBigInt(),
       result[4].toBigInt(),
       result[5].toBigInt(),
-      result[6].toBoolean()
+      result[6].toBigInt(),
+      result[7].toBoolean(),
+      result[8].toBoolean(),
+      result[9].toBigInt()
     );
   }
 
@@ -458,7 +551,7 @@ export class MarginalV1NonfungiblePositionManager extends ethereum.SmartContract
   > {
     let result = super.tryCall(
       "positions",
-      "positions(uint256):(address,uint96,bool,uint128,uint128,uint128,bool)",
+      "positions(uint256):(address,uint96,bool,uint128,uint128,uint128,uint128,bool,bool,uint256)",
       [ethereum.Value.fromUnsignedBigInt(tokenId)]
     );
     if (result.reverted) {
@@ -473,7 +566,10 @@ export class MarginalV1NonfungiblePositionManager extends ethereum.SmartContract
         value[3].toBigInt(),
         value[4].toBigInt(),
         value[5].toBigInt(),
-        value[6].toBoolean()
+        value[6].toBigInt(),
+        value[7].toBoolean(),
+        value[8].toBoolean(),
+        value[9].toBigInt()
       )
     );
   }
@@ -665,6 +761,10 @@ export class BurnCall__Outputs {
   get amountOut(): BigInt {
     return this._call.outputValues[1].value.toBigInt();
   }
+
+  get rewards(): BigInt {
+    return this._call.outputValues[2].value.toBigInt();
+  }
 }
 
 export class BurnCallParamsStruct extends ethereum.Tuple {
@@ -830,6 +930,80 @@ export class GrabCallParamsStruct extends ethereum.Tuple {
 
   get deadline(): BigInt {
     return this[6].toBigInt();
+  }
+}
+
+export class IgniteCall extends ethereum.Call {
+  get inputs(): IgniteCall__Inputs {
+    return new IgniteCall__Inputs(this);
+  }
+
+  get outputs(): IgniteCall__Outputs {
+    return new IgniteCall__Outputs(this);
+  }
+}
+
+export class IgniteCall__Inputs {
+  _call: IgniteCall;
+
+  constructor(call: IgniteCall) {
+    this._call = call;
+  }
+
+  get params(): IgniteCallParamsStruct {
+    return changetype<IgniteCallParamsStruct>(
+      this._call.inputValues[0].value.toTuple()
+    );
+  }
+}
+
+export class IgniteCall__Outputs {
+  _call: IgniteCall;
+
+  constructor(call: IgniteCall) {
+    this._call = call;
+  }
+
+  get amountOut(): BigInt {
+    return this._call.outputValues[0].value.toBigInt();
+  }
+
+  get rewards(): BigInt {
+    return this._call.outputValues[1].value.toBigInt();
+  }
+}
+
+export class IgniteCallParamsStruct extends ethereum.Tuple {
+  get token0(): Address {
+    return this[0].toAddress();
+  }
+
+  get token1(): Address {
+    return this[1].toAddress();
+  }
+
+  get maintenance(): i32 {
+    return this[2].toI32();
+  }
+
+  get oracle(): Address {
+    return this[3].toAddress();
+  }
+
+  get tokenId(): BigInt {
+    return this[4].toBigInt();
+  }
+
+  get amountOutMinimum(): BigInt {
+    return this[5].toBigInt();
+  }
+
+  get recipient(): Address {
+    return this[6].toAddress();
+  }
+
+  get deadline(): BigInt {
+    return this[7].toBigInt();
   }
 }
 
@@ -1060,8 +1234,16 @@ export class MintCall__Outputs {
     return this._call.outputValues[2].value.toBigInt();
   }
 
-  get amountIn(): BigInt {
+  get margin(): BigInt {
     return this._call.outputValues[3].value.toBigInt();
+  }
+
+  get fees(): BigInt {
+    return this._call.outputValues[4].value.toBigInt();
+  }
+
+  get rewards(): BigInt {
+    return this._call.outputValues[5].value.toBigInt();
   }
 }
 
@@ -1293,6 +1475,40 @@ export class SetApprovalForAllCall__Outputs {
   }
 }
 
+export class SweepETHCall extends ethereum.Call {
+  get inputs(): SweepETHCall__Inputs {
+    return new SweepETHCall__Inputs(this);
+  }
+
+  get outputs(): SweepETHCall__Outputs {
+    return new SweepETHCall__Outputs(this);
+  }
+}
+
+export class SweepETHCall__Inputs {
+  _call: SweepETHCall;
+
+  constructor(call: SweepETHCall) {
+    this._call = call;
+  }
+
+  get amountMinimum(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get recipient(): Address {
+    return this._call.inputValues[1].value.toAddress();
+  }
+}
+
+export class SweepETHCall__Outputs {
+  _call: SweepETHCall;
+
+  constructor(call: SweepETHCall) {
+    this._call = call;
+  }
+}
+
 export class SweepTokenCall extends ethereum.Call {
   get inputs(): SweepTokenCall__Inputs {
     return new SweepTokenCall__Inputs(this);
@@ -1365,6 +1581,44 @@ export class TransferFromCall__Outputs {
   _call: TransferFromCall;
 
   constructor(call: TransferFromCall) {
+    this._call = call;
+  }
+}
+
+export class UniswapV3SwapCallbackCall extends ethereum.Call {
+  get inputs(): UniswapV3SwapCallbackCall__Inputs {
+    return new UniswapV3SwapCallbackCall__Inputs(this);
+  }
+
+  get outputs(): UniswapV3SwapCallbackCall__Outputs {
+    return new UniswapV3SwapCallbackCall__Outputs(this);
+  }
+}
+
+export class UniswapV3SwapCallbackCall__Inputs {
+  _call: UniswapV3SwapCallbackCall;
+
+  constructor(call: UniswapV3SwapCallbackCall) {
+    this._call = call;
+  }
+
+  get amount0Delta(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get amount1Delta(): BigInt {
+    return this._call.inputValues[1].value.toBigInt();
+  }
+
+  get data(): Bytes {
+    return this._call.inputValues[2].value.toBytes();
+  }
+}
+
+export class UniswapV3SwapCallbackCall__Outputs {
+  _call: UniswapV3SwapCallbackCall;
+
+  constructor(call: UniswapV3SwapCallbackCall) {
     this._call = call;
   }
 }
