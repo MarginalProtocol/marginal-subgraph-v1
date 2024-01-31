@@ -72,7 +72,7 @@ export function fetchTokenName(tokenAddress: Address): string {
   return nameValue;
 }
 
-export function fetchTokenDecimals(tokenAddress: Address): number {
+export function fetchTokenDecimals(tokenAddress: Address): BigInt {
   let contract = ERC20.bind(tokenAddress);
   // try types uint8 for decimals
   let decimalValue = null;
@@ -90,5 +90,5 @@ export function fetchTokenDecimals(tokenAddress: Address): number {
   //     }
   //   }
 
-  return decimalValue as number;
+  return BigInt.fromI32(decimalValue as i32);
 }

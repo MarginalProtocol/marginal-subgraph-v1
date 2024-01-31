@@ -59,7 +59,7 @@ type Token @entity {
   # token name
   name: String!
   # token decimals
-  decimals: Int!
+  decimals: BigInt!
 }
 
 type Position @entity {
