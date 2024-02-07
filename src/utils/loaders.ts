@@ -75,19 +75,14 @@ export function loadTransaction(event: ethereum.Event): Transaction {
   return transaction as Transaction
 }
 
-export function loadPosition(event: ethereum.Event, owner: Address, pool: Pool, positionId: string): Position {
-  let _positionId = pool.id.concat('-').concat(positionId)
-  // let poolContract = MarginalV1Pool.bind(pool.address as Address)
-
+export function loadPosition(event: ethereum.Event, poolAddress: string, positionId: string): Position {
   // load Position if exists
-  let position = Position.load(_positionId)
+  let position = Position.load(positionId)
 
   // create new Position if null
   if (position === null) {
-    position = new Position(_positionId)
-
-    position.owner = owner.toHexString()
-    position.pool = pool.id
+    position = new Position(positionId)
+    position.pool = poolAddress
     position.margin = null // TODO: Update to pull margin from Contract
     position.blockNumber = null // Do we leave as null if not indexed at creation?
     position.timestamp = null // Do we leave as null if not indexed at creation?

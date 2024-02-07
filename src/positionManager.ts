@@ -1,11 +1,13 @@
 import {
   Mint as MintEvent,
+  Ignite as IgniteEvent,
 } from "../generated/MarginalV1NonfungiblePositionManager/MarginalV1NonfungiblePositionManager"
 import { loadPool, loadTransaction, loadPosition } from "./utils/loaders"
 import { MarginalV1NonfungiblePositionManager } from "../generated/MarginalV1NonfungiblePositionManager/MarginalV1NonfungiblePositionManager"
 import { NFT_POSITION_MANAGER_ADDRESS } from "./utils/constants"
 import { Position } from "../generated/schema"
 import { Address } from "@graphprotocol/graph-ts"
+import { loadPosition } from "./utils/loaders"
 
 export function handleMint(event: MintEvent): void {
   let transaction = loadTransaction(event)
@@ -28,6 +30,26 @@ export function handleMint(event: MintEvent): void {
   position.isSettled = false
   position.isClosed = false
 
+
+  position.save()
+  transaction.save()
+}
+
+export function handleIgnite(event: IgniteEvent): void {
+  let transaction = loadTransaction(event)
+
+  let tokenId = event.params.tokenId
+
+  let positionManagerContract = MarginalV1NonfungiblePositionManager.bind(event.address)
+
+  let positionInfo = positionManagerContract.positions(tokenId)
+  let poolAddress = positionInfo.value0.toString()
+
+  let position = loadPosition(event, poolAddress, tokenId.toString())
+
+  position.isSettled = true
+  position.isClosed = true
+  position.owner = event.params.recipient.toHexString()
 
   position.save()
   transaction.save()
