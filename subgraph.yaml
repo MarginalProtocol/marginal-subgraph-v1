@@ -8,7 +8,7 @@ dataSources:
     source:
       address: "0xA8d9566F6aECE20986e6dfff427DFDB3e0D9750E"
       abi: MarginalV1Factory
-      startBlock: 10374922
+      startBlock: 10374923
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -43,7 +43,7 @@ dataSources:
     source:
       address: "0x19D3dC151170eb94BB4CaBF3aD2931bDC14d566e"
       abi: MarginalV1NonfungiblePositionManager
-      startBlock: 10434783
+      startBlock: 10434784
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

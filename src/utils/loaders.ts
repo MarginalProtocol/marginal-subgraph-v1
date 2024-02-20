@@ -75,7 +75,7 @@ export function loadTransaction(event: ethereum.Event): Transaction {
   return transaction as Transaction
 }
 
-export function loadPosition(event: ethereum.Event, poolAddress: string, positionId: string): Position {
+export function loadPosition(event: ethereum.Event, positionId: string, poolAddress: string | null): Position {
   // load Position if exists
   let position = Position.load(positionId)
 

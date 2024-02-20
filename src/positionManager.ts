@@ -37,14 +37,14 @@ export function handleMint(event: MintEvent): void {
 export function handleIgnite(event: IgniteEvent): void {
   let transaction = loadTransaction(event)
 
-  let positionManagerContract = MarginalV1NonfungiblePositionManager.bind(event.address)
+  // let positionManagerContract = MarginalV1NonfungiblePositionManager.bind(event.address)
   
   let tokenId = event.params.tokenId
 
-  let positionInfo = positionManagerContract.positions(tokenId)
-  let poolAddress = positionInfo.value0.toString()
+  // let positionInfo = positionManagerContract.positions(tokenId)
+  // let poolAddress = positionInfo.value0.toString()
 
-  let position = loadPosition(event, poolAddress, tokenId.toHexString())
+  let position = loadPosition(event, tokenId.toHexString(), null)
 
   position.isSettled = true
   position.isClosed = true
