@@ -8,7 +8,7 @@ dataSources:
     source:
       address: "0xA8d9566F6aECE20986e6dfff427DFDB3e0D9750E"
       abi: MarginalV1Factory
-      startBlock: 10374923
+      startBlock: 10374922
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

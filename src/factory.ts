@@ -53,6 +53,7 @@ export function handlePoolCreated(event: PoolCreated): void {
 
   pool.tokenPair = token0.symbol.concat('-').concat(token1.symbol)
   pool.address = event.params.pool
+  pool.decimals = BigInt.fromI32(poolContract.decimals() as i32)
   pool.factory = factory.id
   pool.token0 = token0.id;
   pool.token1 = token1.id;

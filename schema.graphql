@@ -24,6 +24,8 @@ type Pool @entity {
   tokenPair: String!
   # pool address in Bytes
   address: Bytes!
+  # decimals for pool token
+  decimals: BigInt!
   # factory address
   factory: Factory!
   # oracle address:

@@ -198,6 +198,19 @@ export class Pool extends Entity {
     this.set("address", Value.fromBytes(value));
   }
 
+  get decimals(): BigInt {
+    let value = this.get("decimals");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set decimals(value: BigInt) {
+    this.set("decimals", Value.fromBigInt(value));
+  }
+
   get factory(): string {
     let value = this.get("factory");
     if (!value || value.kind == ValueKind.NULL) {
@@ -490,21 +503,17 @@ export class Position extends Entity {
     this.set("owner", Value.fromString(value));
   }
 
-  get pool(): string | null {
+  get pool(): string {
     let value = this.get("pool");
     if (!value || value.kind == ValueKind.NULL) {
-      return null;
+      throw new Error("Cannot return null for a required field.");
     } else {
       return value.toString();
     }
   }
 
-  set pool(value: string | null) {
-    if (!value) {
-      this.unset("pool");
-    } else {
-      this.set("pool", Value.fromString(<string>value));
-    }
+  set pool(value: string) {
+    this.set("pool", Value.fromString(value));
   }
 
   get margin(): BigInt | null {
