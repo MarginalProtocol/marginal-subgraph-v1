@@ -14,13 +14,10 @@ export const ADDRESS_ZERO = '0x0000000000000000000000000000000000000000'
 export const UNI_V3_FACTORY_ADDRESS = '0x1F98431c8aD98523631AE4a59f267346ea31F984'
 
 // Core Contract
-export const FACTORY_ADDRESS = '0xA8d9566F6aECE20986e6dfff427DFDB3e0D9750E'
+export const FACTORY_ADDRESS = '0xb92eb4ffC52a0EC383efa6577b2c3c89B7b980f5'
 
 // Periphery Write Functions
-export const NFT_POSITION_MANAGER_ADDRESS = '0x4F20f97E3C030584Fb39E86AA6547C785289d415'
-
-// Periphery View Functions
-export const QUOTER_ADDRESS = '0x0CdCb8A938B641eDCF025afa6c8F3BD5C292a1A2'
+export const NFT_POSITION_MANAGER_ADDRESS = '0x95D95C41436C15b50217Bf1C0f810536AD181C13'
 
 export let factoryContract = MarginalV1Factory.bind(Address.fromString(FACTORY_ADDRESS))
 export let nftPositionManagerContract = MarginalV1NonfungiblePositionManager.bind(Address.fromString(NFT_POSITION_MANAGER_ADDRESS))

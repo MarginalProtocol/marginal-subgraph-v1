@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: MarginalV1Factory
-    network: goerli
+    network: sepolia
     source:
-      address: "0xA8d9566F6aECE20986e6dfff427DFDB3e0D9750E"
+      address: "0xb92eb4ffC52a0EC383efa6577b2c3c89B7b980f5"
       abi: MarginalV1Factory
-      startBlock: 10374922
+      startBlock: 5415448
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -39,11 +39,11 @@ dataSources:
 
   - kind: ethereum
     name: MarginalV1NonfungiblePositionManager
-    network: goerli
+    network: sepolia
     source:
-      address: "0x19D3dC151170eb94BB4CaBF3aD2931bDC14d566e"
+      address: "0x95D95C41436C15b50217Bf1C0f810536AD181C13"
       abi: MarginalV1NonfungiblePositionManager
-      startBlock: 10434784
+      startBlock: 5415510
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
