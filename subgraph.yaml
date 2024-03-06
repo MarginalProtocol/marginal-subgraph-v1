@@ -63,7 +63,7 @@ dataSources:
 templates:
   - kind: ethereum
     name: MarginalV1Pool
-    network: goerli
+    network: sepolia
     source:
       abi: MarginalV1Pool
     mapping:
