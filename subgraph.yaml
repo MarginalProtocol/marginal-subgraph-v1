@@ -54,9 +54,9 @@ dataSources:
         - name: MarginalV1NonfungiblePositionManager
           file: ./abis/MarginalV1NonfungiblePositionManager.json
       eventHandlers:
-        - event: Mint(indexed uint256,indexed address,uint256,uint256,uint256,uint256,uint256,uint256)
+        - event: Mint(indexed uint256,address,indexed address,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleMint
-        - event: Ignite(indexed uint256,indexed address,uint256,uint256)
+        - event: Ignite(indexed uint256,indexed address,address,uint256,uint256)
           handler: handleIgnite
       file: ./src/positionManager.ts
 
