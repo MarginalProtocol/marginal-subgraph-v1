@@ -2,7 +2,8 @@
   {
     "inputs": [
       { "internalType": "address", "name": "_factory", "type": "address" },
-      { "internalType": "address", "name": "_WETH9", "type": "address" }
+      { "internalType": "address", "name": "_WETH9", "type": "address" },
+      { "internalType": "address", "name": "_tokenDescriptor_", "type": "address" }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
