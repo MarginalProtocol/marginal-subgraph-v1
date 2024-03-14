@@ -14,7 +14,7 @@ export function handleMint(event: MintEvent): void {
   let positionManagerContract = MarginalV1NonfungiblePositionManager.bind(event.address)
 
   let tokenId = event.params.tokenId
-  let position = new Position(tokenId.toHexString())
+  let position = new Position(tokenId.toString())
 
   let positionInfo = positionManagerContract.positions(tokenId)
   let poolAddress: Address = positionInfo.value0
