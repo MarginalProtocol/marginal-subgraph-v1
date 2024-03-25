@@ -6,9 +6,9 @@ dataSources:
     name: MarginalV1Factory
     network: sepolia
     source:
-      address: "0xb92eb4ffC52a0EC383efa6577b2c3c89B7b980f5"
+      address: "0x71E2760cF5E2beefE5255dAA1F016a84A8fA12a4"
       abi: MarginalV1Factory
-      startBlock: 5415448
+      startBlock: 5445786
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -41,9 +41,9 @@ dataSources:
     name: MarginalV1NonfungiblePositionManager
     network: sepolia
     source:
-      address: "0x95D95C41436C15b50217Bf1C0f810536AD181C13"
+      address: "0x5b1496fD64F1030801C06E5dcc9Db981509a467D"
       abi: MarginalV1NonfungiblePositionManager
-      startBlock: 5415510
+      startBlock: 5445851
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
