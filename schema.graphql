@@ -65,8 +65,12 @@ type Token @entity {
 }
 
 type Position @entity {
-  # tokenId from position manager
+  # poolAddress-positionId 
   id: ID!
+  # tokenId 
+  tokenId: String!
+  # positionId in pool
+  positionId: String!
   # owner of position
   owner: ID!
   # pool address of position
