@@ -84,7 +84,6 @@ export function handleSettle(event: SettleEvent): void {
   position.isLiquidated = false
   position.isSettled = true
   position.isClosed = true
-  position.owner = event.params.recipient.toHexString()
 
   position.save()
   // transaction.save()
@@ -100,7 +99,6 @@ export function handleLiquidate(event: LiquidateEvent): void {
   position.pool = pool.id
   position.isLiquidated = true
   position.isClosed = true
-  position.owner = event.params.recipient.toHexString()
 
   position.save()
   // transaction.save()
