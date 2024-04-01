@@ -5,7 +5,7 @@ import {
   Open as OpenEvent,
   Settle as SettleEvent,
 } from "../generated/templates/MarginalV1Pool/MarginalV1Pool"
-import { loadPool, loadTransaction, loadPosition } from "./utils/loaders"
+import { loadPool, loadTransaction, loadPosition, loadPoolPosition } from "./utils/loaders"
 import { ONE_BI } from "./utils/constants"
 
 export function handleOpen(event: OpenEvent): void {
@@ -75,36 +75,28 @@ export function handleOpen(event: OpenEvent): void {
 
 export function handleSettle(event: SettleEvent): void {
   // let transaction = loadTransaction(event)
-  // let pool = loadPool(event, event.address)
+  let pool = loadPool(event, event.address)
 
-  // let positionId = event.params.id.toHexString()
-  // let _positionId = pool.id.concat('-').concat(positionId)
+  let positionId = event.params.id.toString()
 
-  // let position = loadPosition(event, event.params.owner, pool, _positionId)
-  // position.isSettled = true
-  // position.isClosed = true
+  let position = loadPoolPosition(event, positionId, pool.address.toHexString())
+  position.pool = pool.id
+  position.isLiquidated = false
+  position.isSettled = true
+  position.isClosed = true
+  position.owner = event.params.recipient.toHexString()
 
-  // let settle = new Settle(positionId) as Settle
-  // settle.transaction = transaction.id
-  // settle.timestamp = transaction.timestamp
-  // settle.pool = pool.id
-  // settle.token0 = pool.token0
-  // settle.token1 = pool.token1
-  // settle.owner = event.params.owner
-  // settle.recipient = event.params.recipient
-  // settle.rewards = event.params.rewards
-  
-  // position.save()
-  // settle.save()
+  position.save()
+  // transaction.save()
 }
 
 export function handleLiquidate(event: LiquidateEvent): void {
   // let transaction = loadTransaction(event)
   let pool = loadPool(event, event.address)
 
-  let tokenId = event.params.id.toString()
+  let positionId = event.params.id.toString()
 
-  let position = loadPosition(event, tokenId, '')
+  let position = loadPoolPosition(event, positionId, pool.address.toHexString())
   position.pool = pool.id
   position.isLiquidated = true
   position.isClosed = true
