@@ -98,27 +98,18 @@ export function handleSettle(event: SettleEvent): void {
   // settle.save()
 }
 
-// export function handleLiquidate(event: LiquidateEvent): void {
-//   let transaction = loadTransaction(event)
-//   let pool = loadPool(event, event.address)
+export function handleLiquidate(event: LiquidateEvent): void {
+  // let transaction = loadTransaction(event)
+  let pool = loadPool(event, event.address)
 
-//   let positionId = event.params.id.toHexString()
-//   let _positionId = pool.id.concat('-').concat(positionId)
+  let tokenId = event.params.id.toString()
 
-//   let position = loadPosition(event, event.params.owner, pool, _positionId)
-//   position.isLiquidated = true
-//   position.isClosed = true
+  let position = loadPosition(event, tokenId, '')
+  position.pool = pool.id
+  position.isLiquidated = true
+  position.isClosed = true
+  position.owner = event.params.recipient.toHexString()
 
-//   let liquidate = new Liquidate(positionId) as Liquidate
-//   liquidate.transaction = transaction.id
-//   liquidate.timestamp = transaction.timestamp
-//   liquidate.pool = pool.id
-//   liquidate.token0 = pool.token0
-//   liquidate.token1 = pool.token1
-//   liquidate.owner = event.params.owner
-//   liquidate.recipient = event.params.recipient
-//   liquidate.rewards = event.params.rewards
-  
-//   position.save()
-//   liquidate.save()
-// }
+  position.save()
+  // transaction.save()
+}

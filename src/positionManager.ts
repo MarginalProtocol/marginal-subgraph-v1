@@ -44,7 +44,7 @@ export function handleIgnite(event: IgniteEvent): void {
   // let positionInfo = positionManagerContract.positions(tokenId)
   // let poolAddress = positionInfo.value0.toString()
 
-  let position = loadPosition(event, tokenId.toHexString(), '')
+  let position = loadPosition(event, tokenId.toString(), '')
 
   position.isSettled = true
   position.isClosed = true

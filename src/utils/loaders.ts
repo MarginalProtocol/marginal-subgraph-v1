@@ -75,13 +75,14 @@ export function loadTransaction(event: ethereum.Event): Transaction {
   return transaction as Transaction
 }
 
-export function loadPosition(event: ethereum.Event, positionId: string, poolAddress: string): Position {
+export function loadPosition(event: ethereum.Event, tokenId: string, poolAddress: string): Position {
   // load Position if exists
-  let position = Position.load(positionId)
+  let id = tokenId.toString()
+  let position = Position.load(id)
 
   // create new Position if null
   if (position === null) {
-    position = new Position(positionId)
+    position = new Position(id)
     position.pool = poolAddress
     position.margin = null // TODO: Update to pull margin from Contract
     position.blockNumber = null // Do we leave as null if not indexed at creation?

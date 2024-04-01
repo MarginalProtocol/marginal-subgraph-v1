@@ -65,7 +65,7 @@ type Token @entity {
 }
 
 type Position @entity {
-  # positionId from position manager
+  # tokenId from position manager
   id: ID!
   # owner of position
   owner: ID!
