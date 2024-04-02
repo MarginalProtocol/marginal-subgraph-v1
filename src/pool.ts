@@ -48,30 +48,16 @@ export function handleOpen(event: OpenEvent): void {
   // open.save()
 }
 
-// TODO: Need to rethink through how to index multiple Adjust events to a Position
-// export function handleAdjust(event: AdjustEvent): void {
-//   let transaction = loadTransaction(event)
-//   let pool = loadPool(event, event.address)
+export function handleAdjust(event: AdjustEvent): void {
+  let pool = loadPool(event, event.address)
 
-//   let positionId = event.params.id.toHexString()
-//   let _positionId = pool.id.concat('-').concat(positionId)
+  let positionId = event.params.id.toString()
 
-//   let position = loadPosition(event, event.params.owner, pool, _positionId)
-//   position.margin = event.params.marginAfter
+  let position = loadPoolPosition(event, positionId, pool.address.toHexString())
+  position.margin = event.params.marginAfter
 
-//   let adjust = new Adjust(positionId) as Adjust
-//   adjust.transaction = transaction.id
-//   adjust.timestamp = transaction.timestamp
-//   adjust.pool = pool.id
-//   adjust.token0 = pool.token0
-//   adjust.token1 = pool.token1
-//   adjust.owner = event.params.owner
-//   adjust.recipient = event.params.recipient
-//   adjust.margin = event.params.marginAfter
-
-//   position.save()
-//   adjust.save()
-// } 
+  position.save()
+} 
 
 export function handleSettle(event: SettleEvent): void {
   // let transaction = loadTransaction(event)
