@@ -75,6 +75,8 @@ type Position @entity {
   owner: ID!
   # pool address of position
   pool: Pool!
+  # initial margin at time of open
+  initialMargin: BigInt
   # margin
   margin: BigInt
   # created at block number

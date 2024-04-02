@@ -546,6 +546,23 @@ export class Position extends Entity {
     this.set("pool", Value.fromString(value));
   }
 
+  get initialMargin(): BigInt | null {
+    let value = this.get("initialMargin");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set initialMargin(value: BigInt | null) {
+    if (!value) {
+      this.unset("initialMargin");
+    } else {
+      this.set("initialMargin", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
   get margin(): BigInt | null {
     let value = this.get("margin");
     if (!value || value.kind == ValueKind.NULL) {
