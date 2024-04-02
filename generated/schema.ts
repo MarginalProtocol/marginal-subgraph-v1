@@ -490,6 +490,36 @@ export class Position extends Entity {
     this.set("id", Value.fromString(value));
   }
 
+  get tokenId(): string | null {
+    let value = this.get("tokenId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set tokenId(value: string | null) {
+    if (!value) {
+      this.unset("tokenId");
+    } else {
+      this.set("tokenId", Value.fromString(<string>value));
+    }
+  }
+
+  get positionId(): string {
+    let value = this.get("positionId");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set positionId(value: string) {
+    this.set("positionId", Value.fromString(value));
+  }
+
   get owner(): string {
     let value = this.get("owner");
     if (!value || value.kind == ValueKind.NULL) {
@@ -514,6 +544,23 @@ export class Position extends Entity {
 
   set pool(value: string) {
     this.set("pool", Value.fromString(value));
+  }
+
+  get initialMargin(): BigInt | null {
+    let value = this.get("initialMargin");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set initialMargin(value: BigInt | null) {
+    if (!value) {
+      this.unset("initialMargin");
+    } else {
+      this.set("initialMargin", Value.fromBigInt(<BigInt>value));
+    }
   }
 
   get margin(): BigInt | null {

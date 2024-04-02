@@ -13,14 +13,21 @@ export function handleMint(event: MintEvent): void {
 
   let positionManagerContract = MarginalV1NonfungiblePositionManager.bind(event.address)
 
+  let positionId = event.params.positionId
   let tokenId = event.params.tokenId
-  let position = new Position(tokenId.toString())
-
+  
   let positionInfo = positionManagerContract.positions(tokenId)
-  let poolAddress: Address = positionInfo.value0
+  let poolAddress = positionInfo.value0.toHexString()
+  
+  let id = poolAddress.concat('-').concat(positionId.toString())
 
-  position.pool = poolAddress.toHexString()
+  let position = new Position(id)
+
+  position.tokenId = tokenId.toString()
+  position.positionId = event.params.positionId.toString()
+  position.pool = poolAddress
   position.owner = event.params.recipient.toHexString()
+  position.initialMargin = event.params.margin
   position.margin = event.params.margin
   position.blockNumber = event.block.number
   position.timestamp = event.block.timestamp
@@ -35,21 +42,21 @@ export function handleMint(event: MintEvent): void {
 }
 
 export function handleIgnite(event: IgniteEvent): void {
-  let transaction = loadTransaction(event)
+//   let transaction = loadTransaction(event)
 
-  // let positionManagerContract = MarginalV1NonfungiblePositionManager.bind(event.address)
+//   // let positionManagerContract = MarginalV1NonfungiblePositionManager.bind(event.address)
   
-  let tokenId = event.params.tokenId
+//   let tokenId = event.params.tokenId
 
-  // let positionInfo = positionManagerContract.positions(tokenId)
-  // let poolAddress = positionInfo.value0.toString()
+//   // let positionInfo = positionManagerContract.positions(tokenId)
+//   // let poolAddress = positionInfo.value0.toString()
 
-  let position = loadPosition(event, tokenId.toString(), '')
+//   let position = loadPosition(event, tokenId.toString(), '')
 
-  position.isSettled = true
-  position.isClosed = true
-  position.owner = event.params.recipient.toHexString()
+//   position.isSettled = true
+//   position.isClosed = true
+//   position.owner = event.params.recipient.toHexString()
 
-  position.save()
-  transaction.save()
+//   position.save()
+//   transaction.save()
 }

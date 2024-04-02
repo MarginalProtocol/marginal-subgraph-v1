@@ -96,3 +96,27 @@ export function loadPosition(event: ethereum.Event, tokenId: string, poolAddress
   
   return position
 }
+
+export function loadPoolPosition(event: ethereum.Event, positionId: string, poolAddress: string): Position {
+  // load Position if exists
+  let id = poolAddress.concat('-').concat(positionId)
+
+  let position = Position.load(id)
+
+  // create new Position if null
+  if (position === null) {
+    position = new Position(id)
+    position.positionId = positionId
+    position.pool = poolAddress
+    position.margin = null // TODO: Update to pull margin from Contract
+    position.blockNumber = null // Do we leave as null if not indexed at creation?
+    position.timestamp = null // Do we leave as null if not indexed at creation?
+    position.transaction = event.transaction.hash.toHexString()
+    // TODO: Update below using checks from Pool Contract
+    position.isLiquidated = false
+    position.isSettled = false
+    position.isClosed = false
+  }
+  
+  return position
+}

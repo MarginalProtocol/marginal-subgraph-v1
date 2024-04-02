@@ -79,20 +79,24 @@ export class Burn__Params {
     return this._event.parameters[0].value.toBigInt();
   }
 
-  get recipient(): Address {
+  get sender(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
-  get amountIn(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
+  get recipient(): Address {
+    return this._event.parameters[2].value.toAddress();
   }
 
-  get amountOut(): BigInt {
+  get amountIn(): BigInt {
     return this._event.parameters[3].value.toBigInt();
   }
 
-  get rewards(): BigInt {
+  get amountOut(): BigInt {
     return this._event.parameters[4].value.toBigInt();
+  }
+
+  get rewards(): BigInt {
+    return this._event.parameters[5].value.toBigInt();
   }
 }
 
@@ -113,38 +117,16 @@ export class Free__Params {
     return this._event.parameters[0].value.toBigInt();
   }
 
-  get recipient(): Address {
+  get sender(): Address {
     return this._event.parameters[1].value.toAddress();
+  }
+
+  get recipient(): Address {
+    return this._event.parameters[2].value.toAddress();
   }
 
   get marginAfter(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
-  }
-}
-
-export class Grab extends ethereum.Event {
-  get params(): Grab__Params {
-    return new Grab__Params(this);
-  }
-}
-
-export class Grab__Params {
-  _event: Grab;
-
-  constructor(event: Grab) {
-    this._event = event;
-  }
-
-  get tokenId(): BigInt {
-    return this._event.parameters[0].value.toBigInt();
-  }
-
-  get recipient(): Address {
-    return this._event.parameters[1].value.toAddress();
-  }
-
-  get rewards(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
+    return this._event.parameters[3].value.toBigInt();
   }
 }
 
@@ -165,16 +147,20 @@ export class Ignite__Params {
     return this._event.parameters[0].value.toBigInt();
   }
 
-  get recipient(): Address {
+  get sender(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
+  get recipient(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
   get amountOut(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
+    return this._event.parameters[3].value.toBigInt();
   }
 
   get rewards(): BigInt {
-    return this._event.parameters[3].value.toBigInt();
+    return this._event.parameters[4].value.toBigInt();
   }
 }
 
@@ -195,7 +181,7 @@ export class Lock__Params {
     return this._event.parameters[0].value.toBigInt();
   }
 
-  get recipient(): Address {
+  get sender(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
@@ -221,32 +207,36 @@ export class Mint__Params {
     return this._event.parameters[0].value.toBigInt();
   }
 
-  get recipient(): Address {
+  get sender(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
-  get positionId(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
+  get recipient(): Address {
+    return this._event.parameters[2].value.toAddress();
   }
 
-  get size(): BigInt {
+  get positionId(): BigInt {
     return this._event.parameters[3].value.toBigInt();
   }
 
-  get debt(): BigInt {
+  get size(): BigInt {
     return this._event.parameters[4].value.toBigInt();
   }
 
-  get margin(): BigInt {
+  get debt(): BigInt {
     return this._event.parameters[5].value.toBigInt();
   }
 
-  get fees(): BigInt {
+  get margin(): BigInt {
     return this._event.parameters[6].value.toBigInt();
   }
 
-  get rewards(): BigInt {
+  get fees(): BigInt {
     return this._event.parameters[7].value.toBigInt();
+  }
+
+  get rewards(): BigInt {
+    return this._event.parameters[8].value.toBigInt();
   }
 }
 
@@ -273,6 +263,99 @@ export class Transfer__Params {
 
   get tokenId(): BigInt {
     return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class MarginalV1NonfungiblePositionManager__freeInputParamsStruct extends ethereum.Tuple {
+  get token0(): Address {
+    return this[0].toAddress();
+  }
+
+  get token1(): Address {
+    return this[1].toAddress();
+  }
+
+  get maintenance(): i32 {
+    return this[2].toI32();
+  }
+
+  get oracle(): Address {
+    return this[3].toAddress();
+  }
+
+  get tokenId(): BigInt {
+    return this[4].toBigInt();
+  }
+
+  get marginOut(): BigInt {
+    return this[5].toBigInt();
+  }
+
+  get recipient(): Address {
+    return this[6].toAddress();
+  }
+
+  get deadline(): BigInt {
+    return this[7].toBigInt();
+  }
+}
+
+export class MarginalV1NonfungiblePositionManager__igniteResult {
+  value0: BigInt;
+  value1: BigInt;
+
+  constructor(value0: BigInt, value1: BigInt) {
+    this.value0 = value0;
+    this.value1 = value1;
+  }
+
+  toMap(): TypedMap<string, ethereum.Value> {
+    let map = new TypedMap<string, ethereum.Value>();
+    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
+    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
+    return map;
+  }
+
+  getAmountOut(): BigInt {
+    return this.value0;
+  }
+
+  getRewards(): BigInt {
+    return this.value1;
+  }
+}
+
+export class MarginalV1NonfungiblePositionManager__igniteInputParamsStruct extends ethereum.Tuple {
+  get token0(): Address {
+    return this[0].toAddress();
+  }
+
+  get token1(): Address {
+    return this[1].toAddress();
+  }
+
+  get maintenance(): i32 {
+    return this[2].toI32();
+  }
+
+  get oracle(): Address {
+    return this[3].toAddress();
+  }
+
+  get tokenId(): BigInt {
+    return this[4].toBigInt();
+  }
+
+  get amountOutMinimum(): BigInt {
+    return this[5].toBigInt();
+  }
+
+  get recipient(): Address {
+    return this[6].toAddress();
+  }
+
+  get deadline(): BigInt {
+    return this[7].toBigInt();
   }
 }
 
@@ -410,21 +493,6 @@ export class MarginalV1NonfungiblePositionManager extends ethereum.SmartContract
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  deployer(): Address {
-    let result = super.call("deployer", "deployer():(address)", []);
-
-    return result[0].toAddress();
-  }
-
-  try_deployer(): ethereum.CallResult<Address> {
-    let result = super.tryCall("deployer", "deployer():(address)", []);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
   factory(): Address {
     let result = super.call("factory", "factory():(address)", []);
 
@@ -438,6 +506,33 @@ export class MarginalV1NonfungiblePositionManager extends ethereum.SmartContract
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  free(
+    params: MarginalV1NonfungiblePositionManager__freeInputParamsStruct
+  ): BigInt {
+    let result = super.call(
+      "free",
+      "free((address,address,uint24,address,uint256,uint128,address,uint256)):(uint256)",
+      [ethereum.Value.fromTuple(params)]
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_free(
+    params: MarginalV1NonfungiblePositionManager__freeInputParamsStruct
+  ): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "free",
+      "free((address,address,uint24,address,uint256,uint128,address,uint256)):(uint256)",
+      [ethereum.Value.fromTuple(params)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
   getApproved(tokenId: BigInt): Address {
@@ -459,6 +554,41 @@ export class MarginalV1NonfungiblePositionManager extends ethereum.SmartContract
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
+  }
+
+  ignite(
+    params: MarginalV1NonfungiblePositionManager__igniteInputParamsStruct
+  ): MarginalV1NonfungiblePositionManager__igniteResult {
+    let result = super.call(
+      "ignite",
+      "ignite((address,address,uint24,address,uint256,uint256,address,uint256)):(uint256,uint256)",
+      [ethereum.Value.fromTuple(params)]
+    );
+
+    return new MarginalV1NonfungiblePositionManager__igniteResult(
+      result[0].toBigInt(),
+      result[1].toBigInt()
+    );
+  }
+
+  try_ignite(
+    params: MarginalV1NonfungiblePositionManager__igniteInputParamsStruct
+  ): ethereum.CallResult<MarginalV1NonfungiblePositionManager__igniteResult> {
+    let result = super.tryCall(
+      "ignite",
+      "ignite((address,address,uint24,address,uint256,uint256,address,uint256)):(uint256,uint256)",
+      [ethereum.Value.fromTuple(params)]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(
+      new MarginalV1NonfungiblePositionManager__igniteResult(
+        value[0].toBigInt(),
+        value[1].toBigInt()
+      )
+    );
   }
 
   isApprovedForAll(owner: Address, operator: Address): boolean {
@@ -679,6 +809,10 @@ export class ConstructorCall__Inputs {
   get _WETH9(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
+
+  get _tokenDescriptor_(): Address {
+    return this._call.inputValues[2].value.toAddress();
+  }
 }
 
 export class ConstructorCall__Outputs {
@@ -867,72 +1001,6 @@ export class FreeCallParamsStruct extends ethereum.Tuple {
   }
 }
 
-export class GrabCall extends ethereum.Call {
-  get inputs(): GrabCall__Inputs {
-    return new GrabCall__Inputs(this);
-  }
-
-  get outputs(): GrabCall__Outputs {
-    return new GrabCall__Outputs(this);
-  }
-}
-
-export class GrabCall__Inputs {
-  _call: GrabCall;
-
-  constructor(call: GrabCall) {
-    this._call = call;
-  }
-
-  get params(): GrabCallParamsStruct {
-    return changetype<GrabCallParamsStruct>(
-      this._call.inputValues[0].value.toTuple()
-    );
-  }
-}
-
-export class GrabCall__Outputs {
-  _call: GrabCall;
-
-  constructor(call: GrabCall) {
-    this._call = call;
-  }
-
-  get rewards(): BigInt {
-    return this._call.outputValues[0].value.toBigInt();
-  }
-}
-
-export class GrabCallParamsStruct extends ethereum.Tuple {
-  get token0(): Address {
-    return this[0].toAddress();
-  }
-
-  get token1(): Address {
-    return this[1].toAddress();
-  }
-
-  get maintenance(): i32 {
-    return this[2].toI32();
-  }
-
-  get oracle(): Address {
-    return this[3].toAddress();
-  }
-
-  get tokenId(): BigInt {
-    return this[4].toBigInt();
-  }
-
-  get recipient(): Address {
-    return this[5].toAddress();
-  }
-
-  get deadline(): BigInt {
-    return this[6].toBigInt();
-  }
-}
-
 export class IgniteCall extends ethereum.Call {
   get inputs(): IgniteCall__Inputs {
     return new IgniteCall__Inputs(this);
@@ -1068,12 +1136,8 @@ export class LockCallParamsStruct extends ethereum.Tuple {
     return this[5].toBigInt();
   }
 
-  get recipient(): Address {
-    return this[6].toAddress();
-  }
-
   get deadline(): BigInt {
-    return this[7].toBigInt();
+    return this[6].toBigInt();
   }
 }
 
