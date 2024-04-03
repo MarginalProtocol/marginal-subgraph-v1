@@ -106,6 +106,7 @@ export function loadPoolPosition(event: ethereum.Event, positionId: string, pool
   // create new Position if null
   if (position === null) {
     position = new Position(id)
+    position.owner = event.transaction.from.toHexString()
     position.positionId = positionId
     position.pool = poolAddress
     position.margin = null // TODO: Update to pull margin from Contract
