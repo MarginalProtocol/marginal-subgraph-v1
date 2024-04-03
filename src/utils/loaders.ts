@@ -1,6 +1,6 @@
 import { MarginalV1Pool } from './../../generated/templates/MarginalV1Pool/MarginalV1Pool';
 import { MarginalV1Pool as PoolTemplate } from '../../generated/templates'
-import { Factory, Pool, Transaction, Position } from "../../generated/schema";
+import { Factory, Pool, Transaction, Position, TokenPositionMapping } from "../../generated/schema";
 import {
     FACTORY_ADDRESS,
     ZERO_BI,
@@ -120,4 +120,18 @@ export function loadPoolPosition(event: ethereum.Event, positionId: string, pool
   }
   
   return position
+}
+
+export function loadPositionByTokenId(tokenId: string): Position | null {
+  let matched = TokenPositionMapping.load(tokenId)
+  if (matched === null) {
+    return null
+  }
+
+  let poolAddress = matched.poolAddress
+  let positionId = matched.positionId
+
+  let id = poolAddress.concat('-').concat(positionId)
+
+  return Position.load(id)
 }

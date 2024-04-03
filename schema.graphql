@@ -64,6 +64,13 @@ type Token @entity {
   decimals: BigInt!
 }
 
+type TokenPositionMapping @entity {
+  id: ID!
+  tokenId: String!
+  positionId: String!
+  poolAddress: ID!
+}
+
 type Position @entity {
   # poolAddress-positionId 
   id: ID!
@@ -79,6 +86,8 @@ type Position @entity {
   initialMargin: BigInt
   # margin
   margin: BigInt
+  # margin amountOut at time of close / liquidate
+  marginAmountOut: BigInt
   # created at block number
   blockNumber: BigInt
   # created at timestamp

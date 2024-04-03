@@ -6,7 +6,7 @@ import {
   Settle as SettleEvent,
 } from "../generated/templates/MarginalV1Pool/MarginalV1Pool"
 import { loadPool, loadTransaction, loadPosition, loadPoolPosition } from "./utils/loaders"
-import { ONE_BI } from "./utils/constants"
+import { ONE_BI, ZERO_BI } from "./utils/constants"
 
 export function handleOpen(event: OpenEvent): void {
   // let pool = loadPool(event, event.address)
@@ -82,6 +82,7 @@ export function handleLiquidate(event: LiquidateEvent): void {
   let positionId = event.params.id.toString()
 
   let position = loadPoolPosition(event, positionId, pool.address.toHexString())
+  position.marginAmountOut = ZERO_BI
   position.pool = pool.id
   position.isLiquidated = true
   position.isClosed = true

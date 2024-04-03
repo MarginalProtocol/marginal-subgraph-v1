@@ -451,6 +451,89 @@ export class Token extends Entity {
   }
 }
 
+export class TokenPositionMapping extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save TokenPositionMapping entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type TokenPositionMapping must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("TokenPositionMapping", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): TokenPositionMapping | null {
+    return changetype<TokenPositionMapping | null>(
+      store.get_in_block("TokenPositionMapping", id)
+    );
+  }
+
+  static load(id: string): TokenPositionMapping | null {
+    return changetype<TokenPositionMapping | null>(
+      store.get("TokenPositionMapping", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get tokenId(): string {
+    let value = this.get("tokenId");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set tokenId(value: string) {
+    this.set("tokenId", Value.fromString(value));
+  }
+
+  get positionId(): string {
+    let value = this.get("positionId");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set positionId(value: string) {
+    this.set("positionId", Value.fromString(value));
+  }
+
+  get poolAddress(): string {
+    let value = this.get("poolAddress");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set poolAddress(value: string) {
+    this.set("poolAddress", Value.fromString(value));
+  }
+}
+
 export class Position extends Entity {
   constructor(id: string) {
     super();
@@ -577,6 +660,23 @@ export class Position extends Entity {
       this.unset("margin");
     } else {
       this.set("margin", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
+  get marginAmountOut(): BigInt | null {
+    let value = this.get("marginAmountOut");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set marginAmountOut(value: BigInt | null) {
+    if (!value) {
+      this.unset("marginAmountOut");
+    } else {
+      this.set("marginAmountOut", Value.fromBigInt(<BigInt>value));
     }
   }
 

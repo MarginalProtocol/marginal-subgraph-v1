@@ -5,8 +5,9 @@ import {
 import { loadPool, loadTransaction, loadPosition } from "./utils/loaders"
 import { MarginalV1NonfungiblePositionManager } from "../generated/MarginalV1NonfungiblePositionManager/MarginalV1NonfungiblePositionManager"
 import { NFT_POSITION_MANAGER_ADDRESS } from "./utils/constants"
-import { Position } from "../generated/schema"
+import { Position, TokenPositionMapping } from "../generated/schema"
 import { Address } from "@graphprotocol/graph-ts"
+import { loadPositionByTokenId } from "./utils/loaders"
 
 export function handleMint(event: MintEvent): void {
   let transaction = loadTransaction(event)
@@ -16,12 +17,19 @@ export function handleMint(event: MintEvent): void {
   let positionId = event.params.positionId
   let tokenId = event.params.tokenId
   
+  
   let positionInfo = positionManagerContract.positions(tokenId)
   let poolAddress = positionInfo.value0.toHexString()
   
   let id = poolAddress.concat('-').concat(positionId.toString())
-
+  
   let position = new Position(id)
+
+  let tokenPositionMap = new TokenPositionMapping(tokenId.toString())
+
+  tokenPositionMap.tokenId = tokenId.toString()
+  tokenPositionMap.positionId = positionId.toString()
+  tokenPositionMap.poolAddress = positionInfo.value0.toHexString()
 
   position.tokenId = tokenId.toString()
   position.positionId = event.params.positionId.toString()
@@ -36,27 +44,17 @@ export function handleMint(event: MintEvent): void {
   position.isSettled = false
   position.isClosed = false
 
-
   position.save()
   transaction.save()
+  tokenPositionMap.save()
 }
 
 export function handleIgnite(event: IgniteEvent): void {
-//   let transaction = loadTransaction(event)
+  let tokenId = event.params.tokenId.toString()
+  let position = loadPositionByTokenId(tokenId)
 
-//   // let positionManagerContract = MarginalV1NonfungiblePositionManager.bind(event.address)
-  
-//   let tokenId = event.params.tokenId
-
-//   // let positionInfo = positionManagerContract.positions(tokenId)
-//   // let poolAddress = positionInfo.value0.toString()
-
-//   let position = loadPosition(event, tokenId.toString(), '')
-
-//   position.isSettled = true
-//   position.isClosed = true
-//   position.owner = event.params.recipient.toHexString()
-
-//   position.save()
-//   transaction.save()
+  if (position !== null) {
+    position.marginAmountOut = event.params.amountOut
+    position.save()
+  }
 }
