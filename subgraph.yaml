@@ -41,9 +41,9 @@ dataSources:
     name: MarginalV1NonfungiblePositionManager
     network: sepolia
     source:
-      address: "0x7f14926121F7190798a62CeF49F92D16fAaECD54"
+      address: "0x8B54A64Ee906B5cf7596E54935c9E06b2143D714"
       abi: MarginalV1NonfungiblePositionManager
-      startBlock: 5606200
+      startBlock: 5754422
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -91,8 +91,8 @@ templates:
         - name: ERC20
           file: ./abis/ERC20.json
       eventHandlers:
-        # - event: Adjust(indexed address,indexed uint256,address,uint256)
-        #   handler: handleAdjust
+        - event: Adjust(indexed address,indexed uint256,address,uint256)
+          handler: handleAdjust
         # - event: Approval(indexed address,indexed address,uint256)
         #   handler: handleApproval
         # - event: Burn(indexed address,address,uint128,uint256,uint256)
