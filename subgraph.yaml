@@ -41,9 +41,9 @@ dataSources:
     name: MarginalV1NonfungiblePositionManager
     network: sepolia
     source:
-      address: "0x8B54A64Ee906B5cf7596E54935c9E06b2143D714"
+      address: "0x68edDcbCE80d38ed18c494A8c19148DB4e95F0c5"
       abi: MarginalV1NonfungiblePositionManager
-      startBlock: 5754422
+      startBlock: 5756486
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
