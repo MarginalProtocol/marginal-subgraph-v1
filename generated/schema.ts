@@ -765,6 +765,23 @@ export class Position extends Entity {
   set isClosed(value: boolean) {
     this.set("isClosed", Value.fromBoolean(value));
   }
+
+  get rewards(): BigInt | null {
+    let value = this.get("rewards");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set rewards(value: BigInt | null) {
+    if (!value) {
+      this.unset("rewards");
+    } else {
+      this.set("rewards", Value.fromBigInt(<BigInt>value));
+    }
+  }
 }
 
 export class Transaction extends Entity {

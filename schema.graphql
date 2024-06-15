@@ -100,6 +100,8 @@ type Position @entity {
   isSettled: Boolean!
   # either settled/liquidated is true
   isClosed: Boolean!
+  # escrow rewards 
+  rewards: BigInt
 }
 
 type Transaction @entity {

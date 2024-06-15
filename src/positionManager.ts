@@ -43,6 +43,7 @@ export function handleMint(event: MintEvent): void {
   position.isLiquidated = false
   position.isSettled = false
   position.isClosed = false
+  position.rewards = positionInfo.value9
 
   position.save()
   transaction.save()
