@@ -88,6 +88,8 @@ type Position @entity {
   margin: BigInt
   # margin amountOut at time of close / liquidate
   marginAmountOut: BigInt
+  # position zeroForOne
+  zeroForOne: Boolean
   # created at block number
   blockNumber: BigInt
   # created at timestamp

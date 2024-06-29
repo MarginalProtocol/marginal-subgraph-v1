@@ -74,20 +74,6 @@ export function handlePoolCreated(event: PoolCreated): void {
   PoolTemplate.create(event.params.pool)
 }
 
-// export function handleLeverageEnabled(event: LeverageEnabledEvent): void {
-//   let entity = new LeverageEnabled(
-//     event.transaction.hash.concatI32(event.logIndex.toI32())
-//   )
-//   entity.maintenance = event.params.maintenance
-//   entity.leverage = event.params.leverage
-
-//   entity.blockNumber = event.block.number
-//   entity.blockTimestamp = event.block.timestamp
-//   entity.transactionHash = event.transaction.hash
-
-//   entity.save()
-// }
-
 export function handleOwnerChanged(event: OwnerChanged): void {
   let factory = loadFactory(FACTORY_ADDRESS)
 

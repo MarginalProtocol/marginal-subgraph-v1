@@ -680,6 +680,19 @@ export class Position extends Entity {
     }
   }
 
+  get zeroForOne(): boolean {
+    let value = this.get("zeroForOne");
+    if (!value || value.kind == ValueKind.NULL) {
+      return false;
+    } else {
+      return value.toBoolean();
+    }
+  }
+
+  set zeroForOne(value: boolean) {
+    this.set("zeroForOne", Value.fromBoolean(value));
+  }
+
   get blockNumber(): BigInt | null {
     let value = this.get("blockNumber");
     if (!value || value.kind == ValueKind.NULL) {

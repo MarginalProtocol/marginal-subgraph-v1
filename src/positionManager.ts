@@ -2,11 +2,9 @@ import {
   Mint as MintEvent,
   Ignite as IgniteEvent,
 } from "../generated/MarginalV1NonfungiblePositionManager/MarginalV1NonfungiblePositionManager"
-import { loadPool, loadTransaction, loadPosition } from "./utils/loaders"
+import { loadTransaction } from "./utils/loaders"
 import { MarginalV1NonfungiblePositionManager } from "../generated/MarginalV1NonfungiblePositionManager/MarginalV1NonfungiblePositionManager"
-import { NFT_POSITION_MANAGER_ADDRESS } from "./utils/constants"
 import { Position, TokenPositionMapping } from "../generated/schema"
-import { Address } from "@graphprotocol/graph-ts"
 import { loadPositionByTokenId } from "./utils/loaders"
 
 export function handleMint(event: MintEvent): void {
@@ -37,6 +35,7 @@ export function handleMint(event: MintEvent): void {
   position.owner = event.params.recipient.toHexString()
   position.initialMargin = event.params.margin
   position.margin = event.params.margin
+  position.zeroForOne = positionInfo.value2
   position.blockNumber = event.block.number
   position.timestamp = event.block.timestamp
   position.transaction = transaction.id
