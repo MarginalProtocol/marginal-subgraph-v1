@@ -6,9 +6,9 @@ dataSources:
     name: MarginalV1Factory
     network: sepolia
     source:
-      address: "0x71E2760cF5E2beefE5255dAA1F016a84A8fA12a4"
+      address: "0xa85D1A8f20d1D51612Ffa969f8594166A855c3C2"
       abi: MarginalV1Factory
-      startBlock: 5445786
+      startBlock: 6192164
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -30,7 +30,6 @@ dataSources:
           file: ./abis/ERC20NameBytes.json
       eventHandlers:
         # - event: LeverageEnabled(uint24,uint256)
-        #   handler: handleLeverageEnabled
         - event: OwnerChanged(indexed address,indexed address)
           handler: handleOwnerChanged
         - event: PoolCreated(indexed address,indexed address,uint24,indexed address,address)
@@ -41,9 +40,9 @@ dataSources:
     name: MarginalV1NonfungiblePositionManager
     network: sepolia
     source:
-      address: "0x68edDcbCE80d38ed18c494A8c19148DB4e95F0c5"
+      address: "0x0e090Cdf42b985F7F05eAf4dD165515E309eDC2c"
       abi: MarginalV1NonfungiblePositionManager
-      startBlock: 5756486
+      startBlock: 6192200
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
