@@ -1,8 +1,16 @@
 [
   {
     "inputs": [
-      { "internalType": "address", "name": "_marginalV1Deployer", "type": "address" },
-      { "internalType": "address", "name": "_uniswapV3Factory", "type": "address" },
+      {
+        "internalType": "address",
+        "name": "_marginalV1Deployer",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_uniswapV3Factory",
+        "type": "address"
+      },
       {
         "internalType": "uint16",
         "name": "_observationCardinalityMinimum",
@@ -15,7 +23,11 @@
   { "inputs": [], "name": "InvalidMaintenance", "type": "error" },
   {
     "inputs": [
-      { "internalType": "uint16", "name": "observationCardinality", "type": "uint16" }
+      {
+        "internalType": "uint16",
+        "name": "observationCardinality",
+        "type": "uint16"
+      }
     ],
     "name": "InvalidObservationCardinality",
     "type": "error"
@@ -89,7 +101,12 @@
         "name": "oracle",
         "type": "address"
       },
-      { "indexed": false, "internalType": "address", "name": "pool", "type": "address" }
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "pool",
+        "type": "address"
+      }
     ],
     "name": "PoolCreated",
     "type": "event"
@@ -102,12 +119,16 @@
       { "internalType": "uint24", "name": "uniswapV3Fee", "type": "uint24" }
     ],
     "name": "createPool",
-    "outputs": [{ "internalType": "address", "name": "pool", "type": "address" }],
+    "outputs": [
+      { "internalType": "address", "name": "pool", "type": "address" }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint24", "name": "maintenance", "type": "uint24" }],
+    "inputs": [
+      { "internalType": "uint24", "name": "maintenance", "type": "uint24" }
+    ],
     "name": "enableLeverage",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -161,7 +182,9 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "address", "name": "_owner", "type": "address" }],
+    "inputs": [
+      { "internalType": "address", "name": "_owner", "type": "address" }
+    ],
     "name": "setOwner",
     "outputs": [],
     "stateMutability": "nonpayable",

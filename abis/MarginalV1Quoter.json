@@ -4,7 +4,11 @@
       { "internalType": "address", "name": "_factory", "type": "address" },
       { "internalType": "address", "name": "_WETH9", "type": "address" },
       { "internalType": "address", "name": "_manager", "type": "address" },
-      { "internalType": "address", "name": "_uniswapV3Quoter", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "_uniswapV3Quoter",
+        "type": "address"
+      }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
@@ -14,7 +18,9 @@
   { "inputs": [], "name": "InvalidSqrtPriceX96", "type": "error" },
   { "inputs": [], "name": "PoolInactive", "type": "error" },
   {
-    "inputs": [{ "internalType": "uint256", "name": "reserve", "type": "uint256" }],
+    "inputs": [
+      { "internalType": "uint256", "name": "reserve", "type": "uint256" }
+    ],
     "name": "SizeGreaterThanReserve",
     "type": "error"
   },
@@ -47,9 +53,13 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "bytes[]", "name": "data", "type": "bytes[]" }],
+    "inputs": [
+      { "internalType": "bytes[]", "name": "data", "type": "bytes[]" }
+    ],
     "name": "multicall",
-    "outputs": [{ "internalType": "bytes[]", "name": "results", "type": "bytes[]" }],
+    "outputs": [
+      { "internalType": "bytes[]", "name": "results", "type": "bytes[]" }
+    ],
     "stateMutability": "payable",
     "type": "function"
   },
@@ -59,13 +69,37 @@
         "components": [
           { "internalType": "address", "name": "token0", "type": "address" },
           { "internalType": "address", "name": "token1", "type": "address" },
-          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
+          {
+            "internalType": "uint24",
+            "name": "maintenance",
+            "type": "uint24"
+          },
           { "internalType": "address", "name": "oracle", "type": "address" },
-          { "internalType": "address", "name": "recipient", "type": "address" },
-          { "internalType": "uint256", "name": "amount0Desired", "type": "uint256" },
-          { "internalType": "uint256", "name": "amount1Desired", "type": "uint256" },
-          { "internalType": "uint256", "name": "amount0Min", "type": "uint256" },
-          { "internalType": "uint256", "name": "amount1Min", "type": "uint256" },
+          {
+            "internalType": "address",
+            "name": "recipient",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount0Desired",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount1Desired",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount0Min",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount1Min",
+            "type": "uint256"
+          },
           { "internalType": "uint256", "name": "deadline", "type": "uint256" }
         ],
         "internalType": "struct IRouter.AddLiquidityParams",
@@ -78,7 +112,11 @@
       { "internalType": "uint256", "name": "shares", "type": "uint256" },
       { "internalType": "uint256", "name": "amount0", "type": "uint256" },
       { "internalType": "uint256", "name": "amount1", "type": "uint256" },
-      { "internalType": "uint128", "name": "liquidityAfter", "type": "uint128" }
+      {
+        "internalType": "uint128",
+        "name": "liquidityAfter",
+        "type": "uint128"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -89,10 +127,18 @@
         "components": [
           { "internalType": "address", "name": "token0", "type": "address" },
           { "internalType": "address", "name": "token1", "type": "address" },
-          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
+          {
+            "internalType": "uint24",
+            "name": "maintenance",
+            "type": "uint24"
+          },
           { "internalType": "address", "name": "oracle", "type": "address" },
           { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-          { "internalType": "address", "name": "recipient", "type": "address" },
+          {
+            "internalType": "address",
+            "name": "recipient",
+            "type": "address"
+          },
           { "internalType": "uint256", "name": "deadline", "type": "uint256" }
         ],
         "internalType": "struct INonfungiblePositionManager.BurnParams",
@@ -105,9 +151,21 @@
       { "internalType": "uint256", "name": "amountIn", "type": "uint256" },
       { "internalType": "uint256", "name": "amountOut", "type": "uint256" },
       { "internalType": "uint256", "name": "rewards", "type": "uint256" },
-      { "internalType": "uint128", "name": "liquidityAfter", "type": "uint128" },
-      { "internalType": "uint160", "name": "sqrtPriceX96After", "type": "uint160" },
-      { "internalType": "uint128", "name": "liquidityLockedAfter", "type": "uint128" }
+      {
+        "internalType": "uint128",
+        "name": "liquidityAfter",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint160",
+        "name": "sqrtPriceX96After",
+        "type": "uint160"
+      },
+      {
+        "internalType": "uint128",
+        "name": "liquidityLockedAfter",
+        "type": "uint128"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -117,10 +175,26 @@
       {
         "components": [
           { "internalType": "bytes", "name": "path", "type": "bytes" },
-          { "internalType": "address", "name": "recipient", "type": "address" },
-          { "internalType": "uint256", "name": "deadline", "type": "uint256" },
-          { "internalType": "uint256", "name": "amountIn", "type": "uint256" },
-          { "internalType": "uint256", "name": "amountOutMinimum", "type": "uint256" }
+          {
+            "internalType": "address",
+            "name": "recipient",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amountIn",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amountOutMinimum",
+            "type": "uint256"
+          }
         ],
         "internalType": "struct IRouter.ExactInputParams",
         "name": "params",
@@ -130,8 +204,16 @@
     "name": "quoteExactInput",
     "outputs": [
       { "internalType": "uint256", "name": "amountOut", "type": "uint256" },
-      { "internalType": "uint128[]", "name": "liquiditiesAfter", "type": "uint128[]" },
-      { "internalType": "uint160[]", "name": "sqrtPricesX96After", "type": "uint160[]" }
+      {
+        "internalType": "uint128[]",
+        "name": "liquiditiesAfter",
+        "type": "uint128[]"
+      },
+      {
+        "internalType": "uint160[]",
+        "name": "sqrtPricesX96After",
+        "type": "uint160[]"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -141,14 +223,42 @@
       {
         "components": [
           { "internalType": "address", "name": "tokenIn", "type": "address" },
-          { "internalType": "address", "name": "tokenOut", "type": "address" },
-          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
+          {
+            "internalType": "address",
+            "name": "tokenOut",
+            "type": "address"
+          },
+          {
+            "internalType": "uint24",
+            "name": "maintenance",
+            "type": "uint24"
+          },
           { "internalType": "address", "name": "oracle", "type": "address" },
-          { "internalType": "address", "name": "recipient", "type": "address" },
-          { "internalType": "uint256", "name": "deadline", "type": "uint256" },
-          { "internalType": "uint256", "name": "amountIn", "type": "uint256" },
-          { "internalType": "uint256", "name": "amountOutMinimum", "type": "uint256" },
-          { "internalType": "uint160", "name": "sqrtPriceLimitX96", "type": "uint160" }
+          {
+            "internalType": "address",
+            "name": "recipient",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amountIn",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amountOutMinimum",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint160",
+            "name": "sqrtPriceLimitX96",
+            "type": "uint160"
+          }
         ],
         "internalType": "struct IRouter.ExactInputSingleParams",
         "name": "params",
@@ -158,8 +268,16 @@
     "name": "quoteExactInputSingle",
     "outputs": [
       { "internalType": "uint256", "name": "amountOut", "type": "uint256" },
-      { "internalType": "uint128", "name": "liquidityAfter", "type": "uint128" },
-      { "internalType": "uint160", "name": "sqrtPriceX96After", "type": "uint160" }
+      {
+        "internalType": "uint128",
+        "name": "liquidityAfter",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint160",
+        "name": "sqrtPriceX96After",
+        "type": "uint160"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -169,10 +287,26 @@
       {
         "components": [
           { "internalType": "bytes", "name": "path", "type": "bytes" },
-          { "internalType": "address", "name": "recipient", "type": "address" },
-          { "internalType": "uint256", "name": "deadline", "type": "uint256" },
-          { "internalType": "uint256", "name": "amountOut", "type": "uint256" },
-          { "internalType": "uint256", "name": "amountInMaximum", "type": "uint256" }
+          {
+            "internalType": "address",
+            "name": "recipient",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amountOut",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amountInMaximum",
+            "type": "uint256"
+          }
         ],
         "internalType": "struct IRouter.ExactOutputParams",
         "name": "params",
@@ -182,8 +316,16 @@
     "name": "quoteExactOutput",
     "outputs": [
       { "internalType": "uint256", "name": "amountIn", "type": "uint256" },
-      { "internalType": "uint128[]", "name": "liquiditiesAfter", "type": "uint128[]" },
-      { "internalType": "uint160[]", "name": "sqrtPricesX96After", "type": "uint160[]" }
+      {
+        "internalType": "uint128[]",
+        "name": "liquiditiesAfter",
+        "type": "uint128[]"
+      },
+      {
+        "internalType": "uint160[]",
+        "name": "sqrtPricesX96After",
+        "type": "uint160[]"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -193,14 +335,42 @@
       {
         "components": [
           { "internalType": "address", "name": "tokenIn", "type": "address" },
-          { "internalType": "address", "name": "tokenOut", "type": "address" },
-          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
+          {
+            "internalType": "address",
+            "name": "tokenOut",
+            "type": "address"
+          },
+          {
+            "internalType": "uint24",
+            "name": "maintenance",
+            "type": "uint24"
+          },
           { "internalType": "address", "name": "oracle", "type": "address" },
-          { "internalType": "address", "name": "recipient", "type": "address" },
-          { "internalType": "uint256", "name": "deadline", "type": "uint256" },
-          { "internalType": "uint256", "name": "amountOut", "type": "uint256" },
-          { "internalType": "uint256", "name": "amountInMaximum", "type": "uint256" },
-          { "internalType": "uint160", "name": "sqrtPriceLimitX96", "type": "uint160" }
+          {
+            "internalType": "address",
+            "name": "recipient",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deadline",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amountOut",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amountInMaximum",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint160",
+            "name": "sqrtPriceLimitX96",
+            "type": "uint160"
+          }
         ],
         "internalType": "struct IRouter.ExactOutputSingleParams",
         "name": "params",
@@ -210,8 +380,16 @@
     "name": "quoteExactOutputSingle",
     "outputs": [
       { "internalType": "uint256", "name": "amountIn", "type": "uint256" },
-      { "internalType": "uint128", "name": "liquidityAfter", "type": "uint128" },
-      { "internalType": "uint160", "name": "sqrtPriceX96After", "type": "uint160" }
+      {
+        "internalType": "uint128",
+        "name": "liquidityAfter",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint160",
+        "name": "sqrtPriceX96After",
+        "type": "uint160"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -222,11 +400,23 @@
         "components": [
           { "internalType": "address", "name": "token0", "type": "address" },
           { "internalType": "address", "name": "token1", "type": "address" },
-          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
+          {
+            "internalType": "uint24",
+            "name": "maintenance",
+            "type": "uint24"
+          },
           { "internalType": "address", "name": "oracle", "type": "address" },
           { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-          { "internalType": "uint256", "name": "amountOutMinimum", "type": "uint256" },
-          { "internalType": "address", "name": "recipient", "type": "address" },
+          {
+            "internalType": "uint256",
+            "name": "amountOutMinimum",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "recipient",
+            "type": "address"
+          },
           { "internalType": "uint256", "name": "deadline", "type": "uint256" }
         ],
         "internalType": "struct INonfungiblePositionManager.IgniteParams",
@@ -238,9 +428,21 @@
     "outputs": [
       { "internalType": "uint256", "name": "amountOut", "type": "uint256" },
       { "internalType": "uint256", "name": "rewards", "type": "uint256" },
-      { "internalType": "uint128", "name": "liquidityAfter", "type": "uint128" },
-      { "internalType": "uint160", "name": "sqrtPriceX96After", "type": "uint160" },
-      { "internalType": "uint128", "name": "liquidityLockedAfter", "type": "uint128" }
+      {
+        "internalType": "uint128",
+        "name": "liquidityAfter",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint160",
+        "name": "sqrtPriceX96After",
+        "type": "uint160"
+      },
+      {
+        "internalType": "uint128",
+        "name": "liquidityLockedAfter",
+        "type": "uint128"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -251,16 +453,44 @@
         "components": [
           { "internalType": "address", "name": "token0", "type": "address" },
           { "internalType": "address", "name": "token1", "type": "address" },
-          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
+          {
+            "internalType": "uint24",
+            "name": "maintenance",
+            "type": "uint24"
+          },
           { "internalType": "address", "name": "oracle", "type": "address" },
           { "internalType": "bool", "name": "zeroForOne", "type": "bool" },
-          { "internalType": "uint128", "name": "sizeDesired", "type": "uint128" },
-          { "internalType": "uint128", "name": "sizeMinimum", "type": "uint128" },
-          { "internalType": "uint128", "name": "debtMaximum", "type": "uint128" },
-          { "internalType": "uint256", "name": "amountInMaximum", "type": "uint256" },
-          { "internalType": "uint160", "name": "sqrtPriceLimitX96", "type": "uint160" },
+          {
+            "internalType": "uint128",
+            "name": "sizeDesired",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint128",
+            "name": "sizeMinimum",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint128",
+            "name": "debtMaximum",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amountInMaximum",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint160",
+            "name": "sqrtPriceLimitX96",
+            "type": "uint160"
+          },
           { "internalType": "uint128", "name": "margin", "type": "uint128" },
-          { "internalType": "address", "name": "recipient", "type": "address" },
+          {
+            "internalType": "address",
+            "name": "recipient",
+            "type": "address"
+          },
           { "internalType": "uint256", "name": "deadline", "type": "uint256" }
         ],
         "internalType": "struct INonfungiblePositionManager.MintParams",
@@ -273,12 +503,28 @@
       { "internalType": "uint256", "name": "size", "type": "uint256" },
       { "internalType": "uint256", "name": "debt", "type": "uint256" },
       { "internalType": "uint256", "name": "margin", "type": "uint256" },
-      { "internalType": "uint256", "name": "safeMarginMinimum", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "safeMarginMinimum",
+        "type": "uint256"
+      },
       { "internalType": "uint256", "name": "fees", "type": "uint256" },
       { "internalType": "bool", "name": "safe", "type": "bool" },
-      { "internalType": "uint128", "name": "liquidityAfter", "type": "uint128" },
-      { "internalType": "uint160", "name": "sqrtPriceX96After", "type": "uint160" },
-      { "internalType": "uint128", "name": "liquidityLockedAfter", "type": "uint128" }
+      {
+        "internalType": "uint128",
+        "name": "liquidityAfter",
+        "type": "uint128"
+      },
+      {
+        "internalType": "uint160",
+        "name": "sqrtPriceX96After",
+        "type": "uint160"
+      },
+      {
+        "internalType": "uint128",
+        "name": "liquidityLockedAfter",
+        "type": "uint128"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -289,12 +535,28 @@
         "components": [
           { "internalType": "address", "name": "token0", "type": "address" },
           { "internalType": "address", "name": "token1", "type": "address" },
-          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
+          {
+            "internalType": "uint24",
+            "name": "maintenance",
+            "type": "uint24"
+          },
           { "internalType": "address", "name": "oracle", "type": "address" },
-          { "internalType": "address", "name": "recipient", "type": "address" },
+          {
+            "internalType": "address",
+            "name": "recipient",
+            "type": "address"
+          },
           { "internalType": "uint256", "name": "shares", "type": "uint256" },
-          { "internalType": "uint256", "name": "amount0Min", "type": "uint256" },
-          { "internalType": "uint256", "name": "amount1Min", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "amount0Min",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount1Min",
+            "type": "uint256"
+          },
           { "internalType": "uint256", "name": "deadline", "type": "uint256" }
         ],
         "internalType": "struct IRouter.RemoveLiquidityParams",
@@ -304,10 +566,18 @@
     ],
     "name": "quoteRemoveLiquidity",
     "outputs": [
-      { "internalType": "uint128", "name": "liquidityDelta", "type": "uint128" },
+      {
+        "internalType": "uint128",
+        "name": "liquidityDelta",
+        "type": "uint128"
+      },
       { "internalType": "uint256", "name": "amount0", "type": "uint256" },
       { "internalType": "uint256", "name": "amount1", "type": "uint256" },
-      { "internalType": "uint128", "name": "liquidityAfter", "type": "uint128" }
+      {
+        "internalType": "uint128",
+        "name": "liquidityAfter",
+        "type": "uint128"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
