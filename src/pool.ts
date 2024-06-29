@@ -8,10 +8,9 @@ import {  ZERO_BI } from "./utils/constants"
 
 export function handleAdjust(event: AdjustEvent): void {
   let pool = loadPool(event, event.address)
-
   let positionId = event.params.id.toString()
-
   let position = loadPoolPosition(event, positionId, pool.address.toHexString())
+
   position.margin = event.params.marginAfter
 
   position.save()
@@ -19,10 +18,9 @@ export function handleAdjust(event: AdjustEvent): void {
 
 export function handleSettle(event: SettleEvent): void {
   let pool = loadPool(event, event.address)
-
   let positionId = event.params.id.toString()
-
   let position = loadPoolPosition(event, positionId, pool.address.toHexString())
+
   position.pool = pool.id
   position.isLiquidated = false
   position.isSettled = true
@@ -33,10 +31,9 @@ export function handleSettle(event: SettleEvent): void {
 
 export function handleLiquidate(event: LiquidateEvent): void {
   let pool = loadPool(event, event.address)
-
   let positionId = event.params.id.toString()
-
   let position = loadPoolPosition(event, positionId, pool.address.toHexString())
+  
   position.marginAmountOut = ZERO_BI
   position.pool = pool.id
   position.isLiquidated = true

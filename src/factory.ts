@@ -1,40 +1,33 @@
 import {
-  LeverageEnabled,
   OwnerChanged,
   PoolCreated,
 } from "../generated/MarginalV1Factory/MarginalV1Factory";
 import { MarginalV1Pool } from "./../generated/templates/MarginalV1Pool/MarginalV1Pool";
 import { MarginalV1Pool as PoolTemplate } from './../generated/templates'
-import { Factory, Pool, Token } from "../generated/schema";
+import { Pool, Token } from "../generated/schema";
 import {
   FACTORY_ADDRESS,
   ZERO_BI,
   ONE_BI,
-  factoryContract,
 } from "./utils/constants";
 import {
   fetchTokenDecimals,
   fetchTokenName,
   fetchTokenSymbol,
 } from "./utils/token";
-import { BigInt, BigDecimal, log } from "@graphprotocol/graph-ts";
+import { BigInt } from "@graphprotocol/graph-ts";
 import { loadFactory } from "./utils/loaders";
 
 export function handlePoolCreated(event: PoolCreated): void {
-  // load factory
   let factory = loadFactory(FACTORY_ADDRESS)
-
   factory.poolCount = factory.poolCount.plus(ONE_BI);
 
-  // bind Pool contract to query 
   let poolContract = MarginalV1Pool.bind(event.params.pool)
-
   let pool = new Pool(event.params.pool.toHexString()) as Pool;
   let token0 = Token.load(event.params.token0.toHexString());
   let token1 = Token.load(event.params.token1.toHexString());
 
 
-  // fetch token info if null
   if (token0 === null) {
     token0 = new Token(event.params.token0.toHexString());
     token0.address = event.params.token0.toHexString()
@@ -70,14 +63,13 @@ export function handlePoolCreated(event: PoolCreated): void {
   pool.save()
   token0.save()
   token1.save()
-  // create the tracked contract based on the template
+
   PoolTemplate.create(event.params.pool)
 }
 
 export function handleOwnerChanged(event: OwnerChanged): void {
   let factory = loadFactory(FACTORY_ADDRESS)
 
-  // assign new owner
   factory.owner = event.params.newOwner.toHexString()
 
   factory.save()

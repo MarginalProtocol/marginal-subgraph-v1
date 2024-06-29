@@ -8,21 +8,14 @@ import { Position, TokenPositionMapping } from "../generated/schema"
 import { loadPositionByTokenId } from "./utils/loaders"
 
 export function handleMint(event: MintEvent): void {
-  let transaction = loadTransaction(event)
-
-  let positionManagerContract = MarginalV1NonfungiblePositionManager.bind(event.address)
-
-  let positionId = event.params.positionId
   let tokenId = event.params.tokenId
-  
-  
+  let positionId = event.params.positionId
+  let transaction = loadTransaction(event)
+  let positionManagerContract = MarginalV1NonfungiblePositionManager.bind(event.address)
   let positionInfo = positionManagerContract.positions(tokenId)
   let poolAddress = positionInfo.value0.toHexString()
-  
   let id = poolAddress.concat('-').concat(positionId.toString())
-  
   let position = new Position(id)
-
   let tokenPositionMap = new TokenPositionMapping(tokenId.toString())
 
   tokenPositionMap.tokenId = tokenId.toString()
