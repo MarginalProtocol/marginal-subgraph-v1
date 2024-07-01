@@ -72,9 +72,9 @@ type TokenPositionMapping @entity {
 }
 
 type Position @entity {
-  # poolAddress-positionId 
+  # poolAddress-positionId
   id: ID!
-  # tokenId 
+  # tokenId
   tokenId: String
   # positionId in pool
   positionId: String!
@@ -102,7 +102,7 @@ type Position @entity {
   isSettled: Boolean!
   # either settled/liquidated is true
   isClosed: Boolean!
-  # escrow rewards 
+  # escrow rewards
   rewards: BigInt
 }
 
@@ -206,4 +206,59 @@ type Liquidate @entity {
   recipient: Bytes!
   # amount received
   rewards: BigInt!
+}
+
+type MultiRewards @entity {
+  # position id
+  id: ID!
+  # stakingToken address
+  stakingToken: Bytes!
+  # rewardsToken address
+  rewardsToken: Bytes!
+  # rewardsDistributor address
+  rewardsDistributor: Bytes!
+  # rewardsDuration uint256
+  rewardsDuration: BigInt!
+  # periodFinish uint256
+  periodFinish: BigInt!
+  # rewardRate uint256
+  rewardRate: BigInt!
+  # lastUpdateTime uint256
+  lastUpdateTime: BigInt!
+  # rewardPerTokenStored uint256
+  rewardPerTokenStored: BigInt!
+  # created timestamp
+  createdAtTimestamp: BigInt!
+  # created block number
+  createdAtBlockNumber: BigInt!
+}
+
+type MultiRewardsStaked @entity {
+  # position id
+  id: ID!
+  # rewardsToken
+  multiRewards: MultiRewards!
+  # user address
+  user: Bytes!
+  # staked amount uint256
+  amount: BigInt!
+  # created timestamp
+  createdAtTimestamp: BigInt!
+  # created block number
+  createdAtBlockNumber: BigInt!
+}
+
+type MultiRewardsWithdrawn @entity {
+  # position id
+  id: ID!
+  # rewardsToken
+  multiRewards: MultiRewards!
+  # user address
+  user: Bytes!
+  # staked amount uint256
+  amount: BigInt!
+  # created timestamp
+  createdAtTimestamp: BigInt!
+  # created block number
+  createdAtBlockNumber: BigInt!
 }

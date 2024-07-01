@@ -1,12 +1,21 @@
 import { MarginalV1Pool } from './../../generated/templates/MarginalV1Pool/MarginalV1Pool';
+import { MultiRewards as MultiRewardsContract } from './../../generated/templates/MultiRewards/MultiRewards';
 import { MarginalV1Pool as PoolTemplate } from '../../generated/templates'
-import { Factory, Pool, Transaction, Position, TokenPositionMapping } from "../../generated/schema";
+import { MultiRewards as MultiRewardsTemplate } from '../../generated/templates'
 import {
-    FACTORY_ADDRESS,
-    ZERO_BI,
-    ONE_BI,
-    factoryContract,
-  } from "../utils/constants";
+  Factory,
+  Pool,
+  Transaction,
+  Position,
+  TokenPositionMapping,
+  MultiRewards,
+} from "../../generated/schema";
+import {
+  FACTORY_ADDRESS,
+  ZERO_BI,
+  ONE_BI,
+  factoryContract, multiRewardsFactoryContract,
+} from "../utils/constants";
 import { BigInt, ethereum, Address } from "@graphprotocol/graph-ts";
 import { fetchTokenSymbol } from './token';
 
@@ -59,6 +68,37 @@ export function loadPool(event: ethereum.Event, poolAddress: Address): Pool {
   }
 
   return pool
+}
+
+export function loadMultiRewardsAddress(stakingTokenAddress: Address): Address {
+  return multiRewardsFactoryContract.multiRewardsByStakingToken(stakingTokenAddress);
+}
+
+export function loadMultiRewards(event: ethereum.Event, multiRewardsAddress: Address): MultiRewards {
+  // load multiRewards
+  let multiRewards = MultiRewards.load(multiRewardsAddress.toHexString())
+
+  // create new rewards if null
+  if (multiRewards === null) {
+    multiRewards = new MultiRewards(multiRewardsAddress.toHexString())
+    let multiRewardsContract = MultiRewardsContract.bind(multiRewardsAddress)
+    const rewardsToken = multiRewardsContract.rewardTokens(BigInt.fromString('0'));
+
+    multiRewards.rewardsToken = rewardsToken
+    multiRewards.stakingToken = multiRewardsContract.stakingToken()
+    multiRewards.rewardsDistributor = multiRewardsContract.rewardData(rewardsToken).getRewardsDistributor()
+    multiRewards.rewardsDuration = multiRewardsContract.rewardData(rewardsToken).getRewardsDuration()
+    multiRewards.periodFinish = multiRewardsContract.rewardData(rewardsToken).getPeriodFinish()
+    multiRewards.rewardRate = multiRewardsContract.rewardData(rewardsToken).getRewardRate()
+    multiRewards.lastUpdateTime = multiRewardsContract.rewardData(rewardsToken).getLastUpdateTime()
+    multiRewards.rewardPerTokenStored = multiRewardsContract.rewardData(rewardsToken).getRewardPerTokenStored()
+    multiRewards.createdAtTimestamp = event.block.timestamp
+    multiRewards.createdAtBlockNumber = event.block.number
+
+    MultiRewardsTemplate.create(multiRewardsAddress)
+  }
+
+  return multiRewards
 }
 
 export function loadTransaction(event: ethereum.Event): Transaction {
