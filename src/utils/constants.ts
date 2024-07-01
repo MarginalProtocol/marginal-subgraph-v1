@@ -1,5 +1,6 @@
 import { BigInt, BigDecimal, Address } from '@graphprotocol/graph-ts'
 import { MarginalV1Factory } from '../../generated/MarginalV1Factory/MarginalV1Factory'
+import { MultiRewardsFactory } from '../../generated/MultiRewardsFactory/MultiRewardsFactory'
 import { MarginalV1NonfungiblePositionManager } from './../../generated/MarginalV1NonfungiblePositionManager/MarginalV1NonfungiblePositionManager';
 
 export let ZERO_BI = BigInt.fromI32(0)
@@ -16,8 +17,11 @@ export const UNI_V3_FACTORY_ADDRESS = '0x1F98431c8aD98523631AE4a59f267346ea31F98
 // Core Contract
 export const FACTORY_ADDRESS = '0xa85D1A8f20d1D51612Ffa969f8594166A855c3C2'
 
+export const MULTI_REWARDS_FACTORY_ADDRESS = '0x00cbfa98770d8a0c80164167488e370b06981299'
+
 // Periphery Write Functions
 export const NFT_POSITION_MANAGER_ADDRESS = '0x0e090Cdf42b985F7F05eAf4dD165515E309eDC2c'
 
 export let factoryContract = MarginalV1Factory.bind(Address.fromString(FACTORY_ADDRESS))
+export let multiRewardsFactoryContract = MultiRewardsFactory.bind(Address.fromString(MULTI_REWARDS_FACTORY_ADDRESS))
 export let nftPositionManagerContract = MarginalV1NonfungiblePositionManager.bind(Address.fromString(NFT_POSITION_MANAGER_ADDRESS))
