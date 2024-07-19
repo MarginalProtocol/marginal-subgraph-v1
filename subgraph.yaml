@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: MarginalV1Factory
-    network: sepolia
+    network: base
     source:
-      address: "0xa85D1A8f20d1D51612Ffa969f8594166A855c3C2"
+      address: "0x407fA8029852A8386a907287018CEAFd7242C621"
       abi: MarginalV1Factory
-      startBlock: 6192164
+      startBlock: 17016522
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -38,11 +38,11 @@ dataSources:
 
   - kind: ethereum
     name: MarginalV1NonfungiblePositionManager
-    network: sepolia
+    network: base
     source:
-      address: "0x0e090Cdf42b985F7F05eAf4dD165515E309eDC2c"
+      address: "0x12B4F1984Ef15f93b5636E3332eF4fF727EAa79d"
       abi: MarginalV1NonfungiblePositionManager
-      startBlock: 6192200
+      startBlock: 17016765
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -62,7 +62,7 @@ dataSources:
 templates:
   - kind: ethereum
     name: MarginalV1Pool
-    network: sepolia
+    network: base
     source:
       abi: MarginalV1Pool
     mapping:
@@ -104,8 +104,8 @@ templates:
           handler: handleLiquidate
         # - event: Mint(address,indexed address,uint128,uint256,uint256)
         #   handler: handleMint
-        - event: Open(address,indexed address,indexed uint256,uint128,uint160,uint128)
-          handler: handleOpen
+        # - event: Open(address,indexed address,indexed uint256,uint128,uint160,uint128)
+        #   handler: handleOpen
         # - event: SetFeeProtocol(uint8,uint8)
         #   handler: handleSetFeeProtocol
         - event: Settle(indexed address,indexed uint256,address,uint128,uint160,int256,int256,uint256)
