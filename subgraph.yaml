@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: MarginalV1Factory
-    network: base
+    network: mainnet
     source:
       address: "0x407fA8029852A8386a907287018CEAFd7242C621"
       abi: MarginalV1Factory
-      startBlock: 17016522
+      startBlock: 20297876
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -38,11 +38,11 @@ dataSources:
 
   - kind: ethereum
     name: MarginalV1NonfungiblePositionManager
-    network: base
+    network: mainnet
     source:
-      address: "0x12B4F1984Ef15f93b5636E3332eF4fF727EAa79d"
+      address: "0x273Fb953a410126436F252a86a98c9eff4d2C780"
       abi: MarginalV1NonfungiblePositionManager
-      startBlock: 17016765
+      startBlock: 20298024
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -62,7 +62,7 @@ dataSources:
 templates:
   - kind: ethereum
     name: MarginalV1Pool
-    network: base
+    network: mainnet
     source:
       abi: MarginalV1Pool
     mapping:
