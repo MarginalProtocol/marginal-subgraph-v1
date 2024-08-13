@@ -104,8 +104,8 @@ templates:
           handler: handleLiquidate
         # - event: Mint(address,indexed address,uint128,uint256,uint256)
         #   handler: handleMint
-        # - event: Open(address,indexed address,indexed uint256,uint128,uint160,uint128)
-        #   handler: handleOpen
+        - event: Open(address,indexed address,indexed uint256,uint128,uint160,uint128)
+          handler: handleOpen
         # - event: SetFeeProtocol(uint8,uint8)
         #   handler: handleSetFeeProtocol
         - event: Settle(indexed address,indexed uint256,address,uint128,uint160,int256,int256,uint256)
