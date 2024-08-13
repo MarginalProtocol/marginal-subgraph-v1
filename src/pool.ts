@@ -1,10 +1,21 @@
 import {
+  Open as OpenEvent,
   Adjust as AdjustEvent,
   Liquidate as LiquidateEvent,
   Settle as SettleEvent,
 } from "../generated/templates/MarginalV1Pool/MarginalV1Pool"
 import { loadPool, loadPoolPosition } from "./utils/loaders"
 import {  ZERO_BI } from "./utils/constants"
+
+export function handleOpen(event: OpenEvent): void {
+  let pool = loadPool(event, event.address)
+  let positionId = event.params.id.toString()
+  let position = loadPoolPosition(event, positionId, pool.address.toHexString())
+
+  position.initialSqrtPriceX96After = event.params.sqrtPriceX96After
+
+  position.save()
+}
 
 export function handleAdjust(event: AdjustEvent): void {
   let pool = loadPool(event, event.address)

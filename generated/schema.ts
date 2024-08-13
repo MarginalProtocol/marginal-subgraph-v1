@@ -646,6 +646,23 @@ export class Position extends Entity {
     }
   }
 
+  get initialSqrtPriceX96After(): BigInt | null {
+    let value = this.get("initialSqrtPriceX96After");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set initialSqrtPriceX96After(value: BigInt | null) {
+    if (!value) {
+      this.unset("initialSqrtPriceX96After");
+    } else {
+      this.set("initialSqrtPriceX96After", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
   get margin(): BigInt | null {
     let value = this.get("margin");
     if (!value || value.kind == ValueKind.NULL) {
