@@ -84,6 +84,8 @@ type Position @entity {
   pool: Pool!
   # initial margin at time of open
   initialMargin: BigInt
+  # initial sqrtPriceX96After at time of open
+  initialSqrtPriceX96After: BigInt
   # margin
   margin: BigInt
   # margin amountOut at time of close / liquidate
