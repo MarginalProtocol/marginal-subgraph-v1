@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: MarginalV1Factory
-    network: sepolia
+    network: berachain-bartio
     source:
-      address: "0xa85D1A8f20d1D51612Ffa969f8594166A855c3C2"
+      address: "0x8a3B8cd1cf9B3e4E552a1F8d6C4BC4d3A97C5a6a"
       abi: MarginalV1Factory
-      startBlock: 6192164
+      startBlock: 1472835
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -38,11 +38,11 @@ dataSources:
 
   - kind: ethereum
     name: MarginalV1NonfungiblePositionManager
-    network: sepolia
+    network: berachain-bartio
     source:
-      address: "0x0e090Cdf42b985F7F05eAf4dD165515E309eDC2c"
+      address: "0xD237C7cDb402f120eDac152213540375c4a6c8C4"
       abi: MarginalV1NonfungiblePositionManager
-      startBlock: 6192200
+      startBlock: 1513333
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -62,7 +62,7 @@ dataSources:
 templates:
   - kind: ethereum
     name: MarginalV1Pool
-    network: sepolia
+    network: berachain-bartio
     source:
       abi: MarginalV1Pool
     mapping:

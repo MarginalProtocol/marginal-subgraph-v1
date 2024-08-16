@@ -11,13 +11,13 @@ export let BI_18 = BigInt.fromI32(18)
 export const ADDRESS_ZERO = '0x0000000000000000000000000000000000000000'
 
 // Uniswap V3 Factory Contract
-export const UNI_V3_FACTORY_ADDRESS = '0x1F98431c8aD98523631AE4a59f267346ea31F984'
+export const UNI_V3_FACTORY_ADDRESS = '0x217Cd80795EfCa5025d47023da5c03a24fA95356'
 
 // Core Contract
-export const FACTORY_ADDRESS = '0xa85D1A8f20d1D51612Ffa969f8594166A855c3C2'
+export const FACTORY_ADDRESS = '0x8a3B8cd1cf9B3e4E552a1F8d6C4BC4d3A97C5a6a'
 
 // Periphery Write Functions
-export const NFT_POSITION_MANAGER_ADDRESS = '0x0e090Cdf42b985F7F05eAf4dD165515E309eDC2c'
+export const NFT_POSITION_MANAGER_ADDRESS = '0xD237C7cDb402f120eDac152213540375c4a6c8C4'
 
 export let factoryContract = MarginalV1Factory.bind(Address.fromString(FACTORY_ADDRESS))
 export let nftPositionManagerContract = MarginalV1NonfungiblePositionManager.bind(Address.fromString(NFT_POSITION_MANAGER_ADDRESS))
