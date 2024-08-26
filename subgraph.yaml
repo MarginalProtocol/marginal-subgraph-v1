@@ -6,7 +6,7 @@ dataSources:
     name: MarginalV1Factory
     network: mainnet
     source:
-      address: "0x407fA8029852A8386a907287018CEAFd7242C621"
+      address: "0x95D95C41436C15b50217Bf1C0f810536AD181C13"
       abi: MarginalV1Factory
       startBlock: 20297876
     mapping:
@@ -42,7 +42,7 @@ dataSources:
     source:
       address: "0x273Fb953a410126436F252a86a98c9eff4d2C780"
       abi: MarginalV1NonfungiblePositionManager
-      startBlock: 20298024
+      startBlock: 20297876
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
