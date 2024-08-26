@@ -1,0 +1,37 @@
+type AddReward @entity(immutable: true) {
+  id: Bytes!
+  stakingToken: Bytes! # address
+  rewardsToken: Bytes! # address
+  rewardAmount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Deploy @entity(immutable: true) {
+  id: Bytes!
+  stakingToken: Bytes! # address
+  multiRewards: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NotifyRewardAmount @entity(immutable: true) {
+  id: Bytes!
+  stakingToken: Bytes! # address
+  rewardsToken: Bytes! # address
+  rewardAmount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

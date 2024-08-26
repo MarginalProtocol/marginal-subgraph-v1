@@ -1,0 +1,33 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: MultiRewardsFactory
+    network: sepolia
+    source:
+      address: "0x2F4230DA960756712dFAe11D1585D5DA95b72956"
+      abi: MultiRewardsFactory
+      startBlock: 6526345
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AddReward
+        - Deploy
+        - NotifyRewardAmount
+        - OwnershipTransferred
+      abis:
+        - name: MultiRewardsFactory
+          file: ./abis/MultiRewardsFactory.json
+      eventHandlers:
+        - event: AddReward(indexed address,indexed address,uint256)
+          handler: handleAddReward
+        - event: Deploy(indexed address,address)
+          handler: handleDeploy
+        - event: NotifyRewardAmount(indexed address,indexed address,uint256)
+          handler: handleNotifyRewardAmount
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/multi-rewards-factory.ts

@@ -1,0 +1,8 @@
+{
+  "sepolia": {
+    "MultiRewardsFactory": {
+      "address": "0x2F4230DA960756712dFAe11D1585D5DA95b72956",
+      "startBlock": 6526345
+    }
+  }
+}
