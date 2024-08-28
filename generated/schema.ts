@@ -402,32 +402,6 @@ export class MultiRewardsFactory extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get stakingRewardsGenesis(): BigInt {
-    let value = this.get("stakingRewardsGenesis");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set stakingRewardsGenesis(value: BigInt) {
-    this.set("stakingRewardsGenesis", Value.fromBigInt(value));
-  }
-
-  get rewardsDuration(): BigInt {
-    let value = this.get("rewardsDuration");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set rewardsDuration(value: BigInt) {
-    this.set("rewardsDuration", Value.fromBigInt(value));
-  }
-
   get stakePools(): StakePoolLoader {
     return new StakePoolLoader(
       "MultiRewardsFactory",
