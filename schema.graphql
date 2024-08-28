@@ -52,6 +52,27 @@ type Pool @entity {
   positions: [Position!]! @derivedFrom(field: "pool")
 }
 
+type MultiRewardsFactory @entity {
+  # multirewards factory address
+  id: ID!
+  # staking rewards genesis
+  stakingRewardsGenesis: BigInt!
+  # rewards duration
+  rewardsDuration: BigInt!
+  # stake pools deployed by multirewards factory
+  stakePools: [StakePool!]! @derivedFrom(field: "multiRewardsFactory")
+}
+
+type StakePool @entity {
+  # multirewards stake pool address
+  id: ID!
+  # multirewards factory
+  multiRewardsFactory: MultiRewardsFactory!
+  # stake token
+  stakeToken: Bytes!
+}
+
+
 type Token @entity {
   # token address
   id: ID!
