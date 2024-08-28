@@ -1,11 +1,14 @@
 import { MarginalV1Pool } from './../../generated/templates/MarginalV1Pool/MarginalV1Pool';
-import { MarginalV1Pool as PoolTemplate } from '../../generated/templates'
-import { Factory, Pool, Transaction, Position, TokenPositionMapping } from "../../generated/schema";
+import { MultiRewards } from '../../generated/templates/MultiRewards/MultiRewards';
+import { MarginalV1Pool as PoolTemplate, MultiRewards as StakePoolTemplate } from '../../generated/templates'
+import { Factory, Pool, Transaction, Position, TokenPositionMapping, MultiRewardsFactory, StakePool } from "../../generated/schema";
 import {
     FACTORY_ADDRESS,
     ZERO_BI,
     ONE_BI,
     factoryContract,
+    multiRewardsFactoryContract,
+    MULTIREWARDS_FACTORY_ADDRESS
   } from "../utils/constants";
 import { BigInt, ethereum, Address } from "@graphprotocol/graph-ts";
 import { fetchTokenSymbol } from './token';
@@ -27,6 +30,41 @@ export function loadFactory(factoryAddress: string): Factory {
   }
 
   return factory
+}
+
+export function loadMultiRewardsFactory(multiRewardsFactoryAddress: string): MultiRewardsFactory {
+  // load multirewards factory
+  let multiRewardsFactory = MultiRewardsFactory.load(multiRewardsFactoryAddress)
+
+  if (multiRewardsFactory === null) {
+    multiRewardsFactory = new MultiRewardsFactory(multiRewardsFactoryAddress)
+    multiRewardsFactory.stakingRewardsGenesis = multiRewardsFactoryContract.stakingRewardsGenesis()
+    multiRewardsFactory.rewardsDuration = multiRewardsFactoryContract.rewardsDuration()
+  }
+
+  return multiRewardsFactory
+}
+
+export function loadStakePool(event: ethereum.Event, stakePoolAddress: Address): StakePool {
+  // load stake pool
+  let stakePool = StakePool.load(stakePoolAddress.toHexString())
+
+  let multiRewardsFactory = loadMultiRewardsFactory(
+    MULTIREWARDS_FACTORY_ADDRESS
+  );
+
+  // create new stake pool if null
+  if (stakePool === null) {
+    stakePool = new StakePool(stakePoolAddress.toHexString())
+    let stakePoolContract = MultiRewards.bind(stakePoolAddress)
+
+    stakePool.multiRewardsFactory = multiRewardsFactory.id
+    stakePool.stakeToken = stakePoolContract.stakingToken()
+
+    StakePoolTemplate.create(stakePoolAddress)
+  }
+
+  return stakePool
 }
 
 export function loadPool(event: ethereum.Event, poolAddress: Address): Pool {
