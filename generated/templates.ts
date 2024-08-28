@@ -19,3 +19,17 @@ export class MarginalV1Pool extends DataSourceTemplate {
     );
   }
 }
+
+export class MultiRewards extends DataSourceTemplate {
+  static create(address: Address): void {
+    DataSourceTemplate.create("MultiRewards", [address.toHex()]);
+  }
+
+  static createWithContext(address: Address, context: DataSourceContext): void {
+    DataSourceTemplate.createWithContext(
+      "MultiRewards",
+      [address.toHex()],
+      context
+    );
+  }
+}
