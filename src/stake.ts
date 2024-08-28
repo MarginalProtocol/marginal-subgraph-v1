@@ -24,6 +24,7 @@ export function handleStakePoolCreated(event: DeployStakePool): void {
   stakePool.multiRewardsFactory = multiRewardsFactory.id;
   stakePool.stakeToken = stakePoolContract.stakingToken()
 
+  multiRewardsFactory.save()
   stakePool.save();
 
   StakePoolTemplate.create(event.params.multiRewards);
