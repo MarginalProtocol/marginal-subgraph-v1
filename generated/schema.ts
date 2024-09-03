@@ -357,6 +357,23 @@ export class Pool extends Entity {
   get positions(): PositionLoader {
     return new PositionLoader("Pool", this.get("id")!.toString(), "positions");
   }
+
+  get stakePool(): string | null {
+    let value = this.get("stakePool");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set stakePool(value: string | null) {
+    if (!value) {
+      this.unset("stakePool");
+    } else {
+      this.set("stakePool", Value.fromString(<string>value));
+    }
+  }
 }
 
 export class MultiRewardsFactory extends Entity {
