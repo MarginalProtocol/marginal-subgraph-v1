@@ -50,6 +50,8 @@ type Pool @entity {
   liquidityLocked: BigInt!
   # positions held on pool
   positions: [Position!]! @derivedFrom(field: "pool")
+  # staking rewards pool
+  stakePool: StakePool
 }
 
 type MultiRewardsFactory @entity {
