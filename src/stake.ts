@@ -6,7 +6,7 @@ import {
 import { MultiRewards as StakePoolTemplate } from "../generated/templates";
 import { StakePool, Token } from "../generated/schema";
 import { MULTIREWARDS_FACTORY_ADDRESS } from "./utils/constants";
-import { loadMultiRewardsFactory } from "./utils/loaders";
+import { loadMultiRewardsFactory, loadPool } from "./utils/loaders";
 import {
   fetchTokenSymbol,
   fetchTokenName,
@@ -17,15 +17,18 @@ export function handleStakePoolCreated(event: DeployStakePool): void {
   let multiRewardsFactory = loadMultiRewardsFactory(
     MULTIREWARDS_FACTORY_ADDRESS
   );
-
   let stakePoolContract = MultiRewards.bind(event.params.multiRewards);
   let stakePool = new StakePool(event.params.multiRewards.toHexString());
-
+  
   stakePool.multiRewardsFactory = multiRewardsFactory.id;
   stakePool.stakeToken = stakePoolContract.stakingToken()
 
+  let pool = loadPool(event, stakePoolContract.stakingToken())
+
+  pool.stakePool = stakePool.id
   multiRewardsFactory.save()
   stakePool.save();
+  pool.save()
 
   StakePoolTemplate.create(event.params.multiRewards);
 }
