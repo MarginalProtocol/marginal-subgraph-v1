@@ -38,8 +38,6 @@ export function loadMultiRewardsFactory(multiRewardsFactoryAddress: string): Mul
 
   if (multiRewardsFactory === null) {
     multiRewardsFactory = new MultiRewardsFactory(multiRewardsFactoryAddress)
-    multiRewardsFactory.stakingRewardsGenesis = multiRewardsFactoryContract.stakingRewardsGenesis()
-    multiRewardsFactory.rewardsDuration = multiRewardsFactoryContract.rewardsDuration()
   }
 
   return multiRewardsFactory

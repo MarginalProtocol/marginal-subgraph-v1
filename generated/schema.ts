@@ -357,6 +357,23 @@ export class Pool extends Entity {
   get positions(): PositionLoader {
     return new PositionLoader("Pool", this.get("id")!.toString(), "positions");
   }
+
+  get stakePool(): string | null {
+    let value = this.get("stakePool");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set stakePool(value: string | null) {
+    if (!value) {
+      this.unset("stakePool");
+    } else {
+      this.set("stakePool", Value.fromString(<string>value));
+    }
+  }
 }
 
 export class MultiRewardsFactory extends Entity {
@@ -400,32 +417,6 @@ export class MultiRewardsFactory extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
-  }
-
-  get stakingRewardsGenesis(): BigInt {
-    let value = this.get("stakingRewardsGenesis");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set stakingRewardsGenesis(value: BigInt) {
-    this.set("stakingRewardsGenesis", Value.fromBigInt(value));
-  }
-
-  get rewardsDuration(): BigInt {
-    let value = this.get("rewardsDuration");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set rewardsDuration(value: BigInt) {
-    this.set("rewardsDuration", Value.fromBigInt(value));
   }
 
   get stakePools(): StakePoolLoader {
