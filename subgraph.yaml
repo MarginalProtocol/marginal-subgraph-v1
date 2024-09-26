@@ -91,6 +91,36 @@ dataSources:
         #   handler: handleOwnershipTransferred
       file: ./src/stake.ts
 
+  - kind: ethereum
+    name: MarginalV1LBFactory
+    network: base
+    source:
+      address: "0x07068C8aF4A900feCB8baD37615A1CA407AFF151"
+      abi: MarginalV1LBFactory
+      startBlock: 20283055
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - MarginalV1LBFactoryCollectProtocol
+        - MarginalV1LBFactoryOwnerChanged
+        - MarginalV1LBFactoryPoolCreated
+        - MarginalV1LBFactorySetFeeProtocol
+      abis:
+        - name: MarginalV1LBFactory
+          file: ./abis/MarginalV1LBFactory.json
+      eventHandlers:
+        - event: CollectProtocol(address,indexed address,indexed address,uint256)
+          handler: handleCollectProtocol
+        - event: OwnerChanged(indexed address,indexed address)
+          handler: handleOwnerChanged
+        - event: PoolCreated(indexed address,indexed address,int24,int24,indexed
+            address,uint256,address)
+          handler: handlePoolCreated
+        - event: SetFeeProtocol(uint8,uint8)
+          handler: handleSetFeeProtocol
+      file: ./src/marginal-v-1-lb-factory.ts
 templates:
   - kind: ethereum
     name: MarginalV1Pool

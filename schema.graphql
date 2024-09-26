@@ -228,3 +228,45 @@ type Liquidate @entity {
   # amount received
   rewards: BigInt!
 }
+type MarginalV1LBFactoryCollectProtocol @entity(immutable: true) {
+  id: Bytes!
+  sender: Bytes! # address
+  token: Bytes! # address
+  recipient: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MarginalV1LBFactoryOwnerChanged @entity(immutable: true) {
+  id: Bytes!
+  oldOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MarginalV1LBFactoryPoolCreated @entity(immutable: true) {
+  id: Bytes!
+  token0: Bytes! # address
+  token1: Bytes! # address
+  tickLower: Int! # int24
+  tickUpper: Int! # int24
+  supplier: Bytes! # address
+  blockTimestampInitialize: BigInt! # uint256
+  pool: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type MarginalV1LBFactorySetFeeProtocol @entity(immutable: true) {
+  id: Bytes!
+  oldFeeProtocol: Int! # uint8
+  newFeeProtocol: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
