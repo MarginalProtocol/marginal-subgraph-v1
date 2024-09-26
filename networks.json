@@ -1,0 +1,12 @@
+{
+  "base": {
+    "MarginalV1LBFactory": {
+      "address": "0x07068C8aF4A900feCB8baD37615A1CA407AFF151",
+      "startBlock": 20283055
+    },
+    "MarginalV1LBLiquidityReceiverDeployer": {
+      "address": "0x98E89c5618769Df7f40bD549DD782fCA5682b67c",
+      "startBlock": 20283177
+    }
+  }
+}
