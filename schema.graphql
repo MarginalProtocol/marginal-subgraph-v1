@@ -270,3 +270,12 @@ type MarginalV1LBFactorySetFeeProtocol @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+type ReceiverDeployed @entity(immutable: true) {
+  id: Bytes!
+  pool: Bytes! # address
+  data: Bytes! # bytes
+  receiver: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
