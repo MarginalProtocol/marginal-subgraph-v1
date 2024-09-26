@@ -18,7 +18,7 @@ import {
 } from "../generated/schema"
 
 export function handleApproval(event: ApprovalEvent): void {
-  let entity = new Approval(
+  let entity = new MarginalV1LBPoolApproval(
     event.transaction.hash.concatI32(event.logIndex.toI32()),
   )
   entity.owner = event.params.owner
@@ -33,7 +33,7 @@ export function handleApproval(event: ApprovalEvent): void {
 }
 
 export function handleBurn(event: BurnEvent): void {
-  let entity = new Burn(
+  let entity = new MarginalV1LBPoolBurn(
     event.transaction.hash.concatI32(event.logIndex.toI32()),
   )
   entity.owner = event.params.owner
@@ -52,7 +52,7 @@ export function handleBurn(event: BurnEvent): void {
 }
 
 export function handleFinalize(event: FinalizeEvent): void {
-  let entity = new Finalize(
+  let entity = new MarginalV1LBPoolFinalize(
     event.transaction.hash.concatI32(event.logIndex.toI32()),
   )
   entity.liquidityDelta = event.params.liquidityDelta
@@ -67,7 +67,7 @@ export function handleFinalize(event: FinalizeEvent): void {
 }
 
 export function handleInitialize(event: InitializeEvent): void {
-  let entity = new Initialize(
+  let entity = new MarginalV1LBPoolInitialize(
     event.transaction.hash.concatI32(event.logIndex.toI32()),
   )
   entity.liquidity = event.params.liquidity
@@ -82,7 +82,7 @@ export function handleInitialize(event: InitializeEvent): void {
 }
 
 export function handleMint(event: MintEvent): void {
-  let entity = new Mint(
+  let entity = new MarginalV1LBPoolMint(
     event.transaction.hash.concatI32(event.logIndex.toI32()),
   )
   entity.sender = event.params.sender
@@ -99,7 +99,7 @@ export function handleMint(event: MintEvent): void {
 }
 
 export function handleSwap(event: SwapEvent): void {
-  let entity = new Swap(
+  let entity = new MarginalV1LBPoolSwap(
     event.transaction.hash.concatI32(event.logIndex.toI32()),
   )
   entity.sender = event.params.sender
@@ -119,7 +119,7 @@ export function handleSwap(event: SwapEvent): void {
 }
 
 export function handleTransfer(event: TransferEvent): void {
-  let entity = new Transfer(
+  let entity = new MarginalV1LBPoolTransfer(
     event.transaction.hash.concatI32(event.logIndex.toI32()),
   )
   entity.from = event.params.from
