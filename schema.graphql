@@ -228,6 +228,106 @@ type Liquidate @entity {
   # amount received
   rewards: BigInt!
 }
+
+########################
+# MarginalV1LB contracts
+########################
+
+type MarginalV1LBFactory @entity {
+  # Contract variables
+
+  # marginalV1Deployer address
+  marginalV1Deployer: ID!
+  # factory owner
+  owner: ID!
+  # feeProtocol (uint8)
+  feeProtocol: Int!
+
+  # State variables
+
+  # amount of pools created
+  poolCount: BigInt!
+  # factory address
+  id: ID!
+  # amount of all time transactions
+  txCount: BigInt!
+  # pools deployed by factory
+  pools: [MarginalV1LBPool!]! @derivedFrom(field: "factory")
+}
+
+type MarginalV1LBPool @entity {
+  # Contract variables
+
+  # factory address
+  factory: MarginalV1LBFactory!
+  # token0
+  token0: Token!
+  # token1
+  token1: Token!
+  # tick lower
+  tickLower: Int!
+  # tick upper
+  tickUpper: Int!
+  # sqrtPriceLowerX96
+  sqrtPriceLowerX96: BigInt!
+  # sqrtPriceUpperX96
+  sqrtPriceUpperX96: BigInt!
+  # supplier address
+  supplier: ID!
+  # blockTimestampInitialize
+  blockTimestampInitialize: BigInt!
+  # sqrtPriceInitializeX96
+  sqrtPriceInitializeX96: BigInt!
+  # sqrtPriceFinalizeX96
+  sqrtPriceFinalizeX96: BigInt!
+
+  # State variables
+
+  #   struct State {
+  #     uint160 sqrtPriceX96;
+  #     uint96 totalPositions; // > ~ 2e20 years at max per block to fill on mainnet
+  #     uint128 liquidity;
+  #     int24 tick;
+  #     uint32 blockTimestamp;
+  #     int56 tickCumulative;
+  #     uint8 feeProtocol;
+  #     bool finalized;
+  # }
+  # sqrtPriceX96
+  sqrtPriceX96: BigInt!
+  # totalPositions
+  totalPositions: BigInt!
+  # liquidity
+  liquidity: BigInt!
+  # tick
+  tick: Int!
+  # blockTimestamp
+  blockTimestamp: BigInt!
+  # tickCumulative
+  tickCumulative: BigInt!
+  # feeProtocol
+  feeProtocol: Int!
+  # finalized
+  finalized: Boolean!
+
+  # Global none-contract state variables
+
+  # pool address
+  id: ID!
+  # pool tokens name
+  tokenPair: String!
+  # pool address in Bytes
+  address: Bytes!
+  # decimals for pool token
+  decimals: BigInt!
+  # created timestamp
+  createdAtTimestamp: BigInt!
+  # created block number
+  createdAtBlockNumber: BigInt!
+  # all time number of transactions
+  txCount: BigInt!
+}
+
 type MarginalV1LBFactoryCollectProtocol @entity(immutable: true) {
   id: Bytes!
   sender: Bytes! # address
