@@ -1,14 +1,15 @@
 import { MarginalV1Pool } from './../../generated/templates/MarginalV1Pool/MarginalV1Pool';
 import { MultiRewards } from '../../generated/templates/MultiRewards/MultiRewards';
 import { MarginalV1Pool as PoolTemplate, MultiRewards as StakePoolTemplate } from '../../generated/templates'
-import { Factory, Pool, Transaction, Position, TokenPositionMapping, MultiRewardsFactory, StakePool } from "../../generated/schema";
+import { Factory, Pool, Transaction, Position, TokenPositionMapping, MultiRewardsFactory, StakePool, MarginalV1LBFactory } from "../../generated/schema";
 import {
     FACTORY_ADDRESS,
     ZERO_BI,
     ONE_BI,
     factoryContract,
     multiRewardsFactoryContract,
-    MULTIREWARDS_FACTORY_ADDRESS
+    MULTIREWARDS_FACTORY_ADDRESS,
+    ADDRESS_ZERO
   } from "../utils/constants";
 import { BigInt, ethereum, Address } from "@graphprotocol/graph-ts";
 import { fetchTokenSymbol } from './token';
@@ -27,6 +28,27 @@ export function loadFactory(factoryAddress: string): Factory {
     factory.poolCount = ZERO_BI;
     factory.txCount = ZERO_BI;
     factory.owner = factoryContract.owner().toHexString();
+  }
+
+  return factory
+}
+
+export function loadLBFactory(factoryAddress: string): MarginalV1LBFactory {
+  // load factory
+  let factory = MarginalV1LBFactory.load(factoryAddress);
+
+  // create new factory if null
+  if (factory === null) {
+    factory = new MarginalV1LBFactory(factoryAddress);
+
+    // Variables
+    factory.marginalV1Deployer = ADDRESS_ZERO;
+    factory.owner = ADDRESS_ZERO;
+    factory.feeProtocol = 0;
+
+    // State
+    factory.poolCount = ZERO_BI;
+    factory.txCount = ZERO_BI;
   }
 
   return factory
@@ -129,7 +151,7 @@ export function loadPosition(event: ethereum.Event, tokenId: string, poolAddress
     position.isSettled = false
     position.isClosed = false
   }
-  
+
   return position
 }
 
@@ -154,7 +176,7 @@ export function loadPoolPosition(event: ethereum.Event, positionId: string, pool
     position.isSettled = false
     position.isClosed = false
   }
-  
+
   return position
 }
 

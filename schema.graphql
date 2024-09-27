@@ -247,12 +247,12 @@ type MarginalV1LBFactory @entity {
 
   # amount of pools created
   poolCount: BigInt!
-  # factory address
-  id: ID!
   # amount of all time transactions
   txCount: BigInt!
   # pools deployed by factory
   pools: [MarginalV1LBPool!]! @derivedFrom(field: "factory")
+  # factory address
+  id: ID!
 }
 
 type MarginalV1LBPool @entity {
@@ -316,8 +316,6 @@ type MarginalV1LBPool @entity {
   id: ID!
   # pool tokens name
   tokenPair: String!
-  # pool address in Bytes
-  address: Bytes!
   # decimals for pool token
   decimals: BigInt!
   # created timestamp
