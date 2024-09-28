@@ -105,6 +105,9 @@ export function handlePoolCreated(event: PoolCreatedEvent): void {
   pool.createdAtBlockNumber = event.block.number
   pool.txCount = ZERO_BI
 
+  factory.save()
+  token0.save()
+  token1.save()
   pool.save()
 }
 
