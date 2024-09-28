@@ -103,10 +103,12 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - MarginalV1LBFactoryCollectProtocol
-        - MarginalV1LBFactoryOwnerChanged
-        - MarginalV1LBFactoryPoolCreated
-        - MarginalV1LBFactorySetFeeProtocol
+        - MarginalV1LBPool
+        - Token
+        # - MarginalV1LBFactoryCollectProtocol
+        # - MarginalV1LBFactoryOwnerChanged
+        # - MarginalV1LBFactoryPoolCreated
+        # - MarginalV1LBFactorySetFeeProtocol
       abis:
         - name: MarginalV1LBFactory
           file: ./abis/MarginalV1LBFactory.json
@@ -229,6 +231,8 @@ templates:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
+        - MarginalV1LBPool
+        - Token
         - MarginalV1LBPoolApproval
         - MarginalV1LBPoolBurn
         - MarginalV1LBPoolFinalize
