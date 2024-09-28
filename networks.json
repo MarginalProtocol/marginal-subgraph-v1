@@ -1,5 +1,23 @@
 {
+  "goerli": {
+    "MarginalV1Factory": {
+      "address": "0x0000000000000000000000000000000000000000",
+      "startBlock": 0
+    }
+  },
   "base": {
+    "MarginalV1Factory": {
+      "address": "0x0000000000000000000000000000000000000000",
+      "startBlock": 20296291
+    },
+    "MarginalV1NonfungiblePositionManager": {
+      "address": "0x0000000000000000000000000000000000000000",
+      "startBlock": 20296291
+    },
+    "MultiRewardsFactory": {
+      "address": "0x0000000000000000000000000000000000000000",
+      "startBlock": 20296291
+    },
     "MarginalV1LBFactory": {
       "address": "0x1ff9401787067E295638B28DC94B1c473B605994",
       "startBlock": 20296291
