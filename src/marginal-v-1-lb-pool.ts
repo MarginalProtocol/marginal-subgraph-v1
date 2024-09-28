@@ -8,6 +8,7 @@ import {
   Transfer as TransferEvent,
 } from "../generated/MarginalV1LBPool/MarginalV1LBPool"
 import {
+  MarginalV1LBPool,
   MarginalV1LBPoolApproval,
   MarginalV1LBPoolBurn,
   MarginalV1LBPoolFinalize,
@@ -16,6 +17,15 @@ import {
   MarginalV1LBPoolSwap,
   MarginalV1LBPoolTransfer,
 } from "../generated/schema"
+import { ZERO_BI } from "./utils/constants"
+
+import {
+  MarginalV1LBPool as MarginalV1LBPoolABI,
+} from "../generated/MarginalV1LBPool/MarginalV1LBPool"
+
+import {
+  MarginalV1LBFactory as MarginalV1LBFactoryABI,
+} from "../generated/MarginalV1LBFactory/MarginalV1LBFactory"
 
 export function handleApproval(event: ApprovalEvent): void {
   let entity = new MarginalV1LBPoolApproval(
@@ -67,18 +77,37 @@ export function handleFinalize(event: FinalizeEvent): void {
 }
 
 export function handleInitialize(event: InitializeEvent): void {
-  let entity = new MarginalV1LBPoolInitialize(
-    event.transaction.hash.concatI32(event.logIndex.toI32()),
-  )
-  entity.liquidity = event.params.liquidity
-  entity.sqrtPriceX96 = event.params.sqrtPriceX96
-  entity.tick = event.params.tick
 
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
+  const pool = MarginalV1LBPool.load(event.address.toHexString())!
 
-  entity.save()
+  pool.sqrtPriceX96 = event.params.sqrtPriceX96
+  pool.liquidity = ZERO_BI
+  pool.totalPositions = ZERO_BI
+  pool.tick = event.params.tick
+  pool.blockTimestamp = event.block.timestamp
+  pool.tickCumulative = ZERO_BI
+  pool.feeProtocol = MarginalV1LBFactoryABI.bind(MarginalV1LBPoolABI.bind(event.address).factory()).feeProtocol()
+  pool.finalized = false
+
+  pool.sqrtPriceInitializeX96 = event.params.sqrtPriceX96
+
+  let _sqrtPriceUpperX96 = MarginalV1LBPoolABI.bind(event.address).sqrtPriceUpperX96()
+  let _sqrtPriceLowerX96 = MarginalV1LBPoolABI.bind(event.address).sqrtPriceLowerX96()
+
+  pool.sqrtPriceFinalizeX96 = event.params.sqrtPriceX96 == _sqrtPriceLowerX96 ? _sqrtPriceUpperX96 : _sqrtPriceLowerX96
+
+  // let entity = new MarginalV1LBPoolInitialize(
+  //   event.transaction.hash.concatI32(event.logIndex.toI32()),
+  // )
+  // entity.liquidity = event.params.liquidity
+  // entity.sqrtPriceX96 = event.params.sqrtPriceX96
+  // entity.tick = event.params.tick
+
+  // entity.blockNumber = event.block.number
+  // entity.blockTimestamp = event.block.timestamp
+  // entity.transactionHash = event.transaction.hash
+
+  pool.save()
 }
 
 export function handleMint(event: MintEvent): void {
