@@ -20,6 +20,7 @@ import { BI_18, ONE_BI, ZERO_BI } from "./utils/constants"
 import { loadLBFactory } from "./utils/loaders"
 import { fetchTokenDecimals, fetchTokenName, fetchTokenSymbol } from "./utils/token"
 import { log } from "@graphprotocol/graph-ts"
+import { MarginalV1LBPool as MarginalV1LBPoolTemplate } from "../generated/templates"
 
 export function handleCollectProtocol(event: CollectProtocolEvent): void {
   // let entity = new MarginalV1LBFactoryCollectProtocol(
@@ -109,6 +110,8 @@ export function handlePoolCreated(event: PoolCreatedEvent): void {
   pool.txCount = ZERO_BI
 
   factory.save()
+  // Start indexing pool
+  MarginalV1LBPoolTemplate.create(event.params.pool)
   token0.save()
   token1.save()
   pool.save()

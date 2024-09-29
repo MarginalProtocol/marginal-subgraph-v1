@@ -249,6 +249,8 @@ templates:
         - MarginalV1LBPoolSwap
         - MarginalV1LBPoolTransfer
       abis:
+        - name: MarginalV1LBFactory
+          file: ./abis/MarginalV1LBFactory.json
         - name: MarginalV1LBPool
           file: ./abis/MarginalV1LBPool.json
         - name: ERC20
