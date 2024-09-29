@@ -7,15 +7,15 @@
   },
   "base": {
     "MarginalV1Factory": {
-      "address": "0x0000000000000000000000000000000000000000",
+      "address": "0xffffffffffffffffffffffffffffffffffffffff",
       "startBlock": 20296291
     },
     "MarginalV1NonfungiblePositionManager": {
-      "address": "0x0000000000000000000000000000000000000000",
+      "address": "0xffffffffffffffffffffffffffffffffffffffff",
       "startBlock": 20296291
     },
     "MultiRewardsFactory": {
-      "address": "0x0000000000000000000000000000000000000000",
+      "address": "0xffffffffffffffffffffffffffffffffffffffff",
       "startBlock": 20296291
     },
     "MarginalV1LBFactory": {
