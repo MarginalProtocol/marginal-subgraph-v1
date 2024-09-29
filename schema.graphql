@@ -276,10 +276,10 @@ type MarginalV1LBPool @entity {
   supplier: ID!
   # blockTimestampInitialize
   blockTimestampInitialize: BigInt!
-  # sqrtPriceInitializeX96
-  sqrtPriceInitializeX96: BigInt!
-  # sqrtPriceFinalizeX96
-  sqrtPriceFinalizeX96: BigInt!
+  # sqrtPriceInitializeX96 (can be null when pool is not initialized)
+  sqrtPriceInitializeX96: BigInt
+  # sqrtPriceFinalizeX96 (can be null when pool is not initialized)
+  sqrtPriceFinalizeX96: BigInt
 
   # State variables
 
