@@ -19,6 +19,7 @@ import {
 import { BI_18, ONE_BI, ZERO_BI } from "./utils/constants"
 import { loadLBFactory } from "./utils/loaders"
 import { fetchTokenDecimals, fetchTokenName, fetchTokenSymbol } from "./utils/token"
+import { log } from "@graphprotocol/graph-ts"
 
 export function handleCollectProtocol(event: CollectProtocolEvent): void {
   // let entity = new MarginalV1LBFactoryCollectProtocol(
@@ -46,6 +47,8 @@ export function handleOwnerChanged(event: OwnerChangedEvent): void {
 }
 
 export function handlePoolCreated(event: PoolCreatedEvent): void {
+
+  log.info('On Pool Created', []);
 
   let factory = loadLBFactory(event.address.toHexString())
   factory.poolCount = factory.poolCount.plus(ONE_BI)
