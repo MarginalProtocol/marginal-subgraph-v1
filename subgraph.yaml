@@ -112,6 +112,8 @@ dataSources:
       abis:
         - name: MarginalV1LBFactory
           file: ./abis/MarginalV1LBFactory.json
+        - name: MarginalV1LBPool
+          file: ./abis/MarginalV1LBPool.json
         - name: ERC20
           file: ./abis/ERC20.json
         - name: ERC20SymbolBytes
