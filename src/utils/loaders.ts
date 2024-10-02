@@ -1,7 +1,7 @@
 import { MarginalV1Pool } from './../../generated/templates/MarginalV1Pool/MarginalV1Pool';
 import { MultiRewards } from '../../generated/templates/MultiRewards/MultiRewards';
 import { MarginalV1Pool as PoolTemplate, MultiRewards as StakePoolTemplate } from '../../generated/templates'
-import { Factory, Pool, Transaction, Position, TokenPositionMapping, MultiRewardsFactory, StakePool, MarginalV1LBFactory } from "../../generated/schema";
+import { Factory, Pool, Transaction, Position, TokenPositionMapping, MultiRewardsFactory, StakePool, MarginalV1LBFactory, MarginalV1LBPosition, MarginalV1LBPool } from "../../generated/schema";
 import {
     FACTORY_ADDRESS,
     ZERO_BI,
@@ -52,6 +52,22 @@ export function loadLBFactory(factoryAddress: string): MarginalV1LBFactory {
   }
 
   return factory
+}
+
+export function loadLBPosition(pool: MarginalV1LBPool, ownerAddress: string): MarginalV1LBPosition {
+  // load position
+  let id = pool.id.concat('-').concat(ownerAddress)
+  let position = MarginalV1LBPosition.load(id)
+
+  // create new position if null
+  if (position === null) {
+    position = new MarginalV1LBPosition(id)
+    position.pool = pool.id
+    position.owner = ownerAddress
+    position.liquidity = ZERO_BI
+  }
+
+  return position
 }
 
 export function loadMultiRewardsFactory(multiRewardsFactoryAddress: string): MultiRewardsFactory {
@@ -132,6 +148,21 @@ export function loadTransaction(event: ethereum.Event): Transaction {
 
   return transaction as Transaction
 }
+
+// export function loadLBTransaction(event: ethereum.Event): LBTransaction {
+//   let transaction = LBTransaction.load(event.transaction.hash.toHexString())
+
+//   if (transaction === null) {
+//     transaction = new LBTransaction(event.transaction.hash.toHexString())
+//   }
+
+//   transaction.blockNumber = event.block.number
+//   transaction.timestamp = event.block.timestamp
+//   transaction.gasLimit = event.transaction.gasLimit
+//   transaction.gasPrice = event.transaction.gasPrice
+
+//   return transaction as LBTransaction
+// }
 
 export function loadPosition(event: ethereum.Event, tokenId: string, poolAddress: string): Position {
   // load Position if exists

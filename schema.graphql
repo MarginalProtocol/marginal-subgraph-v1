@@ -324,6 +324,13 @@ type MarginalV1LBPool @entity {
   createdAtBlockNumber: BigInt!
   # all time number of transactions
   txCount: BigInt!
+
+  # Derived
+  positions: [MarginalV1LBPosition!]! @derivedFrom(field: "pool")
+
+  mints: [MarginalV1LBPoolMint!]! @derivedFrom(field: "pool")
+  burns: [MarginalV1LBPoolBurn!]! @derivedFrom(field: "pool")
+  swaps: [MarginalV1LBPoolSwap!]! @derivedFrom(field: "pool")
 }
 
 type MarginalV1LBFactoryCollectProtocol @entity(immutable: true) {
@@ -390,6 +397,7 @@ type MarginalV1LBPoolApproval @entity(immutable: true) {
 type MarginalV1LBPoolBurn @entity(immutable: true) {
   id: Bytes!
   owner: Bytes! # address
+  pool: MarginalV1LBPool! # address
   recipient: Bytes! # address
   liquidityDelta: BigInt! # uint128
   amount0: BigInt! # uint256
@@ -411,20 +419,11 @@ type MarginalV1LBPoolFinalize @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type MarginalV1LBPoolInitialize @entity(immutable: true) {
-  id: Bytes!
-  liquidity: BigInt! # uint128
-  sqrtPriceX96: BigInt! # uint160
-  tick: Int! # int24
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
 type MarginalV1LBPoolMint @entity(immutable: true) {
   id: Bytes!
   sender: Bytes! # address
   owner: Bytes! # address
+  pool: MarginalV1LBPool! # address
   liquidityDelta: BigInt! # uint128
   amount0: BigInt! # uint256
   amount1: BigInt! # uint256
@@ -435,6 +434,7 @@ type MarginalV1LBPoolMint @entity(immutable: true) {
 
 type MarginalV1LBPoolSwap @entity(immutable: true) {
   id: Bytes!
+  pool: MarginalV1LBPool! # address
   sender: Bytes! # address
   recipient: Bytes! # address
   amount0: BigInt! # int256
@@ -456,4 +456,15 @@ type MarginalV1LBPoolTransfer @entity(immutable: true) {
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+}
+
+type MarginalV1LBPosition @entity {
+  # poolAddress-owner
+  id: ID!
+  # pool
+  pool: MarginalV1LBPool!
+  # owner of position
+  owner: ID!
+  # shares
+  liquidity: BigInt!
 }
