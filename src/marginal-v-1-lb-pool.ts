@@ -76,6 +76,7 @@ export function handleBurn(event: BurnEvent): void {
   // Position update
   position.liquidity = position.liquidity.minus(event.params.liquidityDelta)
 
+  pool.save()
   position.save()
   burn.save()
 }
@@ -97,16 +98,9 @@ export function handleFinalize(event: FinalizeEvent): void {
 
 export function handleInitialize(event: InitializeEvent): void {
 
-  const pool = MarginalV1LBPool.load(event.address.toHexString())!
+  let pool = MarginalV1LBPool.load(event.address.toHexString())!
 
-  pool.sqrtPriceX96 = event.params.sqrtPriceX96
-  pool.liquidity = ZERO_BI
-  pool.totalPositions = ZERO_BI
-  pool.tick = event.params.tick
-  pool.blockTimestamp = event.block.timestamp
-  pool.tickCumulative = ZERO_BI
-  pool.feeProtocol = MarginalV1LBFactoryABI.bind(MarginalV1LBPoolABI.bind(event.address).factory()).feeProtocol()
-  pool.finalized = false
+  pool = syncStateLB(pool)
 
   pool.sqrtPriceInitializeX96 = event.params.sqrtPriceX96
 
@@ -114,17 +108,6 @@ export function handleInitialize(event: InitializeEvent): void {
   let _sqrtPriceLowerX96 = MarginalV1LBPoolABI.bind(event.address).sqrtPriceLowerX96()
 
   pool.sqrtPriceFinalizeX96 = event.params.sqrtPriceX96 == _sqrtPriceLowerX96 ? _sqrtPriceUpperX96 : _sqrtPriceLowerX96
-
-  // let entity = new MarginalV1LBPoolInitialize(
-  //   event.transaction.hash.concatI32(event.logIndex.toI32()),
-  // )
-  // entity.liquidity = event.params.liquidity
-  // entity.sqrtPriceX96 = event.params.sqrtPriceX96
-  // entity.tick = event.params.tick
-
-  // entity.blockNumber = event.block.number
-  // entity.blockTimestamp = event.block.timestamp
-  // entity.transactionHash = event.transaction.hash
 
   pool.save()
 }
@@ -164,27 +147,35 @@ export function handleMint(event: MintEvent): void {
   position.liquidity = position.liquidity.plus(event.params.liquidityDelta)
 
   position.save()
+  pool.save()
   mint.save()
 }
 
 export function handleSwap(event: SwapEvent): void {
-  let entity = new MarginalV1LBPoolSwap(
+  let pool = MarginalV1LBPool.load(event.address.toHexString())!
+
+  pool = syncStateLB(pool)
+
+  let swap = new MarginalV1LBPoolSwap(
     event.transaction.hash.concatI32(event.logIndex.toI32()),
   )
-  entity.sender = event.params.sender
-  entity.recipient = event.params.recipient
-  entity.amount0 = event.params.amount0
-  entity.amount1 = event.params.amount1
-  entity.sqrtPriceX96 = event.params.sqrtPriceX96
-  entity.liquidity = event.params.liquidity
-  entity.tick = event.params.tick
-  entity.finalized = event.params.finalized
+  swap.sender = event.params.sender
+  // Link
+  swap.pool = pool.id
+  swap.recipient = event.params.recipient
+  swap.amount0 = event.params.amount0
+  swap.amount1 = event.params.amount1
+  swap.sqrtPriceX96 = event.params.sqrtPriceX96
+  swap.liquidity = event.params.liquidity
+  swap.tick = event.params.tick
+  swap.finalized = event.params.finalized
 
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
+  swap.blockNumber = event.block.number
+  swap.blockTimestamp = event.block.timestamp
+  swap.transactionHash = event.transaction.hash
 
-  entity.save()
+  pool.save()
+  swap.save()
 }
 
 export function handleTransfer(event: TransferEvent): void {

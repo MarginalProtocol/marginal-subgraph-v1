@@ -26,6 +26,14 @@ export function syncStateLB(pool: MarginalV1LBPool): MarginalV1LBPool {
 
   const _state = poolAbi.state()
 
+  // pool.sqrtPriceX96 = event.params.sqrtPriceX96
+  // pool.liquidity = ZERO_BI
+  // pool.totalPositions = ZERO_BI
+  // pool.tick = event.params.tick
+  // pool.blockTimestamp = event.block.timestamp
+  // pool.tickCumulative = ZERO_BI
+  // pool.feeProtocol = MarginalV1LBFactoryABI.bind(MarginalV1LBPoolABI.bind(event.address).factory()).feeProtocol()
+  // pool.finalized = false
   pool.sqrtPriceX96 = _state.value0
   pool.totalPositions = _state.value1
   pool.liquidity = _state.value2

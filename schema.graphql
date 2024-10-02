@@ -328,8 +328,12 @@ type MarginalV1LBPool @entity {
   # Derived
   positions: [MarginalV1LBPosition!]! @derivedFrom(field: "pool")
 
-  mints: [MarginalV1LBPoolMint!]! @derivedFrom(field: "pool")
-  burns: [MarginalV1LBPoolBurn!]! @derivedFrom(field: "pool")
+  # Only 1 single mint event during pool initialization
+  mint: MarginalV1LBPoolMint @derivedFrom(field: "pool")
+
+  # Only 1 single burn event during pool finalization
+  burn: MarginalV1LBPoolBurn @derivedFrom(field: "pool")
+
   swaps: [MarginalV1LBPoolSwap!]! @derivedFrom(field: "pool")
 }
 
