@@ -64,7 +64,7 @@ export function loadLBPosition(pool: MarginalV1LBPool, ownerAddress: string): Ma
     position = new MarginalV1LBPosition(id)
     position.pool = pool.id
     position.owner = ownerAddress
-    position.liquidity = ZERO_BI
+    position.shares = ZERO_BI
   }
 
   return position

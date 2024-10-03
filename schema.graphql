@@ -325,6 +325,8 @@ type MarginalV1LBPool @entity {
   # all time number of transactions
   txCount: BigInt!
 
+  totalVolume: BigInt!
+
   # Derived
   positions: [MarginalV1LBPosition!]! @derivedFrom(field: "pool")
 
@@ -470,5 +472,5 @@ type MarginalV1LBPosition @entity {
   # owner of position
   owner: ID!
   # shares
-  liquidity: BigInt!
+  shares: BigInt!
 }

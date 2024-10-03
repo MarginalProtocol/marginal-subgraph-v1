@@ -108,6 +108,7 @@ export function handlePoolCreated(event: PoolCreatedEvent): void {
   pool.createdAtTimestamp = event.block.timestamp
   pool.createdAtBlockNumber = event.block.number
   pool.txCount = ZERO_BI
+  pool.totalVolume = ZERO_BI;
 
   factory.save()
   // Start indexing pool

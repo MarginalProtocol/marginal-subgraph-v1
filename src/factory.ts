@@ -58,7 +58,7 @@ export function handlePoolCreated(event: PoolCreated): void {
   pool.fee = BigInt.fromI32(poolContract.fee() as i32)
   pool.rewardPremium = BigInt.fromI32(poolContract.rewardPremium() as i32)
   pool.liquidityLocked = poolContract.liquidityLocked()
-  
+
   factory.save()
   pool.save()
   token0.save()

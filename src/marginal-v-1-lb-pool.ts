@@ -16,7 +16,7 @@ import {
   MarginalV1LBPoolSwap,
   MarginalV1LBPoolTransfer,
 } from "../generated/schema"
-import { ZERO_BI } from "./utils/constants"
+import { ADDRESS_ZERO, ZERO_BI } from "./utils/constants"
 
 import {
   MarginalV1LBPool as MarginalV1LBPoolABI,
@@ -48,7 +48,7 @@ export function handleApproval(event: ApprovalEvent): void {
 export function handleBurn(event: BurnEvent): void {
 
   let pool = MarginalV1LBPool.load(event.address.toHexString())!
-  const position = loadLBPosition(pool, event.params.owner.toHexString())
+  // const position = loadLBPosition(pool, event.params.owner.toHexString())
 
   let burn = new MarginalV1LBPoolBurn(
     event.transaction.hash.concatI32(event.logIndex.toI32()),
@@ -74,10 +74,9 @@ export function handleBurn(event: BurnEvent): void {
   // pool.txCount = pool.txCount.plus(new BigInt(1))
 
   // Position update
-  position.liquidity = position.liquidity.minus(event.params.liquidityDelta)
 
+  // position.save()
   pool.save()
-  position.save()
   burn.save()
 }
 
@@ -115,7 +114,7 @@ export function handleInitialize(event: InitializeEvent): void {
 export function handleMint(event: MintEvent): void {
 
   let pool = MarginalV1LBPool.load(event.address.toHexString())!
-  const position = loadLBPosition(pool, event.params.owner.toHexString())
+  // const position = loadLBPosition(pool, event.params.owner.toHexString())
 
   let mint = new MarginalV1LBPoolMint(
     event.transaction.hash.concatI32(event.logIndex.toI32()),
@@ -144,9 +143,8 @@ export function handleMint(event: MintEvent): void {
   // }
 
   // Position update
-  position.liquidity = position.liquidity.plus(event.params.liquidityDelta)
 
-  position.save()
+  // position.save()
   pool.save()
   mint.save()
 }
@@ -179,16 +177,24 @@ export function handleSwap(event: SwapEvent): void {
 }
 
 export function handleTransfer(event: TransferEvent): void {
-  let entity = new MarginalV1LBPoolTransfer(
-    event.transaction.hash.concatI32(event.logIndex.toI32()),
-  )
-  entity.from = event.params.from
-  entity.to = event.params.to
-  entity.value = event.params.value
+  let pool = MarginalV1LBPool.load(event.address.toHexString())!
 
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
+  // Check if from is not zero address
+  if(event.params.from.toHexString() != ADDRESS_ZERO){
+    const positionFrom = loadLBPosition(pool, event.params.from.toHexString())
+    // Check we have enough shares. If not, set to zero
+    if (positionFrom.shares.ge(event.params.value)) {
+      positionFrom.shares = positionFrom.shares.minus(event.params.value)
+    } else {
+      positionFrom.shares = ZERO_BI
+    }
+    positionFrom.save()
+  }
 
-  entity.save()
+  // Check if to is not zero address
+  if(event.params.to.toHexString() != ADDRESS_ZERO){
+    const positionTo = loadLBPosition(pool, event.params.to.toHexString())
+    positionTo.shares = positionTo.shares.plus(event.params.value)
+    positionTo.save()
+  }
 }
