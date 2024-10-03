@@ -134,6 +134,9 @@ export function handleMint(event: MintEvent): void {
   // Pool update
   pool = syncStateLB(pool)
 
+  // The launch token index is the index of the token that has a non-zero balance
+  pool.launchTokenIndex = event.params.amount0.gt(ZERO_BI) ? 0 : 1
+
   // TODO: check valid
   // pool.txCount = pool.txCount.plus(new BigInt(1))
 
@@ -151,6 +154,7 @@ export function handleMint(event: MintEvent): void {
 
 export function handleSwap(event: SwapEvent): void {
   let pool = MarginalV1LBPool.load(event.address.toHexString())!
+  const position = loadLBPosition(pool, event.params.recipient.toHexString())
 
   pool = syncStateLB(pool)
 
@@ -172,6 +176,26 @@ export function handleSwap(event: SwapEvent): void {
   swap.blockTimestamp = event.block.timestamp
   swap.transactionHash = event.transaction.hash
 
+  // Position update
+  // Depending on the launchTokenIndex, we need to update the position using the amount0 or amount1
+  // The amount can be negative, so we need to use plus but make sure we don't go below zero
+
+  const _sharesAmount = pool.launchTokenIndex == 0 ? event.params.amount0 : event.params.amount1
+
+  // If sharesAmount is negative this means the user is buying from the pool
+  if(_sharesAmount.lt(ZERO_BI)){
+    position.shares = position.shares.plus(_sharesAmount.abs())
+  } else {
+    // If sharesAmount is positive this means the user is selling to the pool
+    // We need to make sure we don't underflow
+    if(position.shares.lt(_sharesAmount)){
+      position.shares = ZERO_BI
+    } else {
+      position.shares = position.shares.minus(_sharesAmount)
+    }
+  }
+
+  position.save()
   pool.save()
   swap.save()
 }
@@ -180,21 +204,21 @@ export function handleTransfer(event: TransferEvent): void {
   let pool = MarginalV1LBPool.load(event.address.toHexString())!
 
   // Check if from is not zero address
-  if(event.params.from.toHexString() != ADDRESS_ZERO){
-    const positionFrom = loadLBPosition(pool, event.params.from.toHexString())
-    // Check we have enough shares. If not, set to zero
-    if (positionFrom.shares.ge(event.params.value)) {
-      positionFrom.shares = positionFrom.shares.minus(event.params.value)
-    } else {
-      positionFrom.shares = ZERO_BI
-    }
-    positionFrom.save()
-  }
+  // if(event.params.from.toHexString() != ADDRESS_ZERO){
+  //   const positionFrom = loadLBPosition(pool, event.params.from.toHexString())
+  //   // Check we have enough shares. If not, set to zero
+  //   if (positionFrom.shares.ge(event.params.value)) {
+  //     positionFrom.shares = positionFrom.shares.minus(event.params.value)
+  //   } else {
+  //     positionFrom.shares = ZERO_BI
+  //   }
+  //   positionFrom.save()
+  // }
 
-  // Check if to is not zero address
-  if(event.params.to.toHexString() != ADDRESS_ZERO){
-    const positionTo = loadLBPosition(pool, event.params.to.toHexString())
-    positionTo.shares = positionTo.shares.plus(event.params.value)
-    positionTo.save()
-  }
+  // // Check if to is not zero address
+  // if(event.params.to.toHexString() != ADDRESS_ZERO){
+  //   const positionTo = loadLBPosition(pool, event.params.to.toHexString())
+  //   positionTo.shares = positionTo.shares.plus(event.params.value)
+  //   positionTo.save()
+  // }
 }
