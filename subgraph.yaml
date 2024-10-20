@@ -61,7 +61,7 @@ dataSources:
 
   - kind: ethereum
     name: MultiRewardsFactory
-    network: sepolia
+    network: berachain-bartio
     source:
       address: "0x2F4230DA960756712dFAe11D1585D5DA95b72956"
       abi: MultiRewardsFactory
@@ -149,7 +149,7 @@ templates:
       file: ./src/pool.ts
   - kind: ethereum
     name: MultiRewards
-    network: sepolia
+    network: berachain-bartio
     source:
       abi: MultiRewards
     mapping:
