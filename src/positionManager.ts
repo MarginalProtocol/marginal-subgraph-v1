@@ -25,6 +25,7 @@ export function handleMint(event: MintEvent): void {
   position.tokenId = tokenId.toString()
   position.positionId = event.params.positionId.toString()
   position.pool = poolAddress
+  position.positionManager = positionManagerContract._address.toHexString()
   position.owner = event.params.recipient.toHexString()
   position.initialMargin = event.params.margin
   position.margin = event.params.margin

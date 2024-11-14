@@ -738,6 +738,19 @@ export class Position extends Entity {
     this.set("positionId", Value.fromString(value));
   }
 
+  get positionManager(): string {
+    let value = this.get("positionManager");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set positionManager(value: string) {
+    this.set("positionManager", Value.fromString(value));
+  }
+
   get owner(): string {
     let value = this.get("owner");
     if (!value || value.kind == ValueKind.NULL) {
