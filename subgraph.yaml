@@ -63,7 +63,7 @@ dataSources:
   - kind: ethereum
     # v1.0.4
     name: MarginalV1NonfungiblePositionManager_v1_0_4
-    network: sepolia
+    network: mainnet
     source:
       address: "0xd8Be1B2571B7c43B77FF3aE87BC6F0A23Fa224B8"
       abi: MarginalV1NonfungiblePositionManager_v1_0_4
