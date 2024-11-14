@@ -38,11 +38,11 @@ dataSources:
 
   - kind: ethereum
     # v1.0.3
-    name: MarginalV1NonfungiblePositionManager
+    name: MarginalV1NonfungiblePositionManager_v1_0_3
     network: sepolia
     source:
       address: "0x0e090Cdf42b985F7F05eAf4dD165515E309eDC2c"
-      abi: MarginalV1NonfungiblePositionManager
+      abi: MarginalV1NonfungiblePositionManager_v1_0_3
       startBlock: 6192200
     mapping:
       kind: ethereum/events
@@ -51,32 +51,8 @@ dataSources:
       entities:
         - Mint
       abis:
-        - name: MarginalV1NonfungiblePositionManager
-          file: ./abis/MarginalV1NonfungiblePositionManager.json
-      eventHandlers:
-        - event: Mint(indexed uint256,address,indexed address,uint256,uint256,uint256,uint256,uint256,uint256)
-          handler: handleMint
-        - event: Ignite(indexed uint256,indexed address,address,uint256,uint256)
-          handler: handleIgnite
-      file: ./src/positionManager.ts
-
-  - kind: ethereum
-    # v1.0.3
-    name: MarginalV1NonfungiblePositionManager
-    network: sepolia
-    source:
-      address: "0x0e090Cdf42b985F7F05eAf4dD165515E309eDC2c"
-      abi: MarginalV1NonfungiblePositionManager
-      startBlock: 6192200
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - Mint
-      abis:
-        - name: MarginalV1NonfungiblePositionManager
-          file: ./abis/MarginalV1NonfungiblePositionManager.json
+        - name: MarginalV1NonfungiblePositionManager_v1_0_3
+          file: ./abis/MarginalV1NonfungiblePositionManager_v1_0_3.json
       eventHandlers:
         - event: Mint(indexed uint256,address,indexed address,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleMint
@@ -86,11 +62,11 @@ dataSources:
 
   - kind: ethereum
     # v1.0.4
-    name: MarginalV1NonfungiblePositionManager
-    network: ethereum
+    name: MarginalV1NonfungiblePositionManager_v1_0_4
+    network: sepolia
     source:
       address: "0xd8Be1B2571B7c43B77FF3aE87BC6F0A23Fa224B8"
-      abi: MarginalV1NonfungiblePositionManager
+      abi: MarginalV1NonfungiblePositionManager_v1_0_4
       startBlock: 21138323
     mapping:
       kind: ethereum/events
@@ -99,15 +75,14 @@ dataSources:
       entities:
         - Mint
       abis:
-        - name: MarginalV1NonfungiblePositionManager
-          file: ./abis/MarginalV1NonfungiblePositionManager.json
+        - name: MarginalV1NonfungiblePositionManager_v1_0_4
+          file: ./abis/MarginalV1NonfungiblePositionManager_v1_0_4.json
       eventHandlers:
         - event: Mint(indexed uint256,address,indexed address,uint256,uint256,uint256,uint256,uint256,uint256)
           handler: handleMint
         - event: Ignite(indexed uint256,indexed address,address,uint256,uint256)
           handler: handleIgnite
       file: ./src/positionManager.ts
-
 
   - kind: ethereum
     name: MultiRewardsFactory
