@@ -7,11 +7,6 @@ import { MultiRewards as StakePoolTemplate } from "../generated/templates";
 import { StakePool, Token } from "../generated/schema";
 import { MULTIREWARDS_FACTORY_ADDRESS } from "./utils/constants";
 import { loadMultiRewardsFactory, loadPool } from "./utils/loaders";
-import {
-  fetchTokenSymbol,
-  fetchTokenName,
-  fetchTokenDecimals,
-} from "./utils/token";
 
 export function handleStakePoolCreated(event: DeployStakePool): void {
   let multiRewardsFactory = loadMultiRewardsFactory(
@@ -33,4 +28,6 @@ export function handleStakePoolCreated(event: DeployStakePool): void {
   StakePoolTemplate.create(event.params.multiRewards);
 }
 
-export function handleRewardAdded(event: RewardAdded): void {}
+export function handleRewardAdded(event: RewardAdded): void {
+
+}
