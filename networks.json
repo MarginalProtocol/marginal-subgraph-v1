@@ -40,5 +40,19 @@
             "address": "0xd9eD059DAD43c2B1d50A6751ab3332118fd4842d",
             "startBlock": 18611554
         }
+    },
+    "berachain-bartio": { 
+        "MarginalV1Factory": { 
+            "address": "0x8a3B8cd1cf9B3e4E552a1F8d6C4BC4d3A97C5a6a", 
+            "startBlock": 1472835 
+        },
+        "MarginalV1NonfungiblePositionManager": {
+            "address": "0xD237C7cDb402f120eDac152213540375c4a6c8C4",
+            "startBlock": 1513333
+        },
+        "MultiRewardsFactory": {
+            "address": "0x2F4230DA960756712dFAe11D1585D5DA95b72956",
+            "startBlock": 6526345 
+        }
     }
 }
