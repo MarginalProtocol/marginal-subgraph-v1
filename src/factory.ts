@@ -5,11 +5,11 @@ import {
 import { MarginalV1Pool } from "./../generated/templates/MarginalV1Pool/MarginalV1Pool";
 import { MarginalV1Pool as PoolTemplate } from './../generated/templates'
 import { Pool, Token } from "../generated/schema";
+import { MARGINAL_V1_CORE_FACTORY_ADDRESS } from './constants/addresses';
 import {
-  FACTORY_ADDRESS,
-  ZERO_BI,
-  ONE_BI,
-} from "./utils/constants";
+    ZERO_BI,
+    ONE_BI
+} from './constants';
 import {
   fetchTokenDecimals,
   fetchTokenName,
@@ -19,7 +19,7 @@ import { BigInt } from "@graphprotocol/graph-ts";
 import { loadFactory } from "./utils/loaders";
 
 export function handlePoolCreated(event: PoolCreated): void {
-  let factory = loadFactory(FACTORY_ADDRESS)
+  let factory = loadFactory(MARGINAL_V1_CORE_FACTORY_ADDRESS)
   factory.poolCount = factory.poolCount.plus(ONE_BI);
 
   let poolContract = MarginalV1Pool.bind(event.params.pool)
@@ -68,7 +68,7 @@ export function handlePoolCreated(event: PoolCreated): void {
 }
 
 export function handleOwnerChanged(event: OwnerChanged): void {
-  let factory = loadFactory(FACTORY_ADDRESS)
+  let factory = loadFactory(MARGINAL_V1_CORE_FACTORY_ADDRESS)
 
   factory.owner = event.params.newOwner.toHexString()
 

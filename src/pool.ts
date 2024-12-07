@@ -5,7 +5,7 @@ import {
   Settle as SettleEvent,
 } from "../generated/templates/MarginalV1Pool/MarginalV1Pool"
 import { loadPool, loadPoolPosition } from "./utils/loaders"
-import {  ZERO_BI } from "./utils/constants"
+import { ZERO_BI } from './constants'
 
 export function handleOpen(event: OpenEvent): void {
   let pool = loadPool(event, event.address)

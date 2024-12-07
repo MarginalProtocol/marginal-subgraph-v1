@@ -11,6 +11,10 @@
         "MultiRewardsFactory": {
             "address": "0x2F4230DA960756712dFAe11D1585D5DA95b72956",
             "startBlock": 6526345
+        },
+        "UniswapV3Factory": {
+            "address": "0x0227628f3F023bb0B980b67D528571c95c6DaC1c",
+            "startBlock": 3518270
         }
     },
     "mainnet": { 
@@ -25,6 +29,10 @@
         "MultiRewardsFactory": {
             "address": "0x7120D5FC29BE09b0b86a939D80F096D8Cbf75aFf",
             "startBlock": 20557974
+        },
+        "UniswapV3Factory": {
+            "address": "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+            "startBlock": 12369621
         }
     },
     "base": { 
@@ -39,6 +47,10 @@
         "MultiRewardsFactory": {
             "address": "0xd9eD059DAD43c2B1d50A6751ab3332118fd4842d",
             "startBlock": 18611554
+        },
+        "UniswapV3Factory": {
+            "address": "0x33128a8fC17869897dcE68Ed026d694621f6FDfD",
+            "startBlock": 1371680
         }
     },
     "berachain-bartio": { 
@@ -53,6 +65,10 @@
         "MultiRewardsFactory": {
             "address": "0x2F4230DA960756712dFAe11D1585D5DA95b72956",
             "startBlock": 6526345 
+        },
+        "UniswapV3Factory": {
+            "address": "0x33128a8fC17869897dcE68Ed026d694621f6FDfD",
+            "startBlock": 6526345
         }
     }
 }
