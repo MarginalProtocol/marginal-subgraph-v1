@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: MarginalV1Factory
-    network: mainnet
+    network: base
     source:
       abi: MarginalV1Factory
-      address: "0x95D95C41436C15b50217Bf1C0f810536AD181C13"
-      startBlock: 20297876
+      address: "0x407fA8029852A8386a907287018CEAFd7242C621"
+      startBlock: 17016522
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -37,11 +37,11 @@ dataSources:
       file: ./src/factory.ts
   - kind: ethereum
     name: MarginalV1NonfungiblePositionManager
-    network: mainnet
+    network: base
     source:
       abi: MarginalV1NonfungiblePositionManager
-      address: "0xd8Be1B2571B7c43B77FF3aE87BC6F0A23Fa224B8"
-      startBlock: 21138323
+      address: "0x12B4F1984Ef15f93b5636E3332eF4fF727EAa79d"
+      startBlock: 17016765
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -60,11 +60,11 @@ dataSources:
       file: ./src/positionManager.ts
   - kind: ethereum
     name: MultiRewardsFactory
-    network: mainnet
+    network: base
     source:
       abi: MultiRewardsFactory
-      address: "0x7120D5FC29BE09b0b86a939D80F096D8Cbf75aFf"
-      startBlock: 20557974
+      address: "0xd9eD059DAD43c2B1d50A6751ab3332118fd4842d"
+      startBlock: 18611554
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -86,7 +86,7 @@ dataSources:
 templates:
   - kind: ethereum
     name: MarginalV1Pool
-    network: mainnet
+    network: base
     source:
       abi: MarginalV1Pool
     mapping:
@@ -127,7 +127,7 @@ templates:
       file: ./src/pool.ts
   - kind: ethereum
     name: MultiRewards
-    network: mainnet
+    network: base
     source:
       abi: MultiRewards
     mapping:
