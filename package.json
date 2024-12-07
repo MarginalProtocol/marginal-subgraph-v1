@@ -4,6 +4,9 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
+    "generate:mainnet": "graph build --network mainnet",
+    "generate:base": "graph build --network base",
+    "generate:sepolia": "graph build --network sepolia",
     "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ marginal-v1-sepolia",
     "create-local": "graph create --node http://localhost:8020/ m-v1-subgraph",
     "remove-local": "graph remove --node http://localhost:8020/ m-v1-subgraph",
