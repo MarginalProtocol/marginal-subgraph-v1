@@ -3,13 +3,14 @@ import { MultiRewards } from '../../generated/templates/MultiRewards/MultiReward
 import { MarginalV1Pool as PoolTemplate, MultiRewards as StakePoolTemplate } from '../../generated/templates'
 import { Factory, Pool, Transaction, Position, TokenPositionMapping, MultiRewardsFactory, StakePool } from "../../generated/schema";
 import {
-    FACTORY_ADDRESS,
-    ZERO_BI,
-    ONE_BI,
     factoryContract,
-    multiRewardsFactoryContract,
-    MULTIREWARDS_FACTORY_ADDRESS
-  } from "../utils/constants";
+    multiRewardsFactoryContract
+} from '../constants/contracts';
+import { MARGINAL_V1_CORE_FACTORY_ADDRESS, MULTIREWARDS_FACTORY_ADDRESS } from '../constants/addresses';
+import {
+    ZERO_BI,
+    ONE_BI
+} from '../constants';
 import { BigInt, ethereum, Address } from "@graphprotocol/graph-ts";
 import { fetchTokenSymbol } from './token';
 

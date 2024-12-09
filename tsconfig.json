@@ -1,4 +1,10 @@
 {
   "extends": "@graphprotocol/graph-ts/types/tsconfig.base.json",
-  "include": ["src", "tests"]
+  "include": ["src", "tests", "scripts"],
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  }
 }
