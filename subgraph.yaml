@@ -82,7 +82,9 @@ dataSources:
       eventHandlers:
         - event: Deploy(indexed address,address)
           handler: handleStakePoolCreated
-      file: ./src/stake.ts
+        - event: AddReward(indexed address,indexed address,uint256)
+          handler: handleAddReward
+      file: ./src/multiRewards.ts
 templates:
   - kind: ethereum
     name: MarginalV1Pool
@@ -143,7 +145,7 @@ templates:
       abis:
         - name: MultiRewards
           file: ./abis/MultiRewards.json
-      eventHandlers:
-        - event: RewardAdded(uint256)
-          handler: handleRewardAdded
-      file: ./src/stake.ts
+      # eventHandlers:
+      #   - event: RewardAdded(uint256)
+      #     handler: handleRewardAdded
+      file: ./src/multiRewards.ts

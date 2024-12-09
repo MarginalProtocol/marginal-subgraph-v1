@@ -68,6 +68,8 @@ type StakePool @entity {
   multiRewardsFactory: MultiRewardsFactory!
   # stake token
   stakeToken: Bytes!
+  # # reward tokens
+  rewardTokens: [Token!]!
 }
 
 

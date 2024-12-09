@@ -492,6 +492,19 @@ export class StakePool extends Entity {
   set stakeToken(value: Bytes) {
     this.set("stakeToken", Value.fromBytes(value));
   }
+
+  get rewardTokens(): Array<string> {
+    let value = this.get("rewardTokens");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set rewardTokens(value: Array<string>) {
+    this.set("rewardTokens", Value.fromStringArray(value));
+  }
 }
 
 export class Token extends Entity {
