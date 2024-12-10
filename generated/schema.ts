@@ -374,6 +374,19 @@ export class Pool extends Entity {
       this.set("stakePool", Value.fromString(<string>value));
     }
   }
+
+  get rewardTokens(): Array<string> {
+    let value = this.get("rewardTokens");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set rewardTokens(value: Array<string>) {
+    this.set("rewardTokens", Value.fromStringArray(value));
+  }
 }
 
 export class MultiRewardsFactory extends Entity {
@@ -480,30 +493,17 @@ export class StakePool extends Entity {
     this.set("multiRewardsFactory", Value.fromString(value));
   }
 
-  get stakeToken(): Bytes {
-    let value = this.get("stakeToken");
+  get pool(): string {
+    let value = this.get("pool");
     if (!value || value.kind == ValueKind.NULL) {
       throw new Error("Cannot return null for a required field.");
     } else {
-      return value.toBytes();
+      return value.toString();
     }
   }
 
-  set stakeToken(value: Bytes) {
-    this.set("stakeToken", Value.fromBytes(value));
-  }
-
-  get rewardTokens(): Array<string> {
-    let value = this.get("rewardTokens");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set rewardTokens(value: Array<string>) {
-    this.set("rewardTokens", Value.fromStringArray(value));
+  set pool(value: string) {
+    this.set("pool", Value.fromString(value));
   }
 }
 
