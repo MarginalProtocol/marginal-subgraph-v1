@@ -18,6 +18,10 @@ import {
 import { BigInt } from "@graphprotocol/graph-ts";
 import { loadFactory } from "./utils/loaders";
 
+  /**
+   * Called when a new pool is created.
+   * @param event - The `PoolCreated` event.
+   */
 export function handlePoolCreated(event: PoolCreated): void {
   let factory = loadFactory(MARGINAL_V1_CORE_FACTORY_ADDRESS)
   factory.poolCount = factory.poolCount.plus(ONE_BI);
@@ -58,7 +62,8 @@ export function handlePoolCreated(event: PoolCreated): void {
   pool.fee = BigInt.fromI32(poolContract.fee() as i32)
   pool.rewardPremium = BigInt.fromI32(poolContract.rewardPremium() as i32)
   pool.liquidityLocked = poolContract.liquidityLocked()
-  
+  pool.rewardTokens = []
+
   factory.save()
   pool.save()
   token0.save()
