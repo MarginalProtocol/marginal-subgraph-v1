@@ -15,7 +15,7 @@ import {
 
 import {
   MarginalV1LBPool as MarginalV1LBPoolABI,
-} from "../generated/MarginalV1LBPool/MarginalV1LBPool"
+} from "../generated/templates//MarginalV1LBPool/MarginalV1LBPool"
 import { BI_18, ONE_BI, ZERO_BI } from "./utils/constants"
 import { loadLBFactory } from "./utils/loaders"
 import { fetchTokenDecimals, fetchTokenName, fetchTokenSymbol } from "./utils/token"

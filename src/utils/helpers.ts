@@ -1,7 +1,7 @@
 import { MarginalV1LBPool } from "../../generated/schema";
 import {
   MarginalV1LBPool as MarginalV1LBPoolABI,
-} from "../../generated/MarginalV1LBPool/MarginalV1LBPool"
+} from "../../generated/templates/MarginalV1LBPool/MarginalV1LBPool"
 import { Address } from "@graphprotocol/graph-ts";
 
 export function isNullEthValue(value: string): boolean {

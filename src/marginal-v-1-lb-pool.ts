@@ -6,7 +6,7 @@ import {
   Mint as MintEvent,
   Swap as SwapEvent,
   Transfer as TransferEvent,
-} from "../generated/MarginalV1LBPool/MarginalV1LBPool"
+} from "../generated/templates/MarginalV1LBPool/MarginalV1LBPool"
 import {
   MarginalV1LBPool,
   MarginalV1LBPoolApproval,
@@ -20,7 +20,7 @@ import { ADDRESS_ZERO, ZERO_BI } from "./utils/constants"
 
 import {
   MarginalV1LBPool as MarginalV1LBPoolABI,
-} from "../generated/MarginalV1LBPool/MarginalV1LBPool"
+} from "../generated/templates/MarginalV1LBPool/MarginalV1LBPool"
 
 import {
   MarginalV1LBFactory as MarginalV1LBFactoryABI,
