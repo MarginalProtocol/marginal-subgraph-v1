@@ -58,8 +58,8 @@ export function loadStakePool(event: ethereum.Event, stakePoolAddress: Address):
     let stakePoolContract = MultiRewards.bind(stakePoolAddress)
 
     stakePool.multiRewardsFactory = multiRewardsFactory.id
-    stakePool.stakeToken = stakePoolContract.stakingToken()
-
+    stakePool.pool = stakePoolContract.stakingToken().toHexString()
+    
     StakePoolTemplate.create(stakePoolAddress)
   }
 
@@ -91,7 +91,8 @@ export function loadPool(event: ethereum.Event, poolAddress: Address): Pool {
     pool.fee = BigInt.fromI32(poolContract.fee() as i32)
     pool.rewardPremium = BigInt.fromI32(poolContract.rewardPremium() as i32)
     pool.liquidityLocked = poolContract.liquidityLocked()
-
+    pool.rewardTokens = []
+    
     PoolTemplate.create(poolAddress)
   }
 
