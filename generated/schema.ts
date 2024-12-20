@@ -598,17 +598,17 @@ export class Token extends Entity {
     this.set("decimals", Value.fromBigInt(value));
   }
 
-  get chainId(): string {
+  get chainId(): i32 {
     let value = this.get("chainId");
     if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
+      return 0;
     } else {
-      return value.toString();
+      return value.toI32();
     }
   }
 
-  set chainId(value: string) {
-    this.set("chainId", Value.fromString(value));
+  set chainId(value: i32) {
+    this.set("chainId", Value.fromI32(value));
   }
 }
 

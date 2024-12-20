@@ -84,7 +84,7 @@ type Token @entity {
   # token decimals
   decimals: BigInt!
   # chain ID where the token exists
-  chainId: String!
+  chainId: Int!
 }
 
 type TokenPositionMapping @entity {
