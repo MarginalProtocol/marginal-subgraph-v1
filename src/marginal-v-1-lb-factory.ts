@@ -21,6 +21,7 @@ import { loadLBFactory } from "./utils/loaders"
 import { fetchTokenDecimals, fetchTokenName, fetchTokenSymbol } from "./utils/token"
 import { log } from "@graphprotocol/graph-ts"
 import { MarginalV1LBPool as MarginalV1LBPoolTemplate } from "../generated/templates"
+import { getChainId } from "./utils/network"
 
 export function handleCollectProtocol(event: CollectProtocolEvent): void {
   // let entity = new MarginalV1LBFactoryCollectProtocol(
@@ -64,6 +65,7 @@ export function handlePoolCreated(event: PoolCreatedEvent): void {
     token0.symbol = fetchTokenSymbol(event.params.token0);
     token0.name = fetchTokenName(event.params.token0);
     token0.decimals = fetchTokenDecimals(event.params.token0);
+    token0.chainId = getChainId() as i32;
   }
 
   if (token1 === null) {
@@ -72,6 +74,7 @@ export function handlePoolCreated(event: PoolCreatedEvent): void {
     token1.symbol = fetchTokenSymbol(event.params.token1);
     token1.name = fetchTokenName(event.params.token1);
     token1.decimals = fetchTokenDecimals(event.params.token1);
+    token1.chainId = getChainId() as i32;
   }
 
   // Constructor
