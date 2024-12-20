@@ -17,6 +17,7 @@ import {
 } from "./utils/token";
 import { BigInt } from "@graphprotocol/graph-ts";
 import { loadFactory } from "./utils/loaders";
+import { getChainId } from './utils/network';
 
   /**
    * Called when a new pool is created.
@@ -38,6 +39,7 @@ export function handlePoolCreated(event: PoolCreated): void {
     token0.symbol = fetchTokenSymbol(event.params.token0);
     token0.name = fetchTokenName(event.params.token0);
     token0.decimals = fetchTokenDecimals(event.params.token0);
+    token0.chainId = getChainId() as i32;
   }
 
   if (token1 === null) {
@@ -46,6 +48,7 @@ export function handlePoolCreated(event: PoolCreated): void {
     token1.symbol = fetchTokenSymbol(event.params.token1);
     token1.name = fetchTokenName(event.params.token1);
     token1.decimals = fetchTokenDecimals(event.params.token1);
+    token1.chainId = getChainId() as i32;
   }
 
   pool.tokenPair = token0.symbol.concat('-').concat(token1.symbol)
