@@ -597,6 +597,19 @@ export class Token extends Entity {
   set decimals(value: BigInt) {
     this.set("decimals", Value.fromBigInt(value));
   }
+
+  get chainId(): string {
+    let value = this.get("chainId");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set chainId(value: string) {
+    this.set("chainId", Value.fromString(value));
+  }
 }
 
 export class TokenPositionMapping extends Entity {
