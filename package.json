@@ -7,6 +7,7 @@
     "prepare:mainnet": "node scripts/prepare-addresses.js mainnet && graph build --network mainnet",
     "prepare:base": "node scripts/prepare-addresses.js base && graph build --network base",
     "prepare:sepolia": "node scripts/prepare-addresses.js sepolia && graph build --network sepolia",
+    "prepare:berachain": "node scripts/prepare-addresses.js berachain && graph build --network berachain",
     "prepare:berachain-bartio": "node scripts/prepare-addresses.js berachain-bartio && graph build --network berachain-bartio",
     "deploy:mainnet": "yarn prepare:mainnet && graph deploy --node https://api.studio.thegraph.com/deploy/ v1-marginal-mainnet",
     "deploy:base": "yarn prepare:base && graph deploy --node https://api.studio.thegraph.com/deploy/ v1-marginal-base",
