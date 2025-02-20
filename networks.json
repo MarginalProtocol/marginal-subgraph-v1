@@ -81,8 +81,8 @@
             "startBlock": 1351059
         },
         "MultiRewardsFactory": {
-            "address": "0x2F4230DA960756712dFAe11D1585D5DA95b72956",
-            "startBlock": 6526345 
+            "address": "0x403117C583C035c7d37b29fE5ce664Ba792495e2",
+            "startBlock": 1362989 
         },
         "UniswapV3Factory": {
             "address": "0xD84CBf0B02636E7f53dB9E5e45A616E05d710990",

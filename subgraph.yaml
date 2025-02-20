@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum
     name: MarginalV1Factory
-    network: sepolia
+    network: berachain
     source:
       abi: MarginalV1Factory
-      address: "0xa85D1A8f20d1D51612Ffa969f8594166A855c3C2"
-      startBlock: 6192164
+      address: "0xB4c58A1b0d6Ed479E62120443C6702fCc848f0Fe"
+      startBlock: 1309837
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -37,11 +37,11 @@ dataSources:
       file: ./src/factory.ts
   - kind: ethereum
     name: MarginalV1NonfungiblePositionManager
-    network: sepolia
+    network: berachain
     source:
       abi: MarginalV1NonfungiblePositionManager
-      address: "0x0e090Cdf42b985F7F05eAf4dD165515E309eDC2c"
-      startBlock: 6192200
+      address: "0x71c271B672eE56Cc73AB9bCbAB0a8Bf800257245"
+      startBlock: 1351059
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -60,11 +60,11 @@ dataSources:
       file: ./src/positionManager.ts
   - kind: ethereum
     name: MultiRewardsFactory
-    network: sepolia
+    network: berachain
     source:
       abi: MultiRewardsFactory
-      address: "0x2F4230DA960756712dFAe11D1585D5DA95b72956"
-      startBlock: 6526345
+      address: "0x403117C583C035c7d37b29fE5ce664Ba792495e2"
+      startBlock: 1362989
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -88,7 +88,7 @@ dataSources:
 templates:
   - kind: ethereum
     name: MarginalV1Pool
-    network: sepolia
+    network: berachain
     source:
       abi: MarginalV1Pool
     mapping:
@@ -129,7 +129,7 @@ templates:
       file: ./src/pool.ts
   - kind: ethereum
     name: MultiRewards
-    network: sepolia
+    network: berachain
     source:
       abi: MultiRewards
     mapping:
