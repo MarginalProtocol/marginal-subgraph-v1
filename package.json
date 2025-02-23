@@ -12,6 +12,7 @@
     "deploy:mainnet": "yarn prepare:mainnet && graph deploy --node https://api.studio.thegraph.com/deploy/ v1-marginal-mainnet",
     "deploy:base": "yarn prepare:base && graph deploy --node https://api.studio.thegraph.com/deploy/ v1-marginal-base",
     "deploy:sepolia": "yarn prepare:sepolia && graph deploy --node https://api.studio.thegraph.com/deploy/ v1-marginal-sepolia",
+    "deploy:berachain": "yarn prepare:berachain && graph deploy --node https://api.studio.thegraph.com/deploy/ v1-marginal-berachain",
     "deploy:berachain-bartio": "yarn prepare:berachain-bartio && graph deploy --node https://api.studio.thegraph.com/deploy/ v1-marginal-berachain-bartio",
     "deploy:test-mainnet": "yarn prepare:mainnet && graph deploy --node https://api.studio.thegraph.com/deploy/ test-v1-marginal-mainnet",
     "deploy:test-base": "yarn prepare:base && graph deploy --node https://api.studio.thegraph.com/deploy/ test-v1-marginal-base",

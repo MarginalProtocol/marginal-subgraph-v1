@@ -4,7 +4,7 @@ import {
   MultiRewards,
 } from "../generated/templates/MultiRewards/MultiRewards";
 import { MultiRewards as StakePoolTemplate } from "../generated/templates";
-import { StakePool, Token} from "../generated/schema";
+import { StakePool, Pool, Token} from "../generated/schema";
 import { MULTIREWARDS_FACTORY_ADDRESS } from './constants/addresses';
 import { loadMultiRewardsFactory, loadPool, loadStakePool } from "./utils/loaders";
 import { log } from '@graphprotocol/graph-ts'
@@ -16,15 +16,20 @@ export function handleStakePoolCreated(event: DeployStakePool): void {
   let stakePoolContract = MultiRewards.bind(event.params.multiRewards);
   let stakePool = new StakePool(event.params.multiRewards.toHexString());
   
-  let pool = loadPool(event, stakePoolContract.stakingToken())
+  // Try to load the pool, but don't require it to exist
+  let stakingToken = stakePoolContract.stakingToken();
+  let pool = Pool.load(stakingToken.toHexString());
   
   stakePool.multiRewardsFactory = multiRewardsFactory.id;
-  stakePool.pool = pool.id
+
+  if (pool !== null) {
+    stakePool.pool = pool.id;
+    pool.stakePool = stakePool.id;
+    pool.save();
+  }
   
-  pool.stakePool = stakePool.id
-  multiRewardsFactory.save()
+  multiRewardsFactory.save();
   stakePool.save();
-  pool.save()
 
   StakePoolTemplate.create(event.params.multiRewards);
 }

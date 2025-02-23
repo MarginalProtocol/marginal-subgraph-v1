@@ -370,6 +370,7 @@ export class MarginalV1NonfungiblePositionManager__positionsResult {
   value7: boolean;
   value8: boolean;
   value9: BigInt;
+  value10: BigInt;
 
   constructor(
     value0: Address,
@@ -381,7 +382,8 @@ export class MarginalV1NonfungiblePositionManager__positionsResult {
     value6: BigInt,
     value7: boolean,
     value8: boolean,
-    value9: BigInt
+    value9: BigInt,
+    value10: BigInt
   ) {
     this.value0 = value0;
     this.value1 = value1;
@@ -393,6 +395,7 @@ export class MarginalV1NonfungiblePositionManager__positionsResult {
     this.value7 = value7;
     this.value8 = value8;
     this.value9 = value9;
+    this.value10 = value10;
   }
 
   toMap(): TypedMap<string, ethereum.Value> {
@@ -407,6 +410,7 @@ export class MarginalV1NonfungiblePositionManager__positionsResult {
     map.set("value7", ethereum.Value.fromBoolean(this.value7));
     map.set("value8", ethereum.Value.fromBoolean(this.value8));
     map.set("value9", ethereum.Value.fromUnsignedBigInt(this.value9));
+    map.set("value10", ethereum.Value.fromUnsignedBigInt(this.value10));
     return map;
   }
 
@@ -448,6 +452,10 @@ export class MarginalV1NonfungiblePositionManager__positionsResult {
 
   getRewards(): BigInt {
     return this.value9;
+  }
+
+  getHealth(): BigInt {
+    return this.value10;
   }
 }
 
@@ -656,7 +664,7 @@ export class MarginalV1NonfungiblePositionManager extends ethereum.SmartContract
   ): MarginalV1NonfungiblePositionManager__positionsResult {
     let result = super.call(
       "positions",
-      "positions(uint256):(address,uint96,bool,uint128,uint128,uint128,uint128,bool,bool,uint256)",
+      "positions(uint256):(address,uint96,bool,uint128,uint128,uint128,uint128,bool,bool,uint256,uint256)",
       [ethereum.Value.fromUnsignedBigInt(tokenId)]
     );
 
@@ -670,7 +678,8 @@ export class MarginalV1NonfungiblePositionManager extends ethereum.SmartContract
       result[6].toBigInt(),
       result[7].toBoolean(),
       result[8].toBoolean(),
-      result[9].toBigInt()
+      result[9].toBigInt(),
+      result[10].toBigInt()
     );
   }
 
@@ -681,7 +690,7 @@ export class MarginalV1NonfungiblePositionManager extends ethereum.SmartContract
   > {
     let result = super.tryCall(
       "positions",
-      "positions(uint256):(address,uint96,bool,uint128,uint128,uint128,uint128,bool,bool,uint256)",
+      "positions(uint256):(address,uint96,bool,uint128,uint128,uint128,uint128,bool,bool,uint256,uint256)",
       [ethereum.Value.fromUnsignedBigInt(tokenId)]
     );
     if (result.reverted) {
@@ -699,7 +708,8 @@ export class MarginalV1NonfungiblePositionManager extends ethereum.SmartContract
         value[6].toBigInt(),
         value[7].toBoolean(),
         value[8].toBoolean(),
-        value[9].toBigInt()
+        value[9].toBigInt(),
+        value[10].toBigInt()
       )
     );
   }

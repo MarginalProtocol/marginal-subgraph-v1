@@ -100,36 +100,6 @@ export class Burn__Params {
   }
 }
 
-export class CollectProtocol extends ethereum.Event {
-  get params(): CollectProtocol__Params {
-    return new CollectProtocol__Params(this);
-  }
-}
-
-export class CollectProtocol__Params {
-  _event: CollectProtocol;
-
-  constructor(event: CollectProtocol) {
-    this._event = event;
-  }
-
-  get sender(): Address {
-    return this._event.parameters[0].value.toAddress();
-  }
-
-  get recipient(): Address {
-    return this._event.parameters[1].value.toAddress();
-  }
-
-  get amount0(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
-  }
-
-  get amount1(): BigInt {
-    return this._event.parameters[3].value.toBigInt();
-  }
-}
-
 export class Initialize extends ethereum.Event {
   get params(): Initialize__Params {
     return new Initialize__Params(this);
@@ -259,28 +229,6 @@ export class Open__Params {
 
   get margin(): BigInt {
     return this._event.parameters[5].value.toBigInt();
-  }
-}
-
-export class SetFeeProtocol extends ethereum.Event {
-  get params(): SetFeeProtocol__Params {
-    return new SetFeeProtocol__Params(this);
-  }
-}
-
-export class SetFeeProtocol__Params {
-  _event: SetFeeProtocol;
-
-  constructor(event: SetFeeProtocol) {
-    this._event = event;
-  }
-
-  get oldFeeProtocol(): i32 {
-    return this._event.parameters[0].value.toI32();
-  }
-
-  get newFeeProtocol(): i32 {
-    return this._event.parameters[1].value.toI32();
   }
 }
 
@@ -452,31 +400,6 @@ export class MarginalV1Pool__burnResult {
 
   getAmount1(): BigInt {
     return this.value2;
-  }
-}
-
-export class MarginalV1Pool__collectProtocolResult {
-  value0: BigInt;
-  value1: BigInt;
-
-  constructor(value0: BigInt, value1: BigInt) {
-    this.value0 = value0;
-    this.value1 = value1;
-  }
-
-  toMap(): TypedMap<string, ethereum.Value> {
-    let map = new TypedMap<string, ethereum.Value>();
-    map.set("value0", ethereum.Value.fromUnsignedBigInt(this.value0));
-    map.set("value1", ethereum.Value.fromUnsignedBigInt(this.value1));
-    return map;
-  }
-
-  getAmount0(): BigInt {
-    return this.value0;
-  }
-
-  getAmount1(): BigInt {
-    return this.value1;
   }
 }
 
@@ -943,39 +866,6 @@ export class MarginalV1Pool extends ethereum.SmartContract {
         value[0].toBigInt(),
         value[1].toBigInt(),
         value[2].toBigInt()
-      )
-    );
-  }
-
-  collectProtocol(recipient: Address): MarginalV1Pool__collectProtocolResult {
-    let result = super.call(
-      "collectProtocol",
-      "collectProtocol(address):(uint128,uint128)",
-      [ethereum.Value.fromAddress(recipient)]
-    );
-
-    return new MarginalV1Pool__collectProtocolResult(
-      result[0].toBigInt(),
-      result[1].toBigInt()
-    );
-  }
-
-  try_collectProtocol(
-    recipient: Address
-  ): ethereum.CallResult<MarginalV1Pool__collectProtocolResult> {
-    let result = super.tryCall(
-      "collectProtocol",
-      "collectProtocol(address):(uint128,uint128)",
-      [ethereum.Value.fromAddress(recipient)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(
-      new MarginalV1Pool__collectProtocolResult(
-        value[0].toBigInt(),
-        value[1].toBigInt()
       )
     );
   }
@@ -1836,44 +1726,6 @@ export class BurnCall__Outputs {
   }
 }
 
-export class CollectProtocolCall extends ethereum.Call {
-  get inputs(): CollectProtocolCall__Inputs {
-    return new CollectProtocolCall__Inputs(this);
-  }
-
-  get outputs(): CollectProtocolCall__Outputs {
-    return new CollectProtocolCall__Outputs(this);
-  }
-}
-
-export class CollectProtocolCall__Inputs {
-  _call: CollectProtocolCall;
-
-  constructor(call: CollectProtocolCall) {
-    this._call = call;
-  }
-
-  get recipient(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-}
-
-export class CollectProtocolCall__Outputs {
-  _call: CollectProtocolCall;
-
-  constructor(call: CollectProtocolCall) {
-    this._call = call;
-  }
-
-  get amount0(): BigInt {
-    return this._call.outputValues[0].value.toBigInt();
-  }
-
-  get amount1(): BigInt {
-    return this._call.outputValues[1].value.toBigInt();
-  }
-}
-
 export class DecreaseAllowanceCall extends ethereum.Call {
   get inputs(): DecreaseAllowanceCall__Inputs {
     return new DecreaseAllowanceCall__Inputs(this);
@@ -2109,36 +1961,6 @@ export class OpenCall__Outputs {
 
   get amount1(): BigInt {
     return this._call.outputValues[4].value.toBigInt();
-  }
-}
-
-export class SetFeeProtocolCall extends ethereum.Call {
-  get inputs(): SetFeeProtocolCall__Inputs {
-    return new SetFeeProtocolCall__Inputs(this);
-  }
-
-  get outputs(): SetFeeProtocolCall__Outputs {
-    return new SetFeeProtocolCall__Outputs(this);
-  }
-}
-
-export class SetFeeProtocolCall__Inputs {
-  _call: SetFeeProtocolCall;
-
-  constructor(call: SetFeeProtocolCall) {
-    this._call = call;
-  }
-
-  get feeProtocol(): i32 {
-    return this._call.inputValues[0].value.toI32();
-  }
-}
-
-export class SetFeeProtocolCall__Outputs {
-  _call: SetFeeProtocolCall;
-
-  constructor(call: SetFeeProtocolCall) {
-    this._call = call;
   }
 }
 

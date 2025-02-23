@@ -493,17 +493,21 @@ export class StakePool extends Entity {
     this.set("multiRewardsFactory", Value.fromString(value));
   }
 
-  get pool(): string {
+  get pool(): string | null {
     let value = this.get("pool");
     if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
+      return null;
     } else {
       return value.toString();
     }
   }
 
-  set pool(value: string) {
-    this.set("pool", Value.fromString(value));
+  set pool(value: string | null) {
+    if (!value) {
+      this.unset("pool");
+    } else {
+      this.set("pool", Value.fromString(<string>value));
+    }
   }
 }
 

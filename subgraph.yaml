@@ -79,6 +79,8 @@ dataSources:
           file: ./abis/MultiRewardsFactory.json
         - name: MultiRewards
           file: ./abis/MultiRewards.json
+        - name: MarginalV1Pool
+          file: ./abis/MarginalV1Pool.json
       eventHandlers:
         - event: Deploy(indexed address,address)
           handler: handleStakePoolCreated
@@ -145,4 +147,6 @@ templates:
       abis:
         - name: MultiRewards
           file: ./abis/MultiRewards.json
+        - name: MarginalV1Pool
+          file: ./abis/MarginalV1Pool.json
       file: ./src/multiRewards.ts
