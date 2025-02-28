@@ -151,86 +151,78 @@ type Transaction @entity {
   position: Position
 }
 
-type Open @entity {
-  # position id
+type Mint @entity {
+  # transaction hash
   id: ID!
-  # txn that position was opened in
-  transaction: Transaction!
-  # time of txn
-  timestamp: BigInt!
-  # pool position created in
-  pool: Pool!
-  # pool token0
-  token0: Token!
-  # pool token1
-  token1: Token!
-  # owner of position
-  owner: Bytes!
-  # address that minted position
+  # NFT token ID
+  tokenId: BigInt!
+  # sender address
   sender: Bytes!
-  # position margin
+  # recipient address
+  recipient: Bytes!
+  # position ID in pool
+  positionId: BigInt!
+  # position size
+  size: BigInt!
+  # position debt
+  debt: BigInt!
+  # margin amount
   margin: BigInt!
-}
-
-type Adjust @entity {
-  # position id
-  id: ID!
-  # txn that position was adjusted in
-  transaction: Transaction!
-  # time of txn
-  timestamp: BigInt!
-  # pool position adjusted in
-  pool: Pool!
-  # pool token0
-  token0: Token!
-  # pool token1
-  token1: Token!
-  # owner of position
-  owner: Bytes!
-  # receipient of adjusted position
-  recipient: Bytes!
-  # position margin
-  margin: BigInt!
-}
-
-type Settle @entity {
-  # position id
-  id: ID!
-  # txn that position was settled in
-  transaction: Transaction!
-  # time of txn
-  timestamp: BigInt!
-  # pool position settled in
-  pool: Pool!
-  # pool token0
-  token0: Token!
-  # pool token1
-  token1: Token!
-  # owner of position
-  owner: Bytes!
-  # receipient of closed position
-  recipient: Bytes!
-  # amount received
+  # fees paid
+  fees: BigInt!
+  # rewards earned
   rewards: BigInt!
+  # related transaction
+  transaction: Transaction!
+  # related position
+  position: Position!
 }
 
-type Liquidate @entity {
-  # position id
+type Ignite @entity {
+  # transaction hash
   id: ID!
-  # txn that position was liquidated
-  transaction: Transaction!
-  # time of txn
-  timestamp: BigInt!
-  # pool position liquidated in
-  pool: Pool!
-  # pool token0
-  token0: Token!
-  # pool token1
-  token1: Token!
-  # owner of position
-  owner: Bytes!
-  # receipient of rewards for liquidating
+  # NFT token ID
+  tokenId: BigInt!
+  # sender address
+  sender: Bytes!
+  # recipient address
   recipient: Bytes!
-  # amount received
+  # amount out
+  amountOut: BigInt!
+  # rewards earned
   rewards: BigInt!
+  # related transaction
+  transaction: Transaction!
+  # related position
+  position: Position!
+}
+
+type Lock @entity {
+  # transaction hash
+  id: ID!
+  # NFT token ID
+  tokenId: BigInt!
+  # sender address
+  sender: Bytes!
+  # margin after lock
+  marginAfter: BigInt!
+  # related transaction
+  transaction: Transaction!
+  # related position
+  position: Position!
+}
+
+type Free @entity {
+  # transaction hash
+  id: ID!
+  # NFT token ID
+  tokenId: BigInt!
+  # sender address
+  sender: Bytes!
+  # margin after free
+  marginAfter: BigInt!
+  # related transaction
+  transaction: Transaction!
+  # related position
+  position: Position!
 }

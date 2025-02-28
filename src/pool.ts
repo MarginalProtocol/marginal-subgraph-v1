@@ -3,8 +3,9 @@ import {
   Adjust as AdjustEvent,
   Liquidate as LiquidateEvent,
   Settle as SettleEvent,
+  Swap as SwapEvent,
 } from "../generated/templates/MarginalV1Pool/MarginalV1Pool"
-import { loadPool, loadPoolPosition } from "./utils/loaders"
+import { loadPool, loadPoolPosition, loadTransaction } from "./utils/loaders"
 import { ZERO_BI } from './constants'
 
 export function handleOpen(event: OpenEvent): void {
@@ -51,4 +52,13 @@ export function handleLiquidate(event: LiquidateEvent): void {
   position.isClosed = true
 
   position.save()
+}
+
+export function handleSwap(event: SwapEvent): void {
+  let pool = loadPool(event, event.address)
+  
+  let transaction = loadTransaction(event)
+  transaction.type = 'SWAP'
+  transaction.sender = event.transaction.from.toHexString()
+  transaction.save()
 }
