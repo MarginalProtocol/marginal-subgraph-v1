@@ -1,6 +1,8 @@
 import {
   Mint as MintEvent,
   Ignite as IgniteEvent,
+  Lock as LockEvent,
+  Free as FreeEvent,
 } from "../generated/MarginalV1NonfungiblePositionManager/MarginalV1NonfungiblePositionManager"
 import { loadTransaction } from "./utils/loaders"
 import { MarginalV1NonfungiblePositionManager } from "../generated/MarginalV1NonfungiblePositionManager/MarginalV1NonfungiblePositionManager"
@@ -14,6 +16,10 @@ export function handleMint(event: MintEvent): void {
   let positionManagerContract = MarginalV1NonfungiblePositionManager.bind(event.address)
   let positionInfo = positionManagerContract.positions(tokenId)
   let poolAddress = positionInfo.value0.toHexString()
+  /**
+   * Unique identifier for the position, consisting of the pool address and
+   * positionId concatenated with a hyphen.
+   */
   let id = poolAddress.concat('-').concat(positionId.toString())
   let position = new Position(id)
   let tokenPositionMap = new TokenPositionMapping(tokenId.toString())
@@ -37,6 +43,10 @@ export function handleMint(event: MintEvent): void {
   position.isClosed = false
   position.rewards = positionInfo.value9
 
+  transaction.type = 'MINT'
+  transaction.sender = event.transaction.from.toHexString()
+  transaction.position = position.id
+  
   position.save()
   transaction.save()
   tokenPositionMap.save()
@@ -45,9 +55,47 @@ export function handleMint(event: MintEvent): void {
 export function handleIgnite(event: IgniteEvent): void {
   let tokenId = event.params.tokenId.toString()
   let position = loadPositionByTokenId(tokenId)
+  let transaction = loadTransaction(event)
 
   if (position !== null) {
     position.marginAmountOut = event.params.amountOut
     position.save()
+
+    transaction.type = 'IGNITE'
+    transaction.sender = event.transaction.from.toHexString()
+    transaction.position = position.id
+    transaction.save()
+  }
+}
+
+export function handleLock(event: LockEvent): void {
+  let tokenId = event.params.tokenId.toString()
+  let position = loadPositionByTokenId(tokenId)
+  let transaction = loadTransaction(event)
+
+  if (position !== null) {
+    position.margin = event.params.marginAfter
+    position.save()
+
+    transaction.type = 'LOCK'
+    transaction.sender = event.transaction.from.toHexString()
+    transaction.position = position.id
+    transaction.save()
+  }
+}
+
+export function handleFree(event: FreeEvent): void {
+  let tokenId = event.params.tokenId.toString()
+  let position = loadPositionByTokenId(tokenId)
+  let transaction = loadTransaction(event)
+
+  if (position !== null) {
+    position.margin = event.params.marginAfter
+    position.save()
+
+    transaction.type = 'FREE'
+    transaction.sender = event.transaction.from.toHexString()
+    transaction.position = position.id
+    transaction.save()
   }
 }

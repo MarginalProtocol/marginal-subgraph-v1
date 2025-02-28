@@ -977,6 +977,14 @@ export class Position extends Entity {
       this.set("rewards", Value.fromBigInt(<BigInt>value));
     }
   }
+
+  get transactions(): TransactionLoader {
+    return new TransactionLoader(
+      "Position",
+      this.get("id")!.toString(),
+      "transactions"
+    );
+  }
 }
 
 export class Transaction extends Entity {
@@ -1020,6 +1028,23 @@ export class Transaction extends Entity {
     this.set("id", Value.fromString(value));
   }
 
+  get type(): string | null {
+    let value = this.get("type");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set type(value: string | null) {
+    if (!value) {
+      this.unset("type");
+    } else {
+      this.set("type", Value.fromString(<string>value));
+    }
+  }
+
   get blockNumber(): BigInt {
     let value = this.get("blockNumber");
     if (!value || value.kind == ValueKind.NULL) {
@@ -1031,6 +1056,19 @@ export class Transaction extends Entity {
 
   set blockNumber(value: BigInt) {
     this.set("blockNumber", Value.fromBigInt(value));
+  }
+
+  get sender(): string {
+    let value = this.get("sender");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set sender(value: string) {
+    this.set("sender", Value.fromString(value));
   }
 
   get timestamp(): BigInt {
@@ -1072,32 +1110,21 @@ export class Transaction extends Entity {
     this.set("gasPrice", Value.fromBigInt(value));
   }
 
-  get open(): OpenLoader {
-    return new OpenLoader("Transaction", this.get("id")!.toString(), "open");
+  get position(): string | null {
+    let value = this.get("position");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
   }
 
-  get adjust(): AdjustLoader {
-    return new AdjustLoader(
-      "Transaction",
-      this.get("id")!.toString(),
-      "adjust"
-    );
-  }
-
-  get settle(): SettleLoader {
-    return new SettleLoader(
-      "Transaction",
-      this.get("id")!.toString(),
-      "settle"
-    );
-  }
-
-  get liquidate(): LiquidateLoader {
-    return new LiquidateLoader(
-      "Transaction",
-      this.get("id")!.toString(),
-      "liquidate"
-    );
+  set position(value: string | null) {
+    if (!value) {
+      this.unset("position");
+    } else {
+      this.set("position", Value.fromString(<string>value));
+    }
   }
 }
 
@@ -1731,7 +1758,7 @@ export class StakePoolLoader extends Entity {
   }
 }
 
-export class OpenLoader extends Entity {
+export class TransactionLoader extends Entity {
   _entity: string;
   _field: string;
   _id: string;
@@ -1743,62 +1770,8 @@ export class OpenLoader extends Entity {
     this._field = field;
   }
 
-  load(): Open[] {
+  load(): Transaction[] {
     let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<Open[]>(value);
-  }
-}
-
-export class AdjustLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): Adjust[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<Adjust[]>(value);
-  }
-}
-
-export class SettleLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): Settle[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<Settle[]>(value);
-  }
-}
-
-export class LiquidateLoader extends Entity {
-  _entity: string;
-  _field: string;
-  _id: string;
-
-  constructor(entity: string, id: string, field: string) {
-    super();
-    this._entity = entity;
-    this._id = id;
-    this._field = field;
-  }
-
-  load(): Liquidate[] {
-    let value = store.loadRelated(this._entity, this._id, this._field);
-    return changetype<Liquidate[]>(value);
+    return changetype<Transaction[]>(value);
   }
 }

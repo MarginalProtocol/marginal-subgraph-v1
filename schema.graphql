@@ -129,24 +129,26 @@ type Position @entity {
   isClosed: Boolean!
   # escrow rewards 
   rewards: BigInt
+  # position transactions
+  transactions: [Transaction!]! @derivedFrom(field: "position")
 }
 
 type Transaction @entity {
   # tx hash
   id: ID!
+  # tx type
+  type: String
   # block txn was included in
   blockNumber: BigInt!
+  # tx sender
+  sender: ID!
   # timestamp txn was confirmed
   timestamp: BigInt!
   # gas settings during tx execution
   gasLimit: BigInt!
   gasPrice: BigInt!
-  # derived values
-  open: [Open!]! @derivedFrom(field: "transaction")
-  adjust: [Adjust!]! @derivedFrom(field: "transaction")
-  settle: [Settle!]! @derivedFrom(field: "transaction")
-  liquidate: [Liquidate!]! @derivedFrom(field: "transaction")
-  ## TODO: Add Swap, Mint, Burn
+  # Related position (if this transaction is for a position)
+  position: Position
 }
 
 type Open @entity {
