@@ -132,6 +132,8 @@ templates:
         - event: Settle(indexed address,indexed
             uint256,address,uint128,uint160,int256,int256,uint256)
           handler: handleSettle
+        - event: Swap(indexed address,indexed address,int256,int256,uint160,uint128,int24)
+          handler: handleSwap
       file: ./src/pool.ts
   - kind: ethereum
     name: MultiRewards

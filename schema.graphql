@@ -152,77 +152,58 @@ type Transaction @entity {
 }
 
 type Mint @entity {
-  # transaction hash
   id: ID!
-  # NFT token ID
   tokenId: BigInt!
-  # sender address
   sender: Bytes!
-  # recipient address
   recipient: Bytes!
-  # position ID in pool
   positionId: BigInt!
-  # position size
   size: BigInt!
-  # position debt
   debt: BigInt!
-  # margin amount
   margin: BigInt!
-  # fees paid
   fees: BigInt!
-  # rewards earned
   rewards: BigInt!
-  # related transaction
   transaction: Transaction!
-  # related position
   position: Position!
 }
 
 type Ignite @entity {
-  # transaction hash
   id: ID!
-  # NFT token ID
   tokenId: BigInt!
-  # sender address
   sender: Bytes!
-  # recipient address
   recipient: Bytes!
-  # amount out
   amountOut: BigInt!
-  # rewards earned
   rewards: BigInt!
-  # related transaction
   transaction: Transaction!
-  # related position
   position: Position!
 }
 
 type Lock @entity {
-  # transaction hash
   id: ID!
-  # NFT token ID
   tokenId: BigInt!
-  # sender address
   sender: Bytes!
-  # margin after lock
   marginAfter: BigInt!
-  # related transaction
   transaction: Transaction!
-  # related position
   position: Position!
 }
 
 type Free @entity {
-  # transaction hash
   id: ID!
-  # NFT token ID
   tokenId: BigInt!
-  # sender address
   sender: Bytes!
-  # margin after free
   marginAfter: BigInt!
-  # related transaction
   transaction: Transaction!
-  # related position
   position: Position!
+}
+
+type Swap @entity {
+  id: ID!
+  sender: Bytes!
+  recipient: Bytes!
+  amount0: BigInt!
+  amount1: BigInt!
+  sqrtPriceX96: BigInt!
+  liquidity: BigInt!
+  tick: BigInt!
+  pool: Pool!
+  transaction: Transaction!
 }
