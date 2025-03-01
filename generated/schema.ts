@@ -1126,6 +1126,30 @@ export class Transaction extends Entity {
       this.set("position", Value.fromString(<string>value));
     }
   }
+
+  get mint(): MintLoader {
+    return new MintLoader("Transaction", this.get("id")!.toString(), "mint");
+  }
+
+  get ignite(): IgniteLoader {
+    return new IgniteLoader(
+      "Transaction",
+      this.get("id")!.toString(),
+      "ignite"
+    );
+  }
+
+  get lock(): LockLoader {
+    return new LockLoader("Transaction", this.get("id")!.toString(), "lock");
+  }
+
+  get free(): FreeLoader {
+    return new FreeLoader("Transaction", this.get("id")!.toString(), "free");
+  }
+
+  get swap(): SwapLoader {
+    return new SwapLoader("Transaction", this.get("id")!.toString(), "swap");
+  }
 }
 
 export class Mint extends Entity {
@@ -1204,19 +1228,6 @@ export class Mint extends Entity {
 
   set recipient(value: Bytes) {
     this.set("recipient", Value.fromBytes(value));
-  }
-
-  get positionId(): BigInt {
-    let value = this.get("positionId");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set positionId(value: BigInt) {
-    this.set("positionId", Value.fromBigInt(value));
   }
 
   get size(): BigInt {
@@ -1389,6 +1400,23 @@ export class Ignite extends Entity {
     this.set("recipient", Value.fromBytes(value));
   }
 
+  get marginBefore(): BigInt | null {
+    let value = this.get("marginBefore");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set marginBefore(value: BigInt | null) {
+    if (!value) {
+      this.unset("marginBefore");
+    } else {
+      this.set("marginBefore", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
   get amountOut(): BigInt {
     let value = this.get("amountOut");
     if (!value || value.kind == ValueKind.NULL) {
@@ -1507,6 +1535,23 @@ export class Lock extends Entity {
     this.set("sender", Value.fromBytes(value));
   }
 
+  get marginBefore(): BigInt | null {
+    let value = this.get("marginBefore");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set marginBefore(value: BigInt | null) {
+    if (!value) {
+      this.unset("marginBefore");
+    } else {
+      this.set("marginBefore", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
   get marginAfter(): BigInt {
     let value = this.get("marginAfter");
     if (!value || value.kind == ValueKind.NULL) {
@@ -1610,6 +1655,23 @@ export class Free extends Entity {
 
   set sender(value: Bytes) {
     this.set("sender", Value.fromBytes(value));
+  }
+
+  get marginBefore(): BigInt | null {
+    let value = this.get("marginBefore");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set marginBefore(value: BigInt | null) {
+    if (!value) {
+      this.unset("marginBefore");
+    } else {
+      this.set("marginBefore", Value.fromBigInt(<BigInt>value));
+    }
   }
 
   get marginAfter(): BigInt {
@@ -1878,5 +1940,95 @@ export class TransactionLoader extends Entity {
   load(): Transaction[] {
     let value = store.loadRelated(this._entity, this._id, this._field);
     return changetype<Transaction[]>(value);
+  }
+}
+
+export class MintLoader extends Entity {
+  _entity: string;
+  _field: string;
+  _id: string;
+
+  constructor(entity: string, id: string, field: string) {
+    super();
+    this._entity = entity;
+    this._id = id;
+    this._field = field;
+  }
+
+  load(): Mint[] {
+    let value = store.loadRelated(this._entity, this._id, this._field);
+    return changetype<Mint[]>(value);
+  }
+}
+
+export class IgniteLoader extends Entity {
+  _entity: string;
+  _field: string;
+  _id: string;
+
+  constructor(entity: string, id: string, field: string) {
+    super();
+    this._entity = entity;
+    this._id = id;
+    this._field = field;
+  }
+
+  load(): Ignite[] {
+    let value = store.loadRelated(this._entity, this._id, this._field);
+    return changetype<Ignite[]>(value);
+  }
+}
+
+export class LockLoader extends Entity {
+  _entity: string;
+  _field: string;
+  _id: string;
+
+  constructor(entity: string, id: string, field: string) {
+    super();
+    this._entity = entity;
+    this._id = id;
+    this._field = field;
+  }
+
+  load(): Lock[] {
+    let value = store.loadRelated(this._entity, this._id, this._field);
+    return changetype<Lock[]>(value);
+  }
+}
+
+export class FreeLoader extends Entity {
+  _entity: string;
+  _field: string;
+  _id: string;
+
+  constructor(entity: string, id: string, field: string) {
+    super();
+    this._entity = entity;
+    this._id = id;
+    this._field = field;
+  }
+
+  load(): Free[] {
+    let value = store.loadRelated(this._entity, this._id, this._field);
+    return changetype<Free[]>(value);
+  }
+}
+
+export class SwapLoader extends Entity {
+  _entity: string;
+  _field: string;
+  _id: string;
+
+  constructor(entity: string, id: string, field: string) {
+    super();
+    this._entity = entity;
+    this._id = id;
+    this._field = field;
+  }
+
+  load(): Swap[] {
+    let value = store.loadRelated(this._entity, this._id, this._field);
+    return changetype<Swap[]>(value);
   }
 }

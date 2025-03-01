@@ -72,7 +72,6 @@ type StakePool @entity {
   pool: Pool
 }
 
-
 type Token @entity {
   # token address
   id: ID!
@@ -95,9 +94,9 @@ type TokenPositionMapping @entity {
 }
 
 type Position @entity {
-  # poolAddress-positionId 
+  # poolAddress-positionId
   id: ID!
-  # tokenId 
+  # tokenId
   tokenId: String
   # positionId in pool
   positionId: String!
@@ -127,7 +126,7 @@ type Position @entity {
   isSettled: Boolean!
   # either settled/liquidated is true
   isClosed: Boolean!
-  # escrow rewards 
+  # escrow rewards
   rewards: BigInt
   # position transactions
   transactions: [Transaction!]! @derivedFrom(field: "position")
@@ -149,6 +148,12 @@ type Transaction @entity {
   gasPrice: BigInt!
   # Related position (if this transaction is for a position)
   position: Position
+  # Related events
+  mint: Mint @derivedFrom(field: "transaction")
+  ignite: Ignite @derivedFrom(field: "transaction")
+  lock: Lock @derivedFrom(field: "transaction")
+  free: Free @derivedFrom(field: "transaction")
+  swap: Swap @derivedFrom(field: "transaction")
 }
 
 type Mint @entity {
@@ -156,7 +161,6 @@ type Mint @entity {
   tokenId: BigInt!
   sender: Bytes!
   recipient: Bytes!
-  positionId: BigInt!
   size: BigInt!
   debt: BigInt!
   margin: BigInt!
@@ -171,6 +175,7 @@ type Ignite @entity {
   tokenId: BigInt!
   sender: Bytes!
   recipient: Bytes!
+  marginBefore: BigInt
   amountOut: BigInt!
   rewards: BigInt!
   transaction: Transaction!
@@ -181,6 +186,7 @@ type Lock @entity {
   id: ID!
   tokenId: BigInt!
   sender: Bytes!
+  marginBefore: BigInt
   marginAfter: BigInt!
   transaction: Transaction!
   position: Position!
@@ -190,6 +196,7 @@ type Free @entity {
   id: ID!
   tokenId: BigInt!
   sender: Bytes!
+  marginBefore: BigInt
   marginAfter: BigInt!
   transaction: Transaction!
   position: Position!

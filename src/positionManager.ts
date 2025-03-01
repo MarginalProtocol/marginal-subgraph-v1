@@ -52,7 +52,6 @@ export function handleMint(event: MintEvent): void {
   mintEvent.tokenId = event.params.tokenId
   mintEvent.sender = event.params.sender
   mintEvent.recipient = event.params.recipient
-  mintEvent.positionId = event.params.positionId
   mintEvent.size = event.params.size
   mintEvent.debt = event.params.debt
   mintEvent.margin = event.params.margin
@@ -73,25 +72,26 @@ export function handleIgnite(event: IgniteEvent): void {
   let transaction = loadTransaction(event)
 
   if (position !== null) {
-    position.marginAmountOut = event.params.amountOut
-    position.save()
-
     transaction.type = 'IGNITE'
     transaction.sender = event.transaction.from.toHexString()
     transaction.position = position.id
-
+    
     // Create Ignite event entity
     let igniteEvent = new Ignite(transaction.id)
     igniteEvent.tokenId = event.params.tokenId
     igniteEvent.sender = event.params.sender
     igniteEvent.recipient = event.params.recipient
+    igniteEvent.marginBefore = position.margin
     igniteEvent.amountOut = event.params.amountOut
     igniteEvent.rewards = event.params.rewards
     igniteEvent.transaction = transaction.id
     igniteEvent.position = position.id
-
+    
     transaction.save()
     igniteEvent.save()
+
+    position.marginAmountOut = event.params.amountOut
+    position.save()
   }
 }
 
@@ -101,23 +101,25 @@ export function handleLock(event: LockEvent): void {
   let transaction = loadTransaction(event)
 
   if (position !== null) {
-    position.margin = event.params.marginAfter
-    position.save()
-
+    
     transaction.type = 'LOCK'
     transaction.sender = event.transaction.from.toHexString()
     transaction.position = position.id
-
+    
     // Create Lock event entity
     let lockEvent = new Lock(transaction.id)
     lockEvent.tokenId = event.params.tokenId
     lockEvent.sender = event.params.sender
+    lockEvent.marginBefore = position.margin
     lockEvent.marginAfter = event.params.marginAfter
     lockEvent.transaction = transaction.id
     lockEvent.position = position.id
-
+    
     transaction.save()
     lockEvent.save()
+    
+    position.margin = event.params.marginAfter
+    position.save()
   }
 }
 
@@ -127,22 +129,24 @@ export function handleFree(event: FreeEvent): void {
   let transaction = loadTransaction(event)
 
   if (position !== null) {
-    position.margin = event.params.marginAfter
-    position.save()
-
+    
     transaction.type = 'FREE'
     transaction.sender = event.transaction.from.toHexString()
     transaction.position = position.id
-
+    
     // Create Free event entity
     let freeEvent = new Free(transaction.id)
     freeEvent.tokenId = event.params.tokenId
     freeEvent.sender = event.params.sender
+    freeEvent.marginBefore = position.margin
     freeEvent.marginAfter = event.params.marginAfter
     freeEvent.transaction = transaction.id
     freeEvent.position = position.id
-
+    
     transaction.save()
     freeEvent.save()
+    
+    position.margin = event.params.marginAfter
+    position.save()
   }
 }

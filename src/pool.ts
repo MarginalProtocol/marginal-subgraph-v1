@@ -25,7 +25,7 @@ export function handleAdjust(event: AdjustEvent): void {
   let positionId = event.params.id.toString()
   let position = loadPoolPosition(event, positionId, pool.address.toHexString())
 
-  position.margin = event.params.marginAfter
+  // position.margin = event.params.marginAfter
 
   position.save()
 } 
