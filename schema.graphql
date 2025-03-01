@@ -68,8 +68,8 @@ type StakePool @entity {
   id: ID!
   # multirewards factory
   multiRewardsFactory: MultiRewardsFactory!
-  # pool for multiwards
-  pool: Pool!
+  # pool for multiwards (optional)
+  pool: Pool
 }
 
 

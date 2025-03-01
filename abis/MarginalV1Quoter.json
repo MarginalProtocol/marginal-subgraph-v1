@@ -69,17 +69,9 @@
         "components": [
           { "internalType": "address", "name": "token0", "type": "address" },
           { "internalType": "address", "name": "token1", "type": "address" },
-          {
-            "internalType": "uint24",
-            "name": "maintenance",
-            "type": "uint24"
-          },
+          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
           { "internalType": "address", "name": "oracle", "type": "address" },
-          {
-            "internalType": "address",
-            "name": "recipient",
-            "type": "address"
-          },
+          { "internalType": "address", "name": "recipient", "type": "address" },
           {
             "internalType": "uint256",
             "name": "amount0Desired",
@@ -112,11 +104,7 @@
       { "internalType": "uint256", "name": "shares", "type": "uint256" },
       { "internalType": "uint256", "name": "amount0", "type": "uint256" },
       { "internalType": "uint256", "name": "amount1", "type": "uint256" },
-      {
-        "internalType": "uint128",
-        "name": "liquidityAfter",
-        "type": "uint128"
-      }
+      { "internalType": "uint128", "name": "liquidityAfter", "type": "uint128" }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -127,18 +115,10 @@
         "components": [
           { "internalType": "address", "name": "token0", "type": "address" },
           { "internalType": "address", "name": "token1", "type": "address" },
-          {
-            "internalType": "uint24",
-            "name": "maintenance",
-            "type": "uint24"
-          },
+          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
           { "internalType": "address", "name": "oracle", "type": "address" },
           { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-          {
-            "internalType": "address",
-            "name": "recipient",
-            "type": "address"
-          },
+          { "internalType": "address", "name": "recipient", "type": "address" },
           { "internalType": "uint256", "name": "deadline", "type": "uint256" }
         ],
         "internalType": "struct INonfungiblePositionManager.BurnParams",
@@ -175,21 +155,9 @@
       {
         "components": [
           { "internalType": "bytes", "name": "path", "type": "bytes" },
-          {
-            "internalType": "address",
-            "name": "recipient",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "deadline",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amountIn",
-            "type": "uint256"
-          },
+          { "internalType": "address", "name": "recipient", "type": "address" },
+          { "internalType": "uint256", "name": "deadline", "type": "uint256" },
+          { "internalType": "uint256", "name": "amountIn", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "amountOutMinimum",
@@ -223,32 +191,12 @@
       {
         "components": [
           { "internalType": "address", "name": "tokenIn", "type": "address" },
-          {
-            "internalType": "address",
-            "name": "tokenOut",
-            "type": "address"
-          },
-          {
-            "internalType": "uint24",
-            "name": "maintenance",
-            "type": "uint24"
-          },
+          { "internalType": "address", "name": "tokenOut", "type": "address" },
+          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
           { "internalType": "address", "name": "oracle", "type": "address" },
-          {
-            "internalType": "address",
-            "name": "recipient",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "deadline",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amountIn",
-            "type": "uint256"
-          },
+          { "internalType": "address", "name": "recipient", "type": "address" },
+          { "internalType": "uint256", "name": "deadline", "type": "uint256" },
+          { "internalType": "uint256", "name": "amountIn", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "amountOutMinimum",
@@ -287,21 +235,9 @@
       {
         "components": [
           { "internalType": "bytes", "name": "path", "type": "bytes" },
-          {
-            "internalType": "address",
-            "name": "recipient",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "deadline",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amountOut",
-            "type": "uint256"
-          },
+          { "internalType": "address", "name": "recipient", "type": "address" },
+          { "internalType": "uint256", "name": "deadline", "type": "uint256" },
+          { "internalType": "uint256", "name": "amountOut", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "amountInMaximum",
@@ -335,32 +271,12 @@
       {
         "components": [
           { "internalType": "address", "name": "tokenIn", "type": "address" },
-          {
-            "internalType": "address",
-            "name": "tokenOut",
-            "type": "address"
-          },
-          {
-            "internalType": "uint24",
-            "name": "maintenance",
-            "type": "uint24"
-          },
+          { "internalType": "address", "name": "tokenOut", "type": "address" },
+          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
           { "internalType": "address", "name": "oracle", "type": "address" },
-          {
-            "internalType": "address",
-            "name": "recipient",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "deadline",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amountOut",
-            "type": "uint256"
-          },
+          { "internalType": "address", "name": "recipient", "type": "address" },
+          { "internalType": "uint256", "name": "deadline", "type": "uint256" },
+          { "internalType": "uint256", "name": "amountOut", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "amountInMaximum",
@@ -400,11 +316,7 @@
         "components": [
           { "internalType": "address", "name": "token0", "type": "address" },
           { "internalType": "address", "name": "token1", "type": "address" },
-          {
-            "internalType": "uint24",
-            "name": "maintenance",
-            "type": "uint24"
-          },
+          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
           { "internalType": "address", "name": "oracle", "type": "address" },
           { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
           {
@@ -412,11 +324,7 @@
             "name": "amountOutMinimum",
             "type": "uint256"
           },
-          {
-            "internalType": "address",
-            "name": "recipient",
-            "type": "address"
-          },
+          { "internalType": "address", "name": "recipient", "type": "address" },
           { "internalType": "uint256", "name": "deadline", "type": "uint256" }
         ],
         "internalType": "struct INonfungiblePositionManager.IgniteParams",
@@ -453,11 +361,7 @@
         "components": [
           { "internalType": "address", "name": "token0", "type": "address" },
           { "internalType": "address", "name": "token1", "type": "address" },
-          {
-            "internalType": "uint24",
-            "name": "maintenance",
-            "type": "uint24"
-          },
+          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
           { "internalType": "address", "name": "oracle", "type": "address" },
           { "internalType": "bool", "name": "zeroForOne", "type": "bool" },
           {
@@ -486,11 +390,7 @@
             "type": "uint160"
           },
           { "internalType": "uint128", "name": "margin", "type": "uint128" },
-          {
-            "internalType": "address",
-            "name": "recipient",
-            "type": "address"
-          },
+          { "internalType": "address", "name": "recipient", "type": "address" },
           { "internalType": "uint256", "name": "deadline", "type": "uint256" }
         ],
         "internalType": "struct INonfungiblePositionManager.MintParams",
@@ -510,6 +410,7 @@
       },
       { "internalType": "uint256", "name": "fees", "type": "uint256" },
       { "internalType": "bool", "name": "safe", "type": "bool" },
+      { "internalType": "uint256", "name": "health", "type": "uint256" },
       {
         "internalType": "uint128",
         "name": "liquidityAfter",
@@ -535,17 +436,9 @@
         "components": [
           { "internalType": "address", "name": "token0", "type": "address" },
           { "internalType": "address", "name": "token1", "type": "address" },
-          {
-            "internalType": "uint24",
-            "name": "maintenance",
-            "type": "uint24"
-          },
+          { "internalType": "uint24", "name": "maintenance", "type": "uint24" },
           { "internalType": "address", "name": "oracle", "type": "address" },
-          {
-            "internalType": "address",
-            "name": "recipient",
-            "type": "address"
-          },
+          { "internalType": "address", "name": "recipient", "type": "address" },
           { "internalType": "uint256", "name": "shares", "type": "uint256" },
           {
             "internalType": "uint256",
@@ -573,11 +466,7 @@
       },
       { "internalType": "uint256", "name": "amount0", "type": "uint256" },
       { "internalType": "uint256", "name": "amount1", "type": "uint256" },
-      {
-        "internalType": "uint128",
-        "name": "liquidityAfter",
-        "type": "uint128"
-      }
+      { "internalType": "uint128", "name": "liquidityAfter", "type": "uint128" }
     ],
     "stateMutability": "view",
     "type": "function"
