@@ -72,7 +72,6 @@ type StakePool @entity {
   pool: Pool
 }
 
-
 type Token @entity {
   # token address
   id: ID!
@@ -95,9 +94,9 @@ type TokenPositionMapping @entity {
 }
 
 type Position @entity {
-  # poolAddress-positionId 
+  # poolAddress-positionId
   id: ID!
-  # tokenId 
+  # tokenId
   tokenId: String
   # positionId in pool
   positionId: String!
@@ -127,108 +126,91 @@ type Position @entity {
   isSettled: Boolean!
   # either settled/liquidated is true
   isClosed: Boolean!
-  # escrow rewards 
+  # escrow rewards
   rewards: BigInt
+  # position transactions
+  transactions: [Transaction!]! @derivedFrom(field: "position")
 }
 
 type Transaction @entity {
   # tx hash
   id: ID!
+  # tx type
+  type: String
   # block txn was included in
   blockNumber: BigInt!
+  # tx sender
+  sender: ID!
   # timestamp txn was confirmed
   timestamp: BigInt!
   # gas settings during tx execution
   gasLimit: BigInt!
   gasPrice: BigInt!
-  # derived values
-  open: [Open!]! @derivedFrom(field: "transaction")
-  adjust: [Adjust!]! @derivedFrom(field: "transaction")
-  settle: [Settle!]! @derivedFrom(field: "transaction")
-  liquidate: [Liquidate!]! @derivedFrom(field: "transaction")
-  ## TODO: Add Swap, Mint, Burn
+  # Related position (if this transaction is for a position)
+  position: Position
+  # Related events
+  mint: Mint @derivedFrom(field: "transaction")
+  ignite: Ignite @derivedFrom(field: "transaction")
+  lock: Lock @derivedFrom(field: "transaction")
+  free: Free @derivedFrom(field: "transaction")
+  swap: Swap @derivedFrom(field: "transaction")
 }
 
-type Open @entity {
-  # position id
+type Mint @entity {
   id: ID!
-  # txn that position was opened in
-  transaction: Transaction!
-  # time of txn
-  timestamp: BigInt!
-  # pool position created in
-  pool: Pool!
-  # pool token0
-  token0: Token!
-  # pool token1
-  token1: Token!
-  # owner of position
-  owner: Bytes!
-  # address that minted position
+  tokenId: BigInt!
   sender: Bytes!
-  # position margin
+  recipient: Bytes!
+  size: BigInt!
+  debt: BigInt!
   margin: BigInt!
-}
-
-type Adjust @entity {
-  # position id
-  id: ID!
-  # txn that position was adjusted in
-  transaction: Transaction!
-  # time of txn
-  timestamp: BigInt!
-  # pool position adjusted in
-  pool: Pool!
-  # pool token0
-  token0: Token!
-  # pool token1
-  token1: Token!
-  # owner of position
-  owner: Bytes!
-  # receipient of adjusted position
-  recipient: Bytes!
-  # position margin
-  margin: BigInt!
-}
-
-type Settle @entity {
-  # position id
-  id: ID!
-  # txn that position was settled in
-  transaction: Transaction!
-  # time of txn
-  timestamp: BigInt!
-  # pool position settled in
-  pool: Pool!
-  # pool token0
-  token0: Token!
-  # pool token1
-  token1: Token!
-  # owner of position
-  owner: Bytes!
-  # receipient of closed position
-  recipient: Bytes!
-  # amount received
+  fees: BigInt!
   rewards: BigInt!
+  transaction: Transaction!
+  position: Position!
 }
 
-type Liquidate @entity {
-  # position id
+type Ignite @entity {
   id: ID!
-  # txn that position was liquidated
-  transaction: Transaction!
-  # time of txn
-  timestamp: BigInt!
-  # pool position liquidated in
-  pool: Pool!
-  # pool token0
-  token0: Token!
-  # pool token1
-  token1: Token!
-  # owner of position
-  owner: Bytes!
-  # receipient of rewards for liquidating
+  tokenId: BigInt!
+  sender: Bytes!
   recipient: Bytes!
-  # amount received
+  marginBefore: BigInt
+  amountOut: BigInt!
   rewards: BigInt!
+  transaction: Transaction!
+  position: Position!
+}
+
+type Lock @entity {
+  id: ID!
+  tokenId: BigInt!
+  sender: Bytes!
+  marginBefore: BigInt
+  marginAfter: BigInt!
+  transaction: Transaction!
+  position: Position!
+}
+
+type Free @entity {
+  id: ID!
+  tokenId: BigInt!
+  sender: Bytes!
+  marginBefore: BigInt
+  marginAfter: BigInt!
+  transaction: Transaction!
+  position: Position!
+}
+
+type Swap @entity {
+  id: ID!
+  sender: Bytes!
+  recipient: Bytes!
+  amount0: BigInt!
+  amount1: BigInt!
+  sqrtPriceX96: BigInt!
+  liquidity: BigInt!
+  tick: BigInt!
+  pool: Pool!
+  transaction: Transaction!
 }

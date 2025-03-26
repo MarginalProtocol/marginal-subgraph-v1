@@ -73,16 +73,16 @@
     },
     "berachain": {
         "MarginalV1Factory": {
-            "address": "0xB4c58A1b0d6Ed479E62120443C6702fCc848f0Fe",
-            "startBlock": 1309837
+            "address": "0x0cF798FC6582938eaeE7a75EDf895e350E9b47e8",
+            "startBlock": 2648890
         },
         "MarginalV1NonfungiblePositionManager": {
-            "address": "0x71c271B672eE56Cc73AB9bCbAB0a8Bf800257245",
-            "startBlock": 1351059
+            "address": "0x7F91E7D76B18Ab17fC69d0c701B4c439b17abc57",
+            "startBlock": 2649709
         },
         "MultiRewardsFactory": {
             "address": "0x403117C583C035c7d37b29fE5ce664Ba792495e2",
-            "startBlock": 1362989 
+            "startBlock": 2648890 
         },
         "UniswapV3Factory": {
             "address": "0xD84CBf0B02636E7f53dB9E5e45A616E05d710990",
