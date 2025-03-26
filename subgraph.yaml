@@ -40,7 +40,7 @@ dataSources:
     network: berachain
     source:
       abi: MarginalV1NonfungiblePositionManager
-      address: "0x9c40F17f014966Ea984F299646fbf7e679Edf959"
+      address: "0x7F91E7D76B18Ab17fC69d0c701B4c439b17abc57"
       startBlock: 2649709
     mapping:
       kind: ethereum/events
